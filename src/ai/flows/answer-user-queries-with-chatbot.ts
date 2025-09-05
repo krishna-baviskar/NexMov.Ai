@@ -28,7 +28,7 @@ const prompt = ai.definePrompt({
   name: 'answerUserQueryPrompt',
   input: {schema: AnswerUserQueryInputSchema},
   output: {schema: AnswerUserQueryOutputSchema},
-  prompt: `You are a helpful AI chatbot that answers user questions related to career advice. Use your knowledge to provide informative and helpful responses to the user's query.
+  prompt: `You are a helpful AI assistant named NexAI. Provide informative and helpful responses to the user's query.
 
 Query: {{{query}}}`,
 });

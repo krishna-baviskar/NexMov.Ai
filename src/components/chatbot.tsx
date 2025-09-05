@@ -67,9 +67,9 @@ export default function Chatbot() {
         >
           <div className="flex flex-col h-[60vh]">
             <div className="bg-muted p-4 rounded-t-xl">
-              <h3 className="font-semibold text-foreground">NexAI Assistant</h3>
+              <h3 className="font-semibold text-foreground">NexAI</h3>
               <p className="text-sm text-muted-foreground">
-                Ask me anything about your career!
+                Ask me anything!
               </p>
             </div>
             <ScrollArea className="flex-1 p-4">
