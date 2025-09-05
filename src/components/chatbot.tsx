@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { answerUserQuery } from "@/ai/flows/answer-user-queries-with-chatbot";
 import { cn } from "@/lib/utils";
+import Markdown from "markdown-to-jsx";
 
 type Message = {
   text: string;
@@ -65,7 +66,7 @@ export default function Chatbot() {
           className="w-96 md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <div className="flex flex-col h-[80vh]">
+          <div className="flex flex-col h-[70vh]">
             <div className="bg-muted p-4 rounded-t-xl">
               <h3 className="font-semibold text-foreground">NexAI</h3>
               <p className="text-sm text-muted-foreground">
@@ -89,13 +90,35 @@ export default function Chatbot() {
                     )}
                     <div
                       className={cn(
-                        "p-3 rounded-lg max-w-xs text-sm whitespace-pre-wrap",
+                        "p-3 rounded-lg max-w-xs text-sm",
                         message.isUser
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
                       )}
                     >
-                      {message.text}
+                      <Markdown
+                        options={{
+                          overrides: {
+                            p: {
+                              props: {
+                                className: "mb-2 last:mb-0",
+                              },
+                            },
+                            ol: {
+                              props: {
+                                className: "list-decimal list-inside",
+                              },
+                            },
+                            ul: {
+                              props: {
+                                className: "list-disc list-inside",
+                              },
+                            },
+                          },
+                        }}
+                      >
+                        {message.text}
+                      </Markdown>
                     </div>
                      {message.isUser && (
                       <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
