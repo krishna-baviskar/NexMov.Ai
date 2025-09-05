@@ -180,7 +180,7 @@ export default function JobMarketTrendsPage() {
                             <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 100, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis type="number" domain={[0,100]} />
-                                <YAxis dataKey="name" type="category" width={100} interval={0} />
+                                <YAxis dataKey="name" type="category" width={150} interval={0} />
                                 <RechartsTooltip />
                                 <Bar dataKey="demand" fill="hsl(var(--primary))" />
                             </RechartsBarChart>
