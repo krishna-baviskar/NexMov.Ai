@@ -25,6 +25,8 @@ const AnalyzeJobMarketTrendsOutputSchema = z.object({
   trendingRoles: z.array(TrendingRoleSchema).describe('A list of trending job roles in the specified domain and location, including their demand score.'),
   salaryRanges: z.string().describe('The typical salary ranges for different roles in the specified domain and location.'),
   emergingTechnologies: z.array(z.string()).describe('A list of emerging technologies relevant to the specified domain.'),
+  keySkills: z.array(z.string()).describe('A list of key skills in high demand for the specified domain.'),
+  topCompanies: z.array(z.string()).describe('A list of top companies hiring in the specified domain and location.'),
   demandPercentage: z.number().describe('The percentage of demand for jobs in the specified domain and location.'),
   locationBasedOpportunities: z.string().describe('Information on location-specific job opportunities and trends.'),
 });
@@ -50,6 +52,8 @@ Based on this information, provide the following:
 *   A list of trending job roles, each with a 'name' and a 'demand' score (out of 100).
 *   Typical salary ranges for different roles.
 *   A list of emerging technologies.
+*   A list of key skills in high demand.
+*   A list of top companies currently hiring.
 *   The overall percentage of demand for jobs in this domain.
 *   Information on location-specific job opportunities and trends.
 

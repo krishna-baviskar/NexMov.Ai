@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { BarChart3, TrendingUp, Cpu, MapPin, DollarSign } from "lucide-react";
+import { BarChart3, TrendingUp, Cpu, MapPin, DollarSign, BrainCircuit, Building } from "lucide-react";
 import { ThreeDLoader } from "@/components/ui/3d-loader";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip as RechartsTooltip, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
@@ -197,8 +197,17 @@ export default function JobMarketTrendsPage() {
                   <p className="text-muted-foreground whitespace-pre-wrap">{trends.salaryRanges}</p>
               </CardContent>
             </Card>
+            
+            <Card className="md:col-span-1 lg:col-span-1">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><MapPin/> Location Opportunities</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground whitespace-pre-wrap">{trends.locationBasedOpportunities}</p>
+              </CardContent>
+            </Card>
 
-            <Card className="md:col-span-2 lg:col-span-2">
+            <Card className="md:col-span-1 lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><Cpu/> Emerging Technologies</CardTitle>
               </CardHeader>
@@ -207,15 +216,24 @@ export default function JobMarketTrendsPage() {
               </CardContent>
             </Card>
 
-            <Card className="md:col-span-2 lg:col-span-1">
+            <Card className="md:col-span-1 lg:col-span-1">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2"><MapPin/> Location Opportunities</CardTitle>
+                <CardTitle className="flex items-center gap-2"><BrainCircuit/> Key Skills</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground whitespace-pre-wrap">{trends.locationBasedOpportunities}</p>
+              <CardContent className="flex flex-wrap gap-2">
+                {trends.keySkills.map((skill, i) => <Badge key={i} variant="outline">{skill}</Badge>)}
               </CardContent>
             </Card>
-            
+
+            <Card className="md:col-span-2 lg:col-span-3">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Building/> Top Companies Hiring</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {trends.topCompanies.map((company, i) => <Badge key={i}>{company}</Badge>)}
+              </CardContent>
+            </Card>
+
           </div>
         ) : (
           !isLoading && <div className="text-center text-muted-foreground py-16"><p>Your trend analysis will appear here.</p></div>
