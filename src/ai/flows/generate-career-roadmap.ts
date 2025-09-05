@@ -87,6 +87,7 @@ const generateCareerRoadmapFlow = ai.defineFlow(
     name: 'generateCareerRoadmapFlow',
     inputSchema: GenerateCareerRoadmapInputSchema,
     outputSchema: GenerateCareerRoadmapOutputSchema,
+    retries: 3,
   },
   async input => {
     const {output} = await prompt(input);
