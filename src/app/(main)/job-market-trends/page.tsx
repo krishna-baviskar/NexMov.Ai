@@ -27,7 +27,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, BarChart3, TrendingUp, Cpu, MapPin, DollarSign } from "lucide-react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip as RechartsTooltip, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
 const formSchema = z.object({
   domain: z.string().min(1, "Please enter a job domain."),
@@ -138,7 +138,7 @@ export default function JobMarketTrendsPage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
              <Card className="lg:col-span-1">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2"><TrendingUp/> Demand</CardTitle>
+                <CardTitle className="flex items-center gap-2"><TrendingUp/> Domain Demand</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="w-full h-48">
@@ -160,7 +160,7 @@ export default function JobMarketTrendsPage() {
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value, name) => [`${value}%`, name]}/>
+                      <RechartsTooltip formatter={(value, name) => [`${value}%`, name]}/>
                       <Legend />
                     </PieChart>
                   </ResponsiveContainer>
@@ -170,22 +170,34 @@ export default function JobMarketTrendsPage() {
 
             <Card className="lg:col-span-2">
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Ranges</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><BarChart3/> Trending Role Demand</CardTitle>
+                    <CardDescription>Demand score for top roles in the domain.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-muted-foreground whitespace-pre-wrap">{trends.salaryRanges}</p>
+                    <div className="w-full h-64">
+                        <ResponsiveContainer>
+                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 100, bottom: 5 }}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis type="number" domain={[0,100]} />
+                                <YAxis dataKey="name" type="category" width={100} interval={0} />
+                                <RechartsTooltip />
+                                <Bar dataKey="demand" fill="hsl(var(--primary))" />
+                            </RechartsBarChart>
+                        </ResponsiveContainer>
+                    </div>
                 </CardContent>
             </Card>
 
-            <Card>
+            <Card className="lg:col-span-3">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2"><TrendingUp/> Trending Roles</CardTitle>
+                <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Ranges</CardTitle>
               </CardHeader>
-              <CardContent className="flex flex-col gap-2">
-                {trends.trendingRoles.map((role, i) => <Badge key={i} variant="default">{role}</Badge>)}
+              <CardContent>
+                  <p className="text-muted-foreground whitespace-pre-wrap">{trends.salaryRanges}</p>
               </CardContent>
             </Card>
-            <Card>
+            
+            <Card className="lg:col-span-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><Cpu/> Emerging Technologies</CardTitle>
               </CardHeader>
@@ -193,6 +205,7 @@ export default function JobMarketTrendsPage() {
                 {trends.emergingTechnologies.map((tech, i) => <Badge key={i} variant="secondary">{tech}</Badge>)}
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><MapPin/> Location Opportunities</CardTitle>
