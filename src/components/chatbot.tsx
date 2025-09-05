@@ -65,7 +65,7 @@ export default function Chatbot() {
           className="w-96 md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <div className="flex flex-col h-[55vh]">
+          <div className="flex flex-col h-[60vh]">
             <div className="bg-muted p-4 rounded-t-xl">
               <h3 className="font-semibold text-foreground">NexAI</h3>
               <p className="text-sm text-muted-foreground">
