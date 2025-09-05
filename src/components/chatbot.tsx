@@ -48,7 +48,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -62,10 +62,10 @@ export default function Chatbot() {
         <PopoverContent
           side="top"
           align="end"
-          className="w-96 md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
+          className="w-[calc(100vw-2rem)] h-[80vh] sm:w-[384px] md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <div className="flex flex-col h-[80vh]">
+          <div className="flex flex-col h-full">
             <div className="bg-muted p-4 rounded-t-xl">
               <h3 className="font-semibold text-foreground">NexAI</h3>
               <p className="text-sm text-muted-foreground">
