@@ -37,6 +37,7 @@ import {
   CheckCircle,
   BarChart,
   PieChart as PieChartIcon,
+  PartyPopper,
 } from "lucide-react";
 import {
   PieChart,
@@ -255,6 +256,20 @@ export default function CareerRoadmapPage() {
                         </Card>
                       </div>
                     ))}
+                     <div className="relative">
+                        <div className="absolute -left-9 top-0 bg-background border-2 border-primary rounded-full p-1.5">
+                            <PartyPopper className="w-6 h-6 text-primary" />
+                        </div>
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>Roadmap Complete!</CardTitle>
+                            <CardDescription>Congratulations!</CardDescription>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-muted-foreground">You've reached the end of your personalized roadmap. Keep learning and growing!</p>
+                          </CardContent>
+                        </Card>
+                      </div>
                   </div>
                 </div>
 
