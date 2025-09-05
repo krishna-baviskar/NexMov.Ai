@@ -88,7 +88,7 @@ export default function JobMarketTrendsPage() {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="grid sm:grid-cols-3 gap-4 items-end"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end"
               >
                 <FormField
                   control={form.control}
@@ -116,7 +116,7 @@ export default function JobMarketTrendsPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={isLoading} className="w-full">
+                <Button type="submit" disabled={isLoading} className="w-full sm:col-span-2 lg:col-span-1">
                   {isLoading ? (
                     <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
                   ) : (
@@ -198,16 +198,7 @@ export default function JobMarketTrendsPage() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><MapPin/> Location Opportunities</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground whitespace-pre-wrap">{trends.locationBasedOpportunities}</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="lg:col-span-2">
+            <Card className="md:col-span-2 lg:col-span-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><Cpu/> Emerging Technologies</CardTitle>
               </CardHeader>
@@ -216,6 +207,15 @@ export default function JobMarketTrendsPage() {
               </CardContent>
             </Card>
 
+            <Card className="md:col-span-2 lg:col-span-1">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><MapPin/> Location Opportunities</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground whitespace-pre-wrap">{trends.locationBasedOpportunities}</p>
+              </CardContent>
+            </Card>
+            
           </div>
         ) : (
           !isLoading && <div className="text-center text-muted-foreground py-16"><p>Your trend analysis will appear here.</p></div>
