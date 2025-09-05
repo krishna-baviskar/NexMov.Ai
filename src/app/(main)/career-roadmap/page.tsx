@@ -200,11 +200,11 @@ export default function CareerRoadmapPage() {
                         <CardDescription>Estimated duration for each step in your roadmap.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="w-full h-64">
+                        <div className="w-full h-80">
                             <ResponsiveContainer>
-                                <RechartsBarChart data={roadmap.timeline} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+                                <RechartsBarChart data={roadmap.timeline} margin={{ top: 5, right: 20, left: -10, bottom: 60 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                                    <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} height={100} tick={{ fontSize: 12 }} />
                                     <YAxis label={{ value: 'Months', angle: -90, position: 'insideLeft' }} />
                                     <RechartsTooltip />
                                     <Bar dataKey="duration" fill="hsl(var(--primary))" />
