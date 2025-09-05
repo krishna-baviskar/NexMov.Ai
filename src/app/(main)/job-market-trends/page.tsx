@@ -57,7 +57,7 @@ export default function JobMarketTrendsPage() {
     try {
       const result = await analyzeJobMarketTrends(data);
       setTrends(result);
-    } catch (error) {
+    } catch (error) => {
       console.error("Failed to analyze job market trends:", error);
     } finally {
       setIsLoading(false);
@@ -175,12 +175,12 @@ export default function JobMarketTrendsPage() {
                     <CardDescription>Demand score for top roles in the domain.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="w-full h-64">
+                    <div className="w-full h-80">
                         <ResponsiveContainer>
-                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 100, bottom: 5 }}>
+                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 120, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis type="number" domain={[0,100]} />
-                                <YAxis dataKey="name" type="category" width={150} interval={0} />
+                                <YAxis dataKey="name" type="category" width={180} interval={0} />
                                 <RechartsTooltip />
                                 <Bar dataKey="demand" fill="hsl(var(--primary))" />
                             </RechartsBarChart>
