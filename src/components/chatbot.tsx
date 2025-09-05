@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle, Send, Bot, User, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,11 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -47,6 +52,10 @@ export default function Chatbot() {
     }
   };
 
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -62,7 +71,7 @@ export default function Chatbot() {
         <PopoverContent
           side="top"
           align="end"
-          className="w-[calc(100vw-2rem)] h-[80vh] sm:w-[384px] md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
+          className="w-[calc(100vw-2rem)] h-[85vh] sm:w-[480px] md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <div className="flex flex-col h-full">
