@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { answerUserQuery } from "@/ai/flows/answer-user-queries-with-chatbot";
 import { cn } from "@/lib/utils";
-import Markdown from "markdown-to-jsx";
 
 type Message = {
   text: string;
@@ -90,35 +89,13 @@ export default function Chatbot() {
                     )}
                     <div
                       className={cn(
-                        "p-3 rounded-lg max-w-xs text-sm",
+                        "p-3 rounded-lg max-w-xs text-sm whitespace-pre-wrap",
                         message.isUser
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
                       )}
                     >
-                      <Markdown
-                        options={{
-                          overrides: {
-                            p: {
-                              props: {
-                                className: "mb-2 last:mb-0",
-                              },
-                            },
-                            ol: {
-                              props: {
-                                className: "list-decimal list-inside",
-                              },
-                            },
-                            ul: {
-                              props: {
-                                className: "list-disc list-inside",
-                              },
-                            },
-                          },
-                        }}
-                      >
-                        {message.text}
-                      </Markdown>
+                      {message.text}
                     </div>
                      {message.isUser && (
                       <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
