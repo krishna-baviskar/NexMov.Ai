@@ -57,7 +57,7 @@ export default function JobMarketTrendsPage() {
     try {
       const result = await analyzeJobMarketTrends(data);
       setTrends(result);
-    } catch (error) => {
+    } catch (error) {
       console.error("Failed to analyze job market trends:", error);
     } finally {
       setIsLoading(false);
