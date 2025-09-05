@@ -175,12 +175,12 @@ export default function JobMarketTrendsPage() {
                     <CardDescription>Demand score for top roles in the domain.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="w-full h-80">
+                    <div className="w-full h-[350px]">
                         <ResponsiveContainer>
-                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 120, bottom: 5 }}>
+                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 150, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis type="number" domain={[0,100]} />
-                                <YAxis dataKey="name" type="category" width={180} interval={0} />
+                                <YAxis dataKey="name" type="category" width={150} interval={0} />
                                 <RechartsTooltip />
                                 <Bar dataKey="demand" fill="hsl(var(--primary))" />
                             </RechartsBarChart>
@@ -197,15 +197,6 @@ export default function JobMarketTrendsPage() {
                   <p className="text-muted-foreground whitespace-pre-wrap">{trends.salaryRanges}</p>
               </CardContent>
             </Card>
-            
-            <Card className="lg:col-span-2">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Cpu/> Emerging Technologies</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {trends.emergingTechnologies.map((tech, i) => <Badge key={i} variant="secondary">{tech}</Badge>)}
-              </CardContent>
-            </Card>
 
             <Card>
               <CardHeader>
@@ -213,6 +204,15 @@ export default function JobMarketTrendsPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground whitespace-pre-wrap">{trends.locationBasedOpportunities}</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="lg:col-span-2">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Cpu/> Emerging Technologies</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {trends.emergingTechnologies.map((tech, i) => <Badge key={i} variant="secondary">{tech}</Badge>)}
               </CardContent>
             </Card>
 
