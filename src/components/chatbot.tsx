@@ -89,7 +89,7 @@ export default function Chatbot() {
                     )}
                     <div
                       className={cn(
-                        "p-3 rounded-lg max-w-xs text-sm",
+                        "p-3 rounded-lg max-w-xs text-sm whitespace-pre-wrap",
                         message.isUser
                           ? "bg-primary text-primary-foreground"
                           : "bg-muted"
