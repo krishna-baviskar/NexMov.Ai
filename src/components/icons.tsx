@@ -5,8 +5,8 @@ export function Logo(props: Omit<React.ComponentProps<typeof Image>, 'src' | 'al
     <Image
       src="/nexmov.png"
       alt="NexMov.ai Logo"
-      width={140}
-      height={32}
+      width={160}
+      height={40}
       priority
       {...props}
     />
