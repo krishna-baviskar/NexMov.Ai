@@ -26,7 +26,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, BarChart3, TrendingUp, Cpu, MapPin, DollarSign } from "lucide-react";
+import { BarChart3, TrendingUp, Cpu, MapPin, DollarSign } from "lucide-react";
+import { ThreeDLoader } from "@/components/ui/3d-loader";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip as RechartsTooltip, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
 const formSchema = z.object({
@@ -117,7 +118,7 @@ export default function JobMarketTrendsPage() {
                 />
                 <Button type="submit" disabled={isLoading} className="w-full">
                   {isLoading ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
                   ) : (
                     <BarChart3 className="mr-2 h-4 w-4" />
                   )}
@@ -130,7 +131,7 @@ export default function JobMarketTrendsPage() {
 
         {isLoading && (
           <div className="flex justify-center items-center h-64">
-            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            <ThreeDLoader />
           </div>
         )}
 

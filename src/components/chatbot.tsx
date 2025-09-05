@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MessageCircle, Send, Bot, User, Loader2 } from "lucide-react";
+import { MessageCircle, Send, Bot, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { answerUserQuery } from "@/ai/flows/answer-user-queries-with-chatbot";
 import { cn } from "@/lib/utils";
+import { ThreeDLoader } from "@/components/ui/3d-loader";
 
 type Message = {
   text: string;
@@ -71,7 +72,7 @@ export default function Chatbot() {
         <PopoverContent
           side="top"
           align="end"
-          className="w-[calc(100vw-2rem)] h-[85vh] sm:w-[480px] md:w-[480px] rounded-xl shadow-2xl p-0 border-none"
+          className="w-[calc(100vw-2rem)] h-[calc(100vh-6rem)] sm:w-[480px] rounded-xl shadow-2xl p-0 border-none"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <div className="flex flex-col h-full">
@@ -123,8 +124,8 @@ export default function Chatbot() {
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                       <Bot className="w-5 h-5 text-primary-foreground" />
                     </div>
-                    <div className="p-3 rounded-lg bg-muted">
-                        <Loader2 className="w-5 h-5 animate-spin" />
+                    <div className="p-3 rounded-lg bg-muted flex items-center justify-center">
+                        <ThreeDLoader className="w-8 h-8" />
                     </div>
                   </div>
                 )}

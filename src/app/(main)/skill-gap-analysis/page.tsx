@@ -27,7 +27,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Loader2,
   Compass,
   BookOpen,
   Codepen,
@@ -39,6 +38,7 @@ import {
   Link as LinkIcon,
   Video,
 } from "lucide-react";
+import { ThreeDLoader } from "@/components/ui/3d-loader";
 import {
   RadarChart,
   PolarGrid,
@@ -181,7 +181,7 @@ export default function SkillGapAnalysisPage() {
                     />
                     <Button type="submit" disabled={isLoading} className="w-full">
                       {isLoading ? (
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
                       ) : (
                         <Compass className="mr-2 h-4 w-4" />
                       )}
@@ -196,7 +196,7 @@ export default function SkillGapAnalysisPage() {
           <div className="lg:col-span-2 space-y-8">
             {isLoading && (
               <div className="flex justify-center items-center h-full min-h-96">
-                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                <ThreeDLoader />
               </div>
             )}
             {analysis ? (

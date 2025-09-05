@@ -80,3 +80,44 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .cube-wrapper {
+    @apply w-full h-full flex justify-center items-center;
+  }
+  .cube {
+    width: 50%;
+    height: 50%;
+    transform-style: preserve-3d;
+    transform: rotateX(-40deg) rotateY(30deg);
+    animation: cube-rotation 4s infinite linear;
+  }
+  .cube-faces {
+    @apply relative w-full h-full;
+    transform-style: preserve-3d;
+    transform: translateZ(-2rem);
+  }
+  .cube-face {
+    @apply absolute w-16 h-16 border-2 border-primary;
+    background-color: hsla(var(--primary), 0.2);
+  }
+  .cube-face.front { transform: translateZ(2rem); }
+  .cube-face.back { transform: rotateY(180deg) translateZ(2rem); }
+  .cube-face.right { transform: rotateY(90deg) translateZ(2rem); }
+  .cube-face.left { transform: rotateY(-90deg) translateZ(2rem); }
+  .cube-face.top { transform: rotateX(90deg) translateZ(2rem); }
+  .cube-face.bottom { transform: rotateX(-90deg) translateZ(2rem); }
+  .cube-face.shadow {
+    @apply absolute w-16 h-16 bg-black/50 blur-lg;
+    transform: rotateX(90deg) translateZ(-4rem) translateY(2rem);
+  }
+
+  @keyframes cube-rotation {
+    0% {
+      transform: rotateX(-40deg) rotateY(0deg);
+    }
+    100% {
+      transform: rotateX(-40deg) rotateY(360deg);
+    }
+  }
+}
