@@ -19,7 +19,9 @@ import {
     Twitter, 
     Github, 
     ChevronRight,
-    Target
+    Target,
+    BrainCircuit,
+    UserCheck
 } from 'lucide-react';
 import { Logo } from '@/components/icons';
 import { cn } from '@/lib/utils';
@@ -213,21 +215,49 @@ export default function LandingPage() {
                 <section id="founder" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-4xl px-4 text-center">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">About Us</h2>
-                        <div className="mt-8 card-3d gradient-border-card">
-                            <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
-                                <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-primary">
-                                  <Heart className="w-16 h-16 text-primary" />
+                        <div className="mt-8 grid gap-8 md:grid-cols-1">
+                            <div className="card-3d gradient-border-card">
+                                <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
+                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-primary">
+                                    <Heart className="w-16 h-16 text-primary" />
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-lg text-muted-foreground italic">
+                                            "Nexmov.AI was created because we saw students and professionals struggle with uncertainty in their next step. With AI, we wanted to create clarity, confidence, and a visual roadmap for everyone."
+                                        </p>
+                                        <p className="mt-4 font-bold text-white text-lg">
+                                        Founder & CEO
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            Experts in AI, EdTech, and Career Guidance solutions.
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="text-left">
-                                    <p className="text-lg text-muted-foreground italic">
-                                        "Nexmov.AI was created because we saw students and professionals struggle with uncertainty in their next step. With AI, we wanted to create clarity, confidence, and a visual roadmap for everyone."
-                                    </p>
-                                    <p className="mt-4 font-bold text-white text-lg">
-                                       Founder & CEO
-                                    </p>
-                                     <p className="text-muted-foreground">
-                                        Experts in AI, EdTech, and Career Guidance solutions.
-                                    </p>
+                            </div>
+                            <div className="card-3d gradient-border-card">
+                                <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
+                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-secondary">
+                                      <BrainCircuit className="w-16 h-16 text-secondary" />
+                                    </div>
+                                    <div className="text-left">
+                                        <h4 className="text-xl font-bold text-white">Our Core Values</h4>
+                                        <p className="text-lg text-muted-foreground mt-2">
+                                            We believe in innovation, personalization, and empowerment. Our goal is to provide tools that adapt to you, not the other way around, ensuring that every piece of advice is relevant and actionable.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-3d gradient-border-card">
+                                <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
+                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-accent">
+                                      <UserCheck className="w-16 h-16 text-accent" />
+                                    </div>
+                                    <div className="text-left">
+                                        <h4 className="text-xl font-bold text-white">The Expert Team</h4>
+                                        <p className="text-lg text-muted-foreground mt-2">
+                                            Our team is composed of seasoned career counselors, data scientists, and AI engineers dedicated to building the future of career development. We're passionate about helping you succeed.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
