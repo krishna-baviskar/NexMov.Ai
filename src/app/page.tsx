@@ -311,7 +311,7 @@ export default function LandingPage() {
                                     <MapPin className="w-6 h-6 text-primary" />
                                     <div>
                                         <h4 className="font-bold text-white">Office Address</h4>
-                                        <p className="text-muted-foreground">[Insert Full Address Here]</p>
+                                        <p className="text-muted-foreground">Pune,Maharashtra,India</p>
                                     </div>
                                 </div>
                             </div>
