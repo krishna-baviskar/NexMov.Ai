@@ -42,7 +42,7 @@ export default function DashboardPage() {
       <div className="max-w-4xl mx-auto">
         <div className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Welcome to the <span className="text-primary">Dashboard</span>
+            Welcome to <span className="text-primary">NexMov.AI</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Your AI-powered co-pilot for navigating your career path. Explore our tools to unlock your potential.
