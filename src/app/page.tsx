@@ -1,4 +1,6 @@
 
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -210,7 +212,7 @@ export default function LandingPage() {
                  {/* Founder Section */}
                 <section id="founder" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-4xl px-4 text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">About Our Founder</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">About Us</h2>
                         <div className="mt-8 card-3d gradient-border-card">
                             <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
                                 <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-primary">
