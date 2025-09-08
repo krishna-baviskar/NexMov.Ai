@@ -14,25 +14,25 @@ const features = [
     title: "Career Roadmap",
     description: "Generate a personalized career roadmap with AI-driven insights.",
     href: "/career-roadmap",
-    icon: <GitCommit className="w-8 h-8 text-accent" />,
+    icon: <GitCommit className="w-8 h-8 text-primary" />,
   },
   {
     title: "Skill Gap Analysis",
     description: "Identify skill gaps for your desired career path and get learning suggestions.",
     href: "/skill-gap-analysis",
-    icon: <Compass className="w-8 h-8 text-accent" />,
+    icon: <Compass className="w-8 h-8 text-primary" />,
   },
   {
     title: "Job Market Trends",
     description: "Analyze current job market trends, salaries, and in-demand skills.",
     href: "/job-market-trends",
-    icon: <BarChart3 className="w-8 h-8 text-accent" />,
+    icon: <BarChart3 className="w-8 h-8 text-primary" />,
   },
    {
     title: "Salary Progression",
     description: "Get salary estimates for your career path based on experience and location.",
     href: "/salary-progression",
-    icon: <DollarSign className="w-8 h-8 text-accent" />,
+    icon: <DollarSign className="w-8 h-8 text-primary" />,
   },
 ];
 
@@ -74,7 +74,7 @@ export default function DashboardPage() {
           ))}
         </div>
         
-        <Card className="mt-12 bg-secondary">
+        <Card className="mt-12 bg-secondary/10">
           <CardHeader>
             <CardTitle>Networking & Experience</CardTitle>
             <CardDescription>Discover opportunities to grow your network and gain experience.</CardDescription>
