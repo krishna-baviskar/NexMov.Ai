@@ -108,11 +108,28 @@ const PIE_COLORS = [
   "hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))",
 ];
 
+const CURRENCY_RATES = {
+  USD: 1,
+  INR: 83.5, 
+  EUR: 0.92,
+  GBP: 0.78,
+};
+
+const CURRENCY_SYMBOLS = {
+  USD: "$",
+  INR: "₹",
+  EUR: "€",
+  GBP: "£",
+};
+
+type Currency = keyof typeof CURRENCY_RATES;
+
 export default function CareerRoadmapPage() {
   const [roadmap, setRoadmap] = useState<GenerateCareerRoadmapOutput | null>(
     null
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState<Currency>("INR");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -164,6 +181,27 @@ export default function CareerRoadmapPage() {
       : [...currentValues, value];
     form.setValue(field, newValues, { shouldValidate: true });
   };
+
+  const convertedSalaryProgression = roadmap?.salaryProgression.map(item => ({
+    ...item,
+    estimatedSalary: item.estimatedSalary * CURRENCY_RATES[selectedCurrency],
+  }));
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: selectedCurrency,
+      minimumFractionDigits: 0,
+    }).format(value);
+  };
+  
+  const formatAxis = (value: number) => {
+    if (value >= 10000000) return `${CURRENCY_SYMBOLS[selectedCurrency]}${(value / 10000000).toFixed(1)}Cr`;
+    if (value >= 100000) return `${CURRENCY_SYMBOLS[selectedCurrency]}${(value / 100000).toFixed(1)}L`;
+    if (value >= 1000) return `${CURRENCY_SYMBOLS[selectedCurrency]}${(value / 1000).toFixed(1)}k`;
+    return `${CURRENCY_SYMBOLS[selectedCurrency]}${value}`;
+  }
+
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
@@ -385,22 +423,36 @@ export default function CareerRoadmapPage() {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Progression</CardTitle>
-                        <CardDescription>Estimated annual salary based on your roadmap milestones.</CardDescription>
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Progression</CardTitle>
+                                <CardDescription>Estimated annual salary based on your roadmap milestones.</CardDescription>
+                            </div>
+                            <Select onValueChange={(value) => setSelectedCurrency(value as Currency)} defaultValue={selectedCurrency}>
+                                <SelectTrigger className="w-[100px]">
+                                    <SelectValue placeholder="Currency" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {Object.keys(CURRENCY_RATES).map(currency => (
+                                        <SelectItem key={currency} value={currency}>{currency}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </CardHeader>
                     <CardContent>
                         <div className="w-full h-80">
                             <ResponsiveContainer>
-                                <LineChart data={roadmap.salaryProgression} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                                <LineChart data={convertedSalaryProgression} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="milestone" />
                                     <YAxis 
-                                      label={{ value: 'Salary (USD)', angle: -90, position: 'insideLeft' }}
-                                      tickFormatter={(value) => `$${(value as number / 1000)}k`} 
+                                      label={{ value: `Salary (${selectedCurrency})`, angle: -90, position: 'insideLeft' }}
+                                      tickFormatter={formatAxis} 
                                     />
-                                    <RechartsTooltip formatter={(value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(value)} />
+                                    <RechartsTooltip formatter={(value: number) => formatCurrency(value)} />
                                     <Legend />
-                                    <Line type="monotone" dataKey="estimatedSalary" stroke="hsl(var(--accent))" strokeWidth={2} activeDot={{ r: 8 }} />
+                                    <Line type="monotone" dataKey="estimatedSalary" name="Estimated Salary" stroke="hsl(var(--accent))" strokeWidth={2} activeDot={{ r: 8 }} />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
