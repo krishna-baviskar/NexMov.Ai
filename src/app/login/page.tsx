@@ -70,10 +70,10 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-8">
-        <div className="flex justify-center items-center gap-2">
+        <Link href="/" className="flex justify-center items-center gap-2">
           <Logo />
           <span className="text-2xl font-bold gradient-text">NexMov.AI</span>
-        </div>
+        </Link>
         <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold gradient-text">
