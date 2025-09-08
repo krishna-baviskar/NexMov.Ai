@@ -68,7 +68,7 @@ const userTypes = [
 
 export default function LandingPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-background text-foreground" style={{backgroundImage: "url('https://picsum.photos/1920/1080')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+        <div className="flex flex-col min-h-screen bg-background text-foreground" style={{backgroundImage: "url('https://picsum.photos/1920/1081')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
             <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
                     <Link href="/" className="flex items-center gap-2">
@@ -110,12 +110,12 @@ export default function LandingPage() {
                     </div>
                     <div>
                         <Image 
-                            src="https://picsum.photos/600/401" 
+                            src="https://picsum.photos/600/402" 
                             alt="AI-driven career growth illustration"
                             width={600}
-                            height={401} 
+                            height={402} 
                             className="rounded-lg shadow-2xl"
-                            data-ai-hint="career growth technology"
+                            data-ai-hint="career planning"
                         />
                     </div>
                 </section>
@@ -167,12 +167,12 @@ export default function LandingPage() {
                         </div>
                          <div>
                             <Image 
-                                src="https://picsum.photos/500/500" 
+                                src="https://picsum.photos/500/501" 
                                 alt="Dashboard interface"
                                 width={500}
-                                height={500} 
+                                height={501} 
                                 className="rounded-lg shadow-2xl"
-                                data-ai-hint="dashboard interface"
+                                data-ai-hint="professional development"
                             />
                         </div>
                     </div>
