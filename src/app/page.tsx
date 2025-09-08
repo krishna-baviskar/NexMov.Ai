@@ -304,7 +304,7 @@ export default function LandingPage() {
                                     <Phone className="w-6 h-6 text-primary" />
                                      <div>
                                         <h4 className="font-bold text-white">Phone</h4>
-                                        <p className="text-muted-foreground">+91-XXXXXXXXXX</p>
+                                        <p className="text-muted-foreground">+9100-87670803585</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
