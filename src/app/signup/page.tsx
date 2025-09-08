@@ -192,7 +192,7 @@ export default function SignupPage() {
       pulse: number;
     }> = [];
 
-    const colors = ['#00d4ff', '#7c3aed', '#ff006e', '#ffffff'];
+    const colors = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))', '#ffffff'];
 
     for (let i = 0; i < 150; i++) {
       particles.push({
@@ -210,7 +210,7 @@ export default function SignupPage() {
 
     const animate = () => {
       if(!ctx) return;
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillStyle = 'rgba(10, 10, 20, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const time = Date.now() * 0.001;
@@ -235,9 +235,25 @@ export default function SignupPage() {
         const opacity = Math.min(scale * 2, 1) * (0.6 + Math.sin(particle.pulse) * 0.4);
 
         const gradient = ctx.createRadialGradient(x2d, y2d, 0, x2d, y2d, size * 2);
-        gradient.addColorStop(0, particle.color + Math.floor(opacity * 255).toString(16).padStart(2, '0'));
-        gradient.addColorStop(0.5, particle.color + Math.floor(opacity * 128).toString(16).padStart(2, '0'));
-        gradient.addColorStop(1, particle.color + '00');
+        const colorWithOpacity = (color: string, alpha: number) => {
+            if (color.startsWith('hsl')) {
+                return color.replace(')', `, ${alpha})`).replace('hsl', 'hsla');
+            }
+            let r, g, b;
+            if (color.length === 4) { // #rgb
+                r = parseInt(color[1] + color[1], 16);
+                g = parseInt(color[2] + color[2], 16);
+                b = parseInt(color[3] + color[3], 16);
+            } else { // #rrggbb
+                r = parseInt(color.substring(1,3), 16);
+                g = parseInt(color.substring(3,5), 16);
+                b = parseInt(color.substring(5,7), 16);
+            }
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        };
+        gradient.addColorStop(0, colorWithOpacity(particle.color, opacity));
+        gradient.addColorStop(0.5, colorWithOpacity(particle.color, opacity * 0.5));
+        gradient.addColorStop(1, colorWithOpacity(particle.color, 0));
 
         ctx.beginPath();
         ctx.arc(x2d, y2d, size * 2, 0, Math.PI * 2);
@@ -246,7 +262,7 @@ export default function SignupPage() {
 
         ctx.beginPath();
         ctx.arc(x2d, y2d, size, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color + Math.floor(opacity * 255).toString(16).padStart(2, '0');
+        ctx.fillStyle = colorWithOpacity(particle.color, opacity);
         ctx.fill();
 
         particles.slice(index + 1, index + 5).forEach(other => {
@@ -261,14 +277,14 @@ export default function SignupPage() {
             
             const connectionOpacity = (1 - distance / 120) * 0.4 * Math.min(scale, otherScale);
             
-            let connectionColor = '#7c3aed';
-            if (currentStep === 1) connectionColor = '#00d4ff';
-            else if (currentStep === 2) connectionColor = '#7c3aed';
-            else if (currentStep === 3) connectionColor = '#ff006e';
+            let connectionColor = 'hsl(var(--secondary))';
+            if (currentStep === 1) connectionColor = 'hsl(var(--primary))';
+            else if (currentStep === 2) connectionColor = 'hsl(var(--secondary))';
+            else if (currentStep === 3) connectionColor = 'hsl(var(--accent))';
             
             const connectionGradient = ctx.createLinearGradient(x2d, y2d, otherX2d, otherY2d);
-            connectionGradient.addColorStop(0, connectionColor + Math.floor(connectionOpacity * 255).toString(16).padStart(2, '0'));
-            connectionGradient.addColorStop(1, connectionColor + '00');
+            connectionGradient.addColorStop(0, colorWithOpacity(connectionColor, connectionOpacity));
+            connectionGradient.addColorStop(1, colorWithOpacity(connectionColor, 0));
             
             ctx.beginPath();
             ctx.moveTo(x2d, y2d);
@@ -400,9 +416,15 @@ export default function SignupPage() {
   };
 
   const getStepColor = (step: number) => {
-    if (step === 1) return 'from-cyan-400 to-blue-600';
-    if (step === 2) return 'from-purple-400 to-purple-600';
-    return 'from-pink-400 to-red-600';
+    if (step === 1) return 'from-primary to-secondary';
+    if (step === 2) return 'from-secondary to-accent';
+    return 'from-accent to-pink-500';
+  };
+
+  const getFocusRingColor = (step: number) => {
+    if (step === 1) return 'focus:ring-primary';
+    if (step === 2) return 'focus:ring-secondary';
+    return 'focus:ring-accent';
   };
 
   const getStepIcon = (step: number) => {
@@ -412,29 +434,29 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-white relative overflow-hidden">
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full -z-10"
       />
 
       <div className={`absolute inset-0 bg-gradient-radial ${
-        currentStep === 1 ? 'from-cyan-500/10 via-blue-500/5' :
-        currentStep === 2 ? 'from-purple-500/10 via-purple-500/5' :
-        'from-pink-500/10 via-red-500/5'
+        currentStep === 1 ? 'from-primary/10 via-secondary/5' :
+        currentStep === 2 ? 'from-secondary/10 via-accent/5' :
+        'from-accent/10 via-pink-500/5'
       } to-transparent transition-all duration-1000 -z-5`} />
 
       <nav className="relative z-50 p-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <Logo/>
-            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-white to-purple-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-white to-secondary bg-clip-text text-transparent">
               Nexmov.AI
             </span>
-          </div>
+          </Link>
           <div className="text-sm text-gray-400">
             Already have an account? 
-            <Link href="/login" className="text-cyan-400 hover:text-cyan-300 transition-colors ml-2">
+            <Link href="/login" className="text-primary hover:text-primary/80 transition-colors ml-2">
               Sign In
             </Link>
           </div>
@@ -461,9 +483,9 @@ export default function SignupPage() {
           ))}
         </div>
         <div className="flex justify-between mt-4 text-sm">
-          <span className={currentStep >= 1 ? 'text-cyan-400' : 'text-gray-400'}>Personal Info</span>
-          <span className={currentStep >= 2 ? 'text-purple-400' : 'text-gray-400'}>Career Goals</span>
-          <span className={currentStep >= 3 ? 'text-pink-400' : 'text-gray-400'}>Account Setup</span>
+          <span className={currentStep >= 1 ? 'text-primary' : 'text-gray-400'}>Personal Info</span>
+          <span className={currentStep >= 2 ? 'text-secondary' : 'text-gray-400'}>Career Goals</span>
+          <span className={currentStep >= 3 ? 'text-accent' : 'text-gray-400'}>Account Setup</span>
         </div>
       </div>
 
@@ -477,7 +499,7 @@ export default function SignupPage() {
                   <div className={`w-16 h-16 bg-gradient-to-r ${getStepColor(1)} rounded-2xl mx-auto mb-4 flex items-center justify-center transform hover:scale-110 transition-transform duration-500`}>
                     <User className="w-8 h-8 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                     Personal Information
                   </h2>
                   <p className="text-gray-400">Let's start with the basics about you</p>
@@ -493,7 +515,7 @@ export default function SignupPage() {
                         onChange={(e) => updatePersonalData('firstName', e.target.value)}
                         className={`w-full px-4 py-3 bg-white/5 border ${
                           errors.firstName ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                        } rounded-xl focus:ring-2 ${getFocusRingColor(1)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                         placeholder="Enter your first name"
                       />
                       {errors.firstName && (
@@ -514,7 +536,7 @@ export default function SignupPage() {
                         onChange={(e) => updatePersonalData('lastName', e.target.value)}
                         className={`w-full px-4 py-3 bg-white/5 border ${
                           errors.lastName ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                        } rounded-xl focus:ring-2 ${getFocusRingColor(1)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                         placeholder="Enter your last name"
                       />
                       {errors.lastName && (
@@ -537,7 +559,7 @@ export default function SignupPage() {
                       onChange={(e) => updatePersonalData('email', e.target.value)}
                       className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
                         errors.email ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(1)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                       placeholder="Enter your email address"
                     />
                     {errors.email && (
@@ -560,7 +582,7 @@ export default function SignupPage() {
                         onChange={(e) => updatePersonalData('phone', e.target.value)}
                         className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
                           errors.phone ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                        } rounded-xl focus:ring-2 ${getFocusRingColor(1)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                         placeholder="Enter your phone number"
                       />
                       {errors.phone && (
@@ -582,7 +604,7 @@ export default function SignupPage() {
                         onChange={(e) => updatePersonalData('dateOfBirth', e.target.value)}
                         className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
                           errors.dateOfBirth ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white`}
+                        } rounded-xl focus:ring-2 ${getFocusRingColor(1)} focus:border-transparent outline-none transition-all duration-300 text-white`}
                       />
                       {errors.dateOfBirth && (
                         <div className="absolute -bottom-6 left-0 flex items-center space-x-1 text-red-400 text-xs">
@@ -604,7 +626,7 @@ export default function SignupPage() {
                       onChange={(e) => updatePersonalData('location', e.target.value)}
                       className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
                         errors.location ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(1)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                       placeholder="City, State, Country"
                     />
                     {errors.location && (
@@ -624,7 +646,7 @@ export default function SignupPage() {
                   <div className={`w-16 h-16 bg-gradient-to-r ${getStepColor(2)} rounded-2xl mx-auto mb-4 flex items-center justify-center transform hover:scale-110 transition-transform duration-500`}>
                     <Target className="w-8 h-8 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
                     Career Goals & Interests
                   </h2>
                   <p className="text-gray-400">Help us personalize your AI career guidance</p>
@@ -638,7 +660,7 @@ export default function SignupPage() {
                       onChange={(e) => updateCareerData('currentStatus', e.target.value)}
                       className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
                         errors.currentStatus ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all duration-300 text-white`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
                     >
                       <option value="" className="bg-gray-800">Select your current status</option>
                       {careerStatuses.map(status => (
@@ -663,7 +685,7 @@ export default function SignupPage() {
                         onChange={(e) => updateCareerData('educationLevel', e.target.value)}
                         className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
                           errors.educationLevel ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all duration-300 text-white`}
+                        } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
                       >
                         <option value="" className="bg-gray-800">Select education level</option>
                         {educationLevels.map(level => (
@@ -687,7 +709,7 @@ export default function SignupPage() {
                         onChange={(e) => updateCareerData('experience', e.target.value)}
                         className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
                           errors.experience ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all duration-300 text-white`}
+                        } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
                       >
                         <option value="" className="bg-gray-800">Select experience level</option>
                         {experienceLevels.map(level => (
@@ -712,7 +734,7 @@ export default function SignupPage() {
                       onChange={(e) => updateCareerData('fieldOfStudy', e.target.value)}
                       className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
                         errors.fieldOfStudy ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all duration-300 text-white`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
                     >
                       <option value="" className="bg-gray-800">Select your field of study</option>
                       {fieldsOfStudy.map(field => (
@@ -738,8 +760,8 @@ export default function SignupPage() {
                         onClick={() => updateCareerData('careerGoals', toggleArrayItem(formData.career.careerGoals, goal))}
                         className={`p-3 rounded-xl border transition-all duration-300 text-sm ${
                           formData.career.careerGoals.includes(goal)
-                            ? 'bg-purple-500/20 border-purple-400 text-purple-300'
-                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-purple-400/50 hover:bg-purple-500/10'
+                            ? 'bg-secondary/20 border-secondary text-secondary'
+                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-secondary/50 hover:bg-secondary/10'
                         }`}
                       >
                         {goal}
@@ -764,8 +786,8 @@ export default function SignupPage() {
                         onClick={() => updateCareerData('interests', toggleArrayItem(formData.career.interests, interest))}
                         className={`p-3 rounded-xl border transition-all duration-300 text-sm ${
                           formData.career.interests.includes(interest)
-                            ? 'bg-purple-500/20 border-purple-400 text-purple-300'
-                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-purple-400/50 hover:bg-purple-500/10'
+                            ? 'bg-secondary/20 border-secondary text-secondary'
+                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-secondary/50 hover:bg-secondary/10'
                         }`}
                       >
                         {interest}
@@ -788,7 +810,7 @@ export default function SignupPage() {
                   <div className={`w-16 h-16 bg-gradient-to-r ${getStepColor(3)} rounded-2xl mx-auto mb-4 flex items-center justify-center transform hover:scale-110 transition-transform duration-500`}>
                     <Lock className="w-8 h-8 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-pink-400 to-red-600 bg-clip-text text-transparent">
+                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-accent to-pink-500 bg-clip-text text-transparent">
                     Secure Your Account
                   </h2>
                   <p className="text-gray-400">Create a strong password to protect your account</p>
@@ -804,7 +826,7 @@ export default function SignupPage() {
                       onChange={(e) => updateAccountData('password', e.target.value)}
                       className={`w-full pl-12 pr-12 py-3 bg-white/5 border ${
                         errors.password ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(3)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                       placeholder="Create a strong password"
                     />
                     <button
@@ -847,7 +869,7 @@ export default function SignupPage() {
                       onChange={(e) => updateAccountData('confirmPassword', e.target.value)}
                       className={`w-full pl-12 pr-12 py-3 bg-white/5 border ${
                         errors.confirmPassword ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(3)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                       placeholder="Confirm your password"
                     />
                     <button
@@ -873,15 +895,15 @@ export default function SignupPage() {
                       id="agreeToTerms"
                       checked={formData.account.agreeToTerms}
                       onChange={(e) => updateAccountData('agreeToTerms', e.target.checked)}
-                      className={`w-5 h-5 mt-0.5 bg-white/5 border ${errors.agreeToTerms ? 'border-red-400' : 'border-white/10'} rounded focus:ring-2 focus:ring-pink-400`}
+                      className={`w-5 h-5 mt-0.5 bg-white/5 border ${errors.agreeToTerms ? 'border-red-400' : 'border-white/10'} rounded focus:ring-2 ${getFocusRingColor(3)}`}
                     />
                     <label htmlFor="agreeToTerms" className="text-sm text-gray-400">
                       I agree to the{' '}
-                      <button type="button" className="text-pink-400 hover:text-pink-300 transition-colors underline">
+                      <button type="button" className="text-accent hover:text-accent/80 transition-colors underline">
                         Terms of Service
                       </button>
                       {' '}and{' '}
-                      <button type="button" className="text-pink-400 hover:text-pink-300 transition-colors underline">
+                      <button type="button" className="text-accent hover:text-accent/80 transition-colors underline">
                         Privacy Policy
                       </button>
                     </label>
@@ -899,7 +921,7 @@ export default function SignupPage() {
                       id="subscribeNewsletter"
                       checked={formData.account.subscribeNewsletter}
                       onChange={(e) => updateAccountData('subscribeNewsletter', e.target.checked)}
-                      className="w-5 h-5 mt-0.5 bg-white/5 border border-white/10 rounded focus:ring-2 focus:ring-pink-400"
+                      className={`w-5 h-5 mt-0.5 bg-white/5 border border-white/10 rounded focus:ring-2 ${getFocusRingColor(3)}`}
                     />
                     <label htmlFor="subscribeNewsletter" className="text-sm text-gray-400">
                       Subscribe to our newsletter for career tips, job alerts, and AI insights
@@ -935,7 +957,7 @@ export default function SignupPage() {
                 <button
                   onClick={handleSubmit}
                   disabled={isLoading}
-                  className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-pink-400 to-red-600 hover:from-pink-500 hover:to-red-700 hover:scale-105 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-accent to-pink-500 hover:from-accent/80 hover:to-pink-600 hover:scale-105 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {isLoading ? (
                     <>
@@ -962,7 +984,3 @@ export default function SignupPage() {
     </div>
   );
 };
-
-    
-
-    
