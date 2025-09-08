@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Compass, GitCommit, Briefcase, BarChart3 } from "lucide-react";
+import { Home, Compass, GitCommit, Briefcase, BarChart3, DollarSign, LayoutDashboard } from "lucide-react";
 
 import {
   SidebarMenu,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const links = [
-  { href: "/", label: "Dashboard", icon: Home },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   {
     href: "/career-roadmap",
     label: "Career Roadmap",
@@ -27,6 +27,11 @@ const links = [
     label: "Job Market Trends",
     icon: BarChart3,
   },
+  {
+    href: "/salary-progression",
+    label: "Salary Progression",
+    icon: DollarSign,
+  }
 ];
 
 export function MainNav() {

@@ -7,7 +7,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GitCommit, Compass, BarChart3, ArrowRight } from "lucide-react";
+import { GitCommit, Compass, BarChart3, ArrowRight, DollarSign } from "lucide-react";
 
 const features = [
   {
@@ -28,6 +28,12 @@ const features = [
     href: "/job-market-trends",
     icon: <BarChart3 className="w-8 h-8 text-accent" />,
   },
+   {
+    title: "Salary Progression",
+    description: "Get salary estimates for your career path based on experience and location.",
+    href: "/salary-progression",
+    icon: <DollarSign className="w-8 h-8 text-accent" />,
+  },
 ];
 
 export default function DashboardPage() {
@@ -36,14 +42,14 @@ export default function DashboardPage() {
       <div className="max-w-4xl mx-auto">
         <div className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Welcome to <span className="text-primary">NexMov.ai</span>
+            Welcome to the <span className="text-primary">Dashboard</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Your AI-powered co-pilot for navigating your career path. Explore our tools to unlock your potential.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
           {features.map((feature) => (
             <Card
               key={feature.href}
