@@ -24,7 +24,7 @@ export default function MainLayout({
         <SidebarHeader className="p-4">
           <Link href="/" className="flex items-center gap-2">
             <Logo />
-            <span className="text-xl font-semibold">NexMov.AI</span>
+            <span className="text-xl font-semibold gradient-text">NexMov.AI</span>
           </Link>
         </SidebarHeader>
         <SidebarContent className="p-2">
