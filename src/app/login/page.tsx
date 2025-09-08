@@ -27,6 +27,8 @@ import { Logo } from "@/components/icons";
 import { auth } from "@/lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address."),
@@ -38,6 +40,7 @@ type FormValues = z.infer<typeof formSchema>;
 export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -56,7 +59,7 @@ export default function LoginPage() {
       });
       router.push("/dashboard");
     } catch (error: any) {
-       toast({
+      toast({
         title: "Sign-in Failed",
         description: error.message,
         variant: "destructive",
@@ -68,14 +71,14 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="flex justify-center">
-            <Logo />
+          <Logo />
         </div>
-        <Card>
+        <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
           <CardHeader className="text-center">
-            <CardTitle>Welcome Back!</CardTitle>
-            <CardDescription>
-              Sign in to continue to Nexmov.AI
-            </CardDescription>
+            <CardTitle className="text-2xl font-bold gradient-text">
+              Welcome Back!
+            </CardTitle>
+            <CardDescription>Sign in to continue to Nexmov.AI</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -85,13 +88,19 @@ export default function LoginPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-sm font-medium text-gray-300">
+                        Email Address
+                      </FormLabel>
                       <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="you@example.com"
-                          {...field}
-                        />
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <Input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="w-full pl-10 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -102,16 +111,45 @@ export default function LoginPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel className="text-sm font-medium text-gray-300">
+                        Password
+                      </FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="••••••••" {...field} />
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter your password"
+                            className="w-full pl-10 pr-12 py-4 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                          >
+                            {showPassword ? (
+                              <EyeOff className="w-5 h-5" />
+                            ) : (
+                              <Eye className="w-5 h-5" />
+                            )}
+                          </button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                  {form.formState.isSubmitting ? 'Signing In...' : 'Sign In'}
+                <Button
+                  type="submit"
+                  className="w-full py-4 bg-gradient-to-r from-cyan-400 to-purple-600 hover:from-cyan-500 hover:to-purple-700 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <span>Sign In</span>
+                  )}
                 </Button>
               </form>
             </Form>
@@ -119,7 +157,10 @@ export default function LoginPage() {
         </Card>
         <p className="text-center text-sm text-muted-foreground">
           Don't have an account?{" "}
-          <Link href="/signup" className="font-semibold text-primary hover:underline">
+          <Link
+            href="/signup"
+            className="font-semibold text-primary hover:underline"
+          >
             Sign up
           </Link>
         </p>
