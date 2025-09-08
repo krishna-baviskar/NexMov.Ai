@@ -1,249 +1,177 @@
-
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Briefcase, TrendingUp, Bot, GraduationCap, ChevronRight, Linkedin, Twitter, Github, Wand2, Users, Rocket } from 'lucide-react';
+import { GraduationCap, TrendingUp, Wand2, Bot, Linkedin, Twitter, Github, ChevronRight } from 'lucide-react';
 import { Logo } from '@/components/icons';
-import Image from 'next/image';
-import { ThreeDLoader } from '@/components/ui/3d-loader';
+import { cn } from '@/lib/utils';
 
 const features = [
     {
-        id: 'career_growth_planner',
-        title: 'AI Career Planner',
-        description: 'Generate a dynamic 5-year career roadmap. Our AI analyzes your profile to suggest key milestones, identify skill gaps, project salary growth, and recommend strategic moves to keep you on track.',
-        icon: <GraduationCap className="w-8 h-8 text-primary" />,
+        title: 'Career Growth Planner',
+        description: 'Generate 3-5 year career roadmaps with skill gap analysis, salary projections, and personalized AI advisor guidance for your dream job.',
+        icon: <GraduationCap className="h-10 w-10" />,
     },
     {
-        id: 'job_trends',
-        title: 'Real-Time Job Insights',
-        description: 'Get a live pulse on the job market. Analyze demand for specific roles, see up-to-date salary ranges in your location, and discover the emerging technologies top companies are hiring for.',
-        icon: <TrendingUp className="w-8 h-8 text-primary" />,
+        title: 'Job Trend Insights',
+        description: 'Real-time insights on job demand, salary ranges by sector, and growth charts highlighting emerging and fading industries.',
+        icon: <TrendingUp className="h-10 w-10" />,
     },
     {
-        id: 'course_advisor',
-        title: 'Personalized Learning Paths',
-        description: 'Turn skill gaps into strengths. Receive AI-curated recommendations for online courses, industry certifications, and hands-on projects to build the exact competencies you need.',
-        icon: <Wand2 className="w-8 h-8 text-primary" />,
+        title: 'AI Course Advisor',
+        description: 'Personalized course recommendations, certification paths, and structured learning journeys from beginner to expert level.',
+        icon: <Wand2 className="h-10 w-10" />,
     },
     {
-        id: 'chatbot',
-        title: '24/7 AI Career Advisor',
-        description: 'Ask anything, anytime. Our conversational AI assistant provides instant, well-structured answers to complex career questions, helping you make informed decisions on the spot.',
-        icon: <Bot className="w-8 h-8 text-primary" />,
-    },
-];
-
-const whyChooseUsPoints = [
-    'Personalized guidance for students, graduates, and job switchers.',
-    'Powered by cutting-edge Google Gemini for unparalleled insights.',
-    'Interactive dashboards with timelines, charts, and news.',
-    'Modular tools that work together or standalone.',
-    'Seamless experience with an always-on AI assistant.',
-];
-
-const userTypes = [
-    {
-        type: 'Students (10th/12th)',
-        value: 'Explore future-proof career paths with AI-driven guidance on higher education choices, crucial entrance exams, and foundational skills.',
-        icon: <GraduationCap className="w-6 h-6 text-accent" />
-    },
-    {
-        type: 'Undergraduates',
-        value: 'Build a powerful profile with a clear roadmap for internships, essential skill development, and creating a standout project portfolio.',
-        icon: <Briefcase className="w-6 h-6 text-accent" />
-    },
-    {
-        type: 'Job Switchers',
-        value: 'Transition confidently with in-depth skill gap analysis, realistic salary projections, and tailored recommendations for your new role.',
-        icon: <Users className="w-6 h-6 text-accent" />
-    },
-    {
-        type: 'Exam Aspirants',
-        value: 'Conquer your exams with personalized study plans, AI-curated learning resources, and timely updates to stay ahead of the curve.',
-        icon: <Rocket className="w-6 h-6 text-accent" />
+        title: 'Floating AI Chatbot',
+        description: '24/7 career guidance with instant answers, integrated with roadmaps, job trends, and course recommendations.',
+        icon: <Bot className="h-10 w-10" />,
     },
 ];
 
 export default function LandingPage() {
     return (
-        <div className="relative flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
-            <Image
-                src="https://picsum.photos/1920/1281?random=3"
-                alt="Abstract AI background"
-                fill
-                className="object-cover"
-                data-ai-hint="abstract technology"
-            />
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+        <div className="relative flex min-h-screen w-full flex-col items-center overflow-x-hidden bg-background text-foreground">
+            {/* Animated Background */}
+            <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+            <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-br from-background via-black/80 to-background opacity-90"></div>
+            <div 
+              className="absolute -z-10 -top-1/4 left-0 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,hsl(var(--primary)/0.2),transparent)] blur-3xl"
+              style={{ animation: 'hero-float 8s ease-in-out infinite' }}
+            ></div>
+            <div 
+              className="absolute -z-10 -bottom-1/4 right-0 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,hsl(var(--secondary)/0.2),transparent)] blur-3xl"
+              style={{ animation: 'hero-float 10s ease-in-out infinite 2s' }}
+            ></div>
 
-            <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-                <div className="container flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                    <Link href="/" className="flex items-center gap-2">
+            {/* Header */}
+            <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-md">
+                <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                    <Link href="/" className="flex items-center gap-2 transition-transform hover:scale-105">
                         <Logo />
-                        <span className="text-xl font-bold">Nexmov.AI</span>
+                        <span className="text-2xl font-bold gradient-text">Nexmov.AI</span>
                     </Link>
-                    <nav className="hidden items-center gap-6 md:flex">
-                        <Link href="#features" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
-                            Features
-                        </Link>
-                        <Link href="#about" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
-                            About
-                        </Link>
-                        <Link href="#who" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
-                           Who It's For
-                        </Link>
+                    <nav className="hidden items-center gap-2 md:flex">
+                        <Link href="#features"><Button variant="ghost">Features</Button></Link>
+                        <Link href="#about"><Button variant="ghost">About</Button></Link>
+                        <Link href="#contact"><Button variant="ghost">Contact</Button></Link>
                     </nav>
                      <div className="flex items-center gap-2">
                         <Link href="/login">
-                          <Button variant="ghost">Login</Button>
+                          <Button variant="outline" className="border-primary/50 bg-primary/10 hover:bg-primary/20">Login</Button>
                         </Link>
                         <Link href="/signup">
-                            <Button>
-                                Get Started <ChevronRight className="ml-1 h-4 w-4 hidden sm:inline" />
+                            <Button className="bg-primary/80 text-primary-foreground hover:bg-primary">
+                                Get Started <ChevronRight className="ml-1 h-4 w-4" />
                             </Button>
                         </Link>
                     </div>
                 </div>
             </header>
 
-            <main className="flex-1 z-10">
+            <main className="flex-1">
                 {/* Hero Section */}
-                <section className="container grid lg:grid-cols-2 place-items-center gap-10 px-4 py-16 text-center lg:text-left sm:py-24">
-                    <div className="lg:col-span-2 text-center flex flex-col items-center gap-4">
-                        <h1 className="text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                           Navigate Your Career with <span className='text-primary'>AI-Powered</span> Precision
+                <section id="hero" className="container relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center text-center">
+                    <div className="max-w-4xl" style={{ animation: 'hero-float 6s ease-in-out infinite' }}>
+                        <h1 className="text-4xl font-black tracking-tighter text-white sm:text-6xl md:text-7xl lg:text-8xl" style={{ animation: 'subtle-glow 4s ease-in-out infinite' }}>
+                            Navigate Your Career with <span className="gradient-text">AI Precision</span>
                         </h1>
-                        <p className="max-w-3xl text-lg text-gray-300 sm:text-xl">
-                            From university to the C-suite, get a personalized, data-driven roadmap to achieve your professional goals faster. Nexmov.AI is your dedicated co-pilot for smarter career decisions.
+                        <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+                            Nexmov.AI is designed for students, job seekers, and professionals. Generate personalized career paths, discover skills, track job trends, and get curated news — all in one dashboard.
                         </p>
-                        <Link href="/dashboard">
-                            <Button size="lg" className="mt-4">
-                                Start Your Journey <Rocket className="ml-2"/>
-                            </Button>
-                        </Link>
-                    </div>
-                    <div className="w-full max-w-md h-64 sm:h-72 md:h-80 lg:h-96 lg:col-span-2 lg:mt-4">
-                        <ThreeDLoader/>
+                        <div className="mt-8 flex justify-center gap-4">
+                            <Link href="/signup">
+                                <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-lg text-white shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30">
+                                    Find Your Nex Mov
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </section>
-                
 
                 {/* About Section */}
-                <section id="about" className="py-16 sm:py-20 bg-secondary/80 backdrop-blur-md">
-                    <div className="container max-w-4xl mx-auto px-4 text-center">
-                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">What is Nexmov.AI?</h2>
-                        <p className="mt-4 text-muted-foreground text-lg">
-                            Nexmov.AI is your personal career strategist, powered by Google's advanced Gemini AI. We go beyond generic advice to provide a deeply personalized guidance system. Our platform analyzes millions of data points on job trends, salaries, and required skills, then tailors that information to your unique profile and ambitions. Whether you are a student choosing a major, a graduate hunting for your first job, or a professional aiming for the next big promotion, Nexmov.AI delivers a clear, visual, and data-driven roadmap to help you achieve your goals faster.
-                        </p>
+                <section id="about" className="py-20 sm:py-32">
+                    <div className="container mx-auto max-w-5xl px-4">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">What is Nexmov.AI?</h2>
+                            <p className="mt-4 text-lg text-muted-foreground">
+                                Nexmov.AI is a next-generation career navigation platform that adapts to your education, interests, and goals. It transforms complex career data into a clear, visual, and guided experience.
+                            </p>
+                        </div>
+                        <div className="mt-16 grid gap-8 md:grid-cols-2">
+                             <div className="card-3d gradient-border-card">
+                                <h3 className="gradient-text text-2xl font-bold">Our Mission</h3>
+                                <p className="mt-2 text-muted-foreground">To make career guidance personalized, data-driven, and accessible to all, regardless of background.</p>
+                             </div>
+                             <div className="card-3d gradient-border-card">
+                                <h3 className="gradient-text text-2xl font-bold">Our Vision</h3>
+                                <p className="mt-2 text-muted-foreground">To create a world where every learner and professional has a personal AI mentor for navigating their future.</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 {/* Features Section */}
-                <section id="features" className="container py-16 sm:py-20 px-4">
-                    <div className="text-center max-w-3xl mx-auto mb-12">
-                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Everything You Need to Succeed</h2>
-                        <p className="text-gray-300 mt-2 text-lg">Our powerful, AI-driven features are designed to guide your career at every stage.</p>
-                    </div>
-                    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-                        {features.map((feature) => (
-                            <Card key={feature.id} className="flex flex-col bg-secondary/50 backdrop-blur-sm border-primary/20 hover:border-primary/50 transition-all hover:scale-105 duration-300">
-                                <CardHeader className="flex flex-row items-center gap-4">
-                                    <div className="bg-primary/10 p-3 rounded-lg">{feature.icon}</div>
-                                    <CardTitle>{feature.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex-grow">
-                                    <p className="text-muted-foreground">{feature.description}</p>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Why Choose Us Section */}
-                <section className="py-16 bg-secondary/80 backdrop-blur-md sm:py-20">
-                    <div className="container grid gap-12 px-4 md:grid-cols-2 items-center">
-                        <div className="relative w-full h-72 rounded-lg overflow-hidden">
-                           <Image 
-                                src="https://picsum.photos/600/400" 
-                                alt="Professional working on a laptop"
-                                fill
-                                className="object-cover"
-                                data-ai-hint="professional development"
-                            />
+                <section id="features" className="py-20 sm:py-32">
+                    <div className="container mx-auto max-w-6xl px-4">
+                        <div className="mx-auto mb-16 max-w-3xl text-center">
+                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Core Features</h2>
+                            <p className="mt-4 text-lg text-muted-foreground">
+                                Our powerful, AI-driven tools are designed to guide you at every stage of your career.
+                            </p>
                         </div>
-                        <div>
-                             <h2 className="text-3xl font-bold tracking-tight mb-4 sm:text-4xl">Why Choose Nexmov.AI?</h2>
-                             <ul className="space-y-4">
-                                {whyChooseUsPoints.map((point, index) => (
-                                    <li key={index} className="flex items-start gap-3">
-                                        <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                                        <span className="text-muted-foreground">{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Who It's For Section */}
-                <section id="who" className="py-16 sm:py-20">
-                    <div className="container px-4">
-                        <div className="text-center max-w-3xl mx-auto mb-12">
-                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Tailored for Every Ambition</h2>
-                             <p className="text-gray-300 mt-2 text-lg">No matter where you are in your career journey, Nexmov.AI has a plan for you.</p>
-                        </div>
-                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                            {userTypes.map((user) => (
-                                <Card key={user.type} className="bg-secondary/50 backdrop-blur-sm border-primary/10 text-center flex flex-col items-center">
-                                    <CardHeader>
-                                        <div className='mx-auto bg-accent/10 p-3 rounded-full mb-2'>{user.icon}</div>
-                                        <CardTitle>{user.type}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <p className="text-muted-foreground">{user.value}</p>
-                                    </CardContent>
-                                </Card>
+                        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+                            {features.map((feature) => (
+                                <div key={feature.title} className="card-3d gradient-border-card text-center items-center flex flex-col">
+                                    <div className="mb-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 p-4 text-secondary">
+                                        {feature.icon}
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
+                                    <p className="mt-2 flex-grow text-muted-foreground">{feature.description}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
                 </section>
-                
-                {/* CTA Section */}
-                <section className="py-20 bg-primary/90 text-primary-foreground">
-                    <div className="container text-center px-4">
-                        <h2 className="text-4xl font-bold tracking-tight mb-4">Ready to Shape Your Future?</h2>
-                        <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto mb-8">Join thousands of users who are building their dream careers with the power of AI. Your journey starts now.</p>
-                        <Link href="/dashboard">
-                            <Button variant="secondary" size="lg" className="text-lg">
-                                Find Your Nex Mov <ChevronRight className="ml-2 h-5 w-5" />
-                            </Button>
-                        </Link>
+
+                 {/* Contact Section */}
+                <section id="contact" className="py-20 text-center sm:py-32">
+                    <div className="container mx-auto max-w-2xl px-4">
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Ready to Shape Your Future?</h2>
+                        <p className="mt-4 text-lg text-muted-foreground">
+                           Join thousands of users building their dream careers with the power of AI. Your journey starts now.
+                        </p>
+                        <div className="mt-8">
+                            <Link href="/signup">
+                                 <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-lg text-white shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30">
+                                    Get Started for Free
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </section>
-
             </main>
 
-            <footer className="z-10 bg-secondary/80 backdrop-blur-md text-secondary-foreground py-8">
-                <div className="container flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-2 mb-4 md:mb-0">
+            {/* Footer */}
+            <footer className="w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
+                <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
+                    <div className="flex items-center gap-2">
                          <Logo />
-                         <span className="font-semibold">Nexmov.AI</span>
+                         <span className="font-semibold text-white">Nexmov.AI</span>
                     </div>
-                    <div className="flex flex-wrap justify-center gap-4 text-sm mb-4 md:mb-0">
-                        <Link href="#features" className="hover:underline">Features</Link>
-                        <Link href="#about" className="hover:underline">About</Link>
-                        <Link href="/privacy" className="hover:underline">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:underline">Terms of Use</Link>
+                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                        <Link href="#features" className="transition-colors hover:text-white">Features</Link>
+                        <Link href="#about" className="transition-colors hover:text-white">About</Link>
+                        <Link href="/privacy" className="transition-colors hover:text-white">Privacy</Link>
+                        <Link href="/terms" className="transition-colors hover:text-white">Terms</Link>
                     </div>
                      <div className="flex gap-4">
-                        <a href="#" target="_blank" rel="noopener noreferrer"><Linkedin className="w-5 h-5 hover:text-primary transition-colors"/></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer"><Twitter className="w-5 h-5 hover:text-primary transition-colors"/></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer"><Github className="w-5 h-5 hover:text-primary transition-colors"/></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Linkedin className="h-5 w-5"/></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Twitter className="h-5 w-5"/></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Github className="h-5 w-5"/></a>
                     </div>
                 </div>
-                 <div className="container text-center mt-6 text-xs text-muted-foreground px-4">
-                    © 2024 Nexmov.AI. All rights reserved.
+                 <div className="container mx-auto mt-6 text-center text-xs text-muted-foreground px-4">
+                    © {new Date().getFullYear()} Nexmov.AI. All rights reserved.
                 </div>
             </footer>
         </div>
