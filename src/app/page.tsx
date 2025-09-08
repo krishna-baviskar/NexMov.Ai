@@ -70,7 +70,7 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground">
             <Image
-                src="https://picsum.photos/1920/1082"
+                src="https://picsum.photos/1920/1083"
                 alt="Abstract background"
                 fill
                 className="object-cover"
@@ -107,8 +107,8 @@ export default function LandingPage() {
 
             <main className="flex-1 z-10">
                 {/* Hero Section */}
-                <section className="container grid items-center gap-6 px-4 pt-12 pb-12 text-center md:grid-cols-2 md:py-24 md:text-left lg:gap-12">
-                    <div className="flex flex-col items-center gap-4 md:items-start">
+                <section className="container grid items-center gap-6 px-4 py-16 text-center sm:py-24 lg:gap-12">
+                    <div className="flex flex-col items-center gap-4">
                         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter text-white sm:text-4xl md:text-5xl lg:text-6xl">
                             AI-Driven Career Guidance for Every Step of Your Journey
                         </h1>
@@ -119,12 +119,12 @@ export default function LandingPage() {
                             <Button size="lg">Find Your Nex Mov</Button>
                         </Link>
                     </div>
-                    <div className="mx-auto max-w-full md:mx-0">
+                    <div className="mx-auto mt-8 max-w-full md:mx-0">
                         <Image 
-                            src="https://picsum.photos/600/401" 
+                            src="https://picsum.photos/600/403" 
                             alt="AI-driven career growth illustration"
                             width={600}
-                            height={401} 
+                            height={403} 
                             className="rounded-lg shadow-2xl w-full h-auto"
                             data-ai-hint="artificial intelligence"
                         />
