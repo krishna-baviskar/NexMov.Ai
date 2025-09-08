@@ -110,12 +110,12 @@ export default function LandingPage() {
                     </div>
                     <div>
                         <Image 
-                            src="https://picsum.photos/600/400" 
+                            src="https://picsum.photos/600/401" 
                             alt="AI-driven career growth illustration"
                             width={600}
-                            height={400} 
+                            height={401} 
                             className="rounded-lg shadow-2xl"
-                            data-ai-hint="career growth"
+                            data-ai-hint="career growth technology"
                         />
                     </div>
                 </section>
