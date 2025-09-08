@@ -119,7 +119,7 @@ export default function LandingPage() {
                 </div>
             </header>
 
-            <main className="flex-1 z-10 w-full flex flex-col items-center">
+            <main className="flex-1 z-10 w-full flex flex-col">
                 {/* Hero Section */}
                 <section id="hero" className="container relative z-10 flex min-h-[calc(80vh)] flex-col items-center justify-center text-center py-12 md:py-20">
                      <div className="max-w-4xl" style={{ animation: 'hero-float 6s ease-in-out infinite' }}>
