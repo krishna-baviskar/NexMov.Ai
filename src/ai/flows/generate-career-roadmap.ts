@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -109,7 +110,7 @@ Your response must be a JSON object that adheres to the GenerateCareerRoadmapOut
 
 5.  **careerOptions**: Based on the user's entire profile, suggest 2-3 specific and relevant job roles or career paths. For each, provide a \`role\` and a short \`description\` of why it's a suitable option.
 
-6.  **finalAdvice**: Write a concluding paragraph of personalized advice. Summarize the key strengths of the user's profile and offer encouragement for their journey ahead, connecting it back to their stated goals.
+6.  **finalAdvice**: Write a short, encouraging, and easy-to-understand concluding paragraph. Summarize the user's key strengths and connect them to their career goals.
 
 Provide a comprehensive, actionable, and financially insightful roadmap. The roadmap should be highly tailored to the user's detailed profile.`,
 });
@@ -126,3 +127,4 @@ const generateCareerRoadmapFlow = ai.defineFlow(
     return output!;
   }
 );
+
