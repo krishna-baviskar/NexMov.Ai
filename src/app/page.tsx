@@ -69,7 +69,7 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
             <Image
-                src="https://picsum.photos/1920/1280"
+                src="https://picsum.photos/1920/1281"
                 alt="Abstract AI background"
                 fill
                 className="object-cover"
@@ -110,20 +110,20 @@ export default function LandingPage() {
             <main className="flex-1 z-10">
                 {/* Hero Section */}
                 <section className="container grid lg:grid-cols-2 place-items-center gap-12 px-4 py-20 text-center lg:text-left sm:py-32">
-                    <div className="flex flex-col items-center lg:items-start gap-4">
+                    <div className="lg:col-span-2 text-center flex flex-col items-center gap-4">
                         <h1 className="text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                           Your AI Co-Pilot for <span className='text-primary'>Smarter</span> Career Decisions
+                           Navigate Your Career with <span className='text-primary'>AI-Powered</span> Precision
                         </h1>
-                        <p className="max-w-2xl text-lg text-gray-300 sm:text-xl">
-                            Stop guessing. Start growing. Nexmov.AI combines real-time data with powerful AI to give you a personalized, actionable roadmap for your entire career journey.
+                        <p className="max-w-3xl text-lg text-gray-300 sm:text-xl">
+                            From university to the C-suite, get a personalized, data-driven roadmap to achieve your professional goals faster. Nexmov.AI is your dedicated co-pilot for smarter career decisions.
                         </p>
                         <Link href="/dashboard">
                             <Button size="lg" className="mt-4">
-                                Find Your Next Move <Rocket className="ml-2"/>
+                                Start Your Journey <Rocket className="ml-2"/>
                             </Button>
                         </Link>
                     </div>
-                    <div className="w-full max-w-md h-72 sm:h-80 md:h-96 lg:h-[32rem]">
+                    <div className="w-full max-w-md h-72 sm:h-80 md:h-96 lg:h-[32rem] lg:col-span-2 lg:mt-8">
                         <ThreeDLoader/>
                     </div>
                 </section>
