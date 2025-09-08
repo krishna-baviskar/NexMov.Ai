@@ -12,13 +12,13 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const GenerateCareerRoadmapInputSchema = z.object({
-  currentProfile: z
-    .string()
-    .describe('The user\'s current professional profile or job description.'),
+  currentStatus: z.string().describe("The user's current professional status (e.g., 'Working Professional', 'Student')."),
+  educationLevel: z.string().describe("The user's highest level of education."),
+  fieldOfStudy: z.string().describe("The user's primary field of study or expertise."),
+  experience: z.string().describe("The user's years of professional experience."),
   skills: z.string().describe('A comma-separated list of the user\'s skills.'),
-  careerInterests: z
-    .string()
-    .describe('A description of the user\'s career interests and goals.'),
+  careerGoals: z.array(z.string()).describe("A list of the user's primary career goals."),
+  interests: z.array(z.string()).describe("A list of the user's professional interests."),
 });
 export type GenerateCareerRoadmapInput = z.infer<
   typeof GenerateCareerRoadmapInputSchema
@@ -63,11 +63,22 @@ const prompt = ai.definePrompt({
   name: 'generateCareerRoadmapPrompt',
   input: {schema: GenerateCareerRoadmapInputSchema},
   output: {schema: GenerateCareerRoadmapOutputSchema},
-  prompt: `You are a career and salary expert. Generate a personalized career roadmap and salary progression for the user.
+  prompt: `You are a career and salary expert. Generate a personalized career roadmap and salary progression for the user based on their detailed profile.
 
-Current Profile: {{{currentProfile}}}
-Skills: {{{skills}}}
-Career Interests: {{{careerInterests}}}
+**User Profile:**
+- Current Status: {{{currentStatus}}}
+- Education Level: {{{educationLevel}}}
+- Field of Study: {{{fieldOfStudy}}}
+- Experience Level: {{{experience}}}
+- Current Skills: {{{skills}}}
+- Career Goals:
+{{#each careerGoals}}
+  - {{{this}}}
+{{/each}}
+- Interests:
+{{#each interests}}
+  - {{{this}}}
+{{/each}}
 
 Your response must be a JSON object that adheres to the GenerateCareerRoadmapOutputSchema.
 
@@ -89,7 +100,7 @@ Your response must be a JSON object that adheres to the GenerateCareerRoadmapOut
     *   \`milestone\`: The name of the career stage (e.g., "Entry-Level", "Mid-Level", "Senior", "Lead").
     *   \`estimatedSalary\`: A realistic estimated annual salary in USD for that stage. Start with the current role if possible.
 
-Provide a comprehensive, actionable, and financially insightful roadmap.`,
+Provide a comprehensive, actionable, and financially insightful roadmap. The roadmap should be highly tailored to the user's detailed profile.`,
 });
 
 const generateCareerRoadmapFlow = ai.defineFlow(

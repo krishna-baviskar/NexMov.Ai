@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -25,7 +25,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import {
   Wand2,
@@ -37,7 +43,6 @@ import {
   BarChart,
   PieChart as PieChartIcon,
   PartyPopper,
-  LineChart,
   DollarSign,
 } from "lucide-react";
 import { ThreeDLoader } from "@/components/ui/3d-loader";
@@ -53,14 +58,37 @@ import {
   YAxis,
   CartesianGrid,
   BarChart as RechartsBarChart,
-  LineChart as RechartsLineChart,
+  LineChart,
   Line,
 } from "recharts";
 
+const careerStatuses = [
+    'High School Student (10th/12th)', 'Undergraduate Student', 'Graduate Student', 'Recent Graduate', 'Working Professional', 'Career Switcher', 'Competitive Exam Aspirant', 'Freelancer', 'Entrepreneur'
+];
+const educationLevels = [
+    '10th Grade', '12th Grade/High School', 'Diploma', "Bachelor's Degree", "Master's Degree", 'PhD/Doctorate', 'Professional Certification'
+];
+const fieldsOfStudy = [
+    'Computer Science & IT', 'Engineering', 'Business & Management', 'Healthcare & Medicine', 'Finance & Economics', 'Marketing & Communications', 'Design & Creative Arts', 'Education', 'Law', 'Science & Research', 'Other'
+];
+const experienceLevels = [
+    'No Experience', 'Less than 1 year', '1-3 years', '3-5 years', '5-10 years', '10+ years'
+];
+const careerGoalOptions = [
+    'Get my first job', 'Switch career paths', 'Get promoted', 'Start my own business', 'Learn new skills', 'Higher education', 'Competitive exams', 'Salary increase', 'Work-life balance', 'Remote work opportunities'
+];
+const interestOptions = [
+    'Artificial Intelligence', 'Data Science', 'Web Development', 'Mobile Development', 'Cybersecurity', 'Digital Marketing', 'Finance', 'Healthcare', 'Education', 'Entrepreneurship', 'Design', 'Research'
+];
+
 const formSchema = z.object({
-  currentProfile: z.string().min(1, "Please enter your current role."),
+  currentStatus: z.string().min(1, "Please select your current status."),
+  educationLevel: z.string().min(1, "Please select your education level."),
+  fieldOfStudy: z.string().min(1, "Please select your field of study."),
+  experience: z.string().min(1, "Please select your experience level."),
   skills: z.string().min(1, "Please list some of your skills."),
-  careerInterests: z.string().min(1, "Please describe your career interests."),
+  careerGoals: z.array(z.string()).min(1, "Please select at least one career goal."),
+  interests: z.array(z.string()).min(1, "Please select at least one interest."),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -74,11 +102,7 @@ const ICONS = [
 ];
 
 const PIE_COLORS = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
-  "hsl(var(--chart-4))",
-  "hsl(var(--chart-5))",
+  "hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))",
 ];
 
 export default function CareerRoadmapPage() {
@@ -90,9 +114,13 @@ export default function CareerRoadmapPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      currentProfile: "",
+      currentStatus: "",
+      educationLevel: "",
+      fieldOfStudy: "",
+      experience: "",
       skills: "",
-      careerInterests: "",
+      careerGoals: [],
+      interests: [],
     },
   });
 
@@ -107,6 +135,14 @@ export default function CareerRoadmapPage() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const toggleArrayItem = (field: 'careerGoals' | 'interests', value: string) => {
+    const currentValues = form.getValues(field);
+    const newValues = currentValues.includes(value)
+      ? currentValues.filter((item) => item !== value)
+      : [...currentValues, value];
+    form.setValue(field, newValues, { shouldValidate: true });
   };
 
   return (
@@ -126,6 +162,7 @@ export default function CareerRoadmapPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Your Profile</CardTitle>
+                <CardDescription>Provide details for a more accurate roadmap.</CardDescription>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -134,17 +171,76 @@ export default function CareerRoadmapPage() {
                     className="space-y-6"
                   >
                     <FormField
-                      control={form.control}
-                      name="currentProfile"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Current Role</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., Junior Web Developer" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                        control={form.control}
+                        name="currentStatus"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Current Status</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                <SelectTrigger><SelectValue placeholder="Select your status" /></SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                {careerStatuses.map(status => <SelectItem key={status} value={status}>{status}</SelectItem>)}
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="educationLevel"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Education Level</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                <SelectTrigger><SelectValue placeholder="Select education level" /></SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                {educationLevels.map(level => <SelectItem key={level} value={level}>{level}</SelectItem>)}
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="fieldOfStudy"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Field of Study</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                <SelectTrigger><SelectValue placeholder="Select your field" /></SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                {fieldsOfStudy.map(field => <SelectItem key={field} value={field}>{field}</SelectItem>)}
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="experience"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Experience Level</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                <SelectTrigger><SelectValue placeholder="Select experience level" /></SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                {experienceLevels.map(level => <SelectItem key={level} value={level}>{level}</SelectItem>)}
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                            </FormItem>
+                        )}
                     />
                     <FormField
                       control={form.control}
@@ -153,7 +249,7 @@ export default function CareerRoadmapPage() {
                         <FormItem>
                           <FormLabel>Your Skills</FormLabel>
                           <FormControl>
-                            <Input placeholder="e.g., React, TypeScript" {...field} />
+                            <Input placeholder="e.g., React, TypeScript, SQL" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -161,21 +257,49 @@ export default function CareerRoadmapPage() {
                     />
                     <FormField
                       control={form.control}
-                      name="careerInterests"
-                      render={({ field }) => (
+                      name="careerGoals"
+                      render={() => (
                         <FormItem>
-                          <FormLabel>Career Interests</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="e.g., Become a full-stack developer"
-                              className="min-h-24"
-                              {...field}
-                            />
-                          </FormControl>
+                          <FormLabel>Career Goals</FormLabel>
+                          <div className="flex flex-wrap gap-2">
+                            {careerGoalOptions.map(goal => (
+                                <Button
+                                key={goal}
+                                type="button"
+                                variant={form.getValues("careerGoals").includes(goal) ? "default" : "outline"}
+                                onClick={() => toggleArrayItem("careerGoals", goal)}
+                                >
+                                {goal}
+                                </Button>
+                            ))}
+                          </div>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+                     <FormField
+                      control={form.control}
+                      name="interests"
+                      render={() => (
+                        <FormItem>
+                          <FormLabel>Interests</FormLabel>
+                          <div className="flex flex-wrap gap-2">
+                            {interestOptions.map(interest => (
+                                <Button
+                                key={interest}
+                                type="button"
+                                variant={form.getValues("interests").includes(interest) ? "default" : "outline"}
+                                onClick={() => toggleArrayItem("interests", interest)}
+                                >
+                                {interest}
+                                </Button>
+                            ))}
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
                     <Button type="submit" disabled={isLoading} className="w-full">
                       {isLoading ? (
                         <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
@@ -225,7 +349,7 @@ export default function CareerRoadmapPage() {
                     <CardContent>
                         <div className="w-full h-80">
                             <ResponsiveContainer>
-                                <RechartsLineChart data={roadmap.salaryProgression} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                                <LineChart data={roadmap.salaryProgression} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="milestone" />
                                     <YAxis 
@@ -235,7 +359,7 @@ export default function CareerRoadmapPage() {
                                     <RechartsTooltip formatter={(value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(value)} />
                                     <Legend />
                                     <Line type="monotone" dataKey="estimatedSalary" stroke="hsl(var(--accent))" strokeWidth={2} activeDot={{ r: 8 }} />
-                                </RechartsLineChart>
+                                </LineChart>
                             </ResponsiveContainer>
                         </div>
                     </CardContent>
