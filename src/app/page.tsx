@@ -68,9 +68,9 @@ const userTypes = [
 
 export default function LandingPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-background text-foreground" style={{backgroundImage: "url('https://picsum.photos/1920/1081')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+        <div className="flex flex-col min-h-screen bg-background text-foreground" style={{backgroundImage: "url('/background.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
             <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
+                <div className="container flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     <Link href="/" className="flex items-center gap-2">
                         <Logo />
                         <span className="text-xl font-bold">Nexmov.AI</span>
@@ -86,19 +86,21 @@ export default function LandingPage() {
                             Docs
                         </Link>
                     </nav>
-                    <Link href="/dashboard">
-                        <Button>
-                            Find Your Nex Mov <ChevronRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </Link>
+                     <div className="flex items-center gap-2">
+                        <Link href="/dashboard">
+                            <Button>
+                                Find Your Nex Mov <ChevronRight className="ml-2 h-4 w-4 hidden sm:inline" />
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </header>
 
             <main className="flex-1 bg-black/50">
                 {/* Hero Section */}
-                <section className="container grid items-center gap-6 pt-12 pb-12 md:grid-cols-2 lg:pt-24 lg:pb-24">
-                    <div className="flex flex-col items-start gap-4">
-                        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-white">
+                <section className="container grid items-center gap-6 px-4 pt-12 pb-12 text-center md:grid-cols-2 md:py-24 md:text-left lg:gap-12">
+                    <div className="flex flex-col items-center gap-4 md:items-start">
+                        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter text-white sm:text-4xl md:text-5xl lg:text-6xl">
                             AI-Driven Career Guidance for Every Step of Your Journey
                         </h1>
                         <p className="max-w-[700px] text-lg text-gray-200 sm:text-xl">
@@ -108,32 +110,32 @@ export default function LandingPage() {
                             <Button size="lg">Find Your Nex Mov</Button>
                         </Link>
                     </div>
-                    <div>
+                    <div className="mx-auto max-w-full md:mx-0">
                         <Image 
-                            src="https://picsum.photos/600/402" 
+                            src="https://picsum.photos/600/400" 
                             alt="AI-driven career growth illustration"
                             width={600}
-                            height={402} 
-                            className="rounded-lg shadow-2xl"
+                            height={400} 
+                            className="rounded-lg shadow-2xl w-full h-auto"
                             data-ai-hint="career planning"
                         />
                     </div>
                 </section>
 
                 {/* About Section */}
-                <section id="about" className="py-16 bg-secondary/90">
-                    <div className="container max-w-4xl mx-auto text-center">
-                        <h2 className="text-3xl font-bold tracking-tight mb-4">What is Nexmov.AI?</h2>
-                        <p className="text-muted-foreground text-lg">
+                <section id="about" className="py-16 bg-secondary/90 sm:py-24">
+                    <div className="container max-w-4xl mx-auto px-4 text-center">
+                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">What is Nexmov.AI?</h2>
+                        <p className="mt-4 text-muted-foreground text-lg">
                             Nexmov.AI is a next-generation AI-powered career guidance platform. It personalizes career planning, learning paths, and industry insights using Google Gemini AI. Whether you’re a 10th pass student exploring higher studies, a graduate aiming for internships, a job switcher planning growth, or a competitive exam aspirant, Nexmov.AI adapts to your needs and gives you a clear, visual roadmap.
                         </p>
                     </div>
                 </section>
 
                 {/* Features Section */}
-                <section id="features" className="container py-24">
+                <section id="features" className="container py-16 sm:py-24 px-4">
                     <div className="text-center max-w-2xl mx-auto mb-12">
-                        <h2 className="text-3xl font-bold tracking-tight text-white">Powerful Features to Guide Your Career</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Powerful Features to Guide Your Career</h2>
                         <p className="text-gray-300 mt-2">Everything you need to plan your next move and achieve your professional goals.</p>
                     </div>
                     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -152,10 +154,10 @@ export default function LandingPage() {
                 </section>
 
                 {/* Why Choose Us Section */}
-                <section className="py-24 bg-secondary/90">
-                    <div className="container grid gap-12 md:grid-cols-2 items-center">
+                <section className="py-16 bg-secondary/90 sm:py-24">
+                    <div className="container grid gap-12 px-4 md:grid-cols-2 items-center">
                         <div>
-                             <h2 className="text-3xl font-bold tracking-tight mb-4">Why Choose Nexmov.AI?</h2>
+                             <h2 className="text-3xl font-bold tracking-tight mb-4 sm:text-4xl">Why Choose Nexmov.AI?</h2>
                              <ul className="space-y-4">
                                 {whyChooseUsPoints.map((point, index) => (
                                     <li key={index} className="flex items-start gap-3">
@@ -165,13 +167,13 @@ export default function LandingPage() {
                                 ))}
                             </ul>
                         </div>
-                         <div>
+                         <div className="mx-auto max-w-full md:mx-0">
                             <Image 
-                                src="https://picsum.photos/500/501" 
+                                src="https://picsum.photos/500/500" 
                                 alt="Dashboard interface"
                                 width={500}
-                                height={501} 
-                                className="rounded-lg shadow-2xl"
+                                height={500} 
+                                className="rounded-lg shadow-2xl w-full h-auto"
                                 data-ai-hint="professional development"
                             />
                         </div>
@@ -179,10 +181,10 @@ export default function LandingPage() {
                 </section>
 
                 {/* User Types Section */}
-                <section className="py-24">
-                    <div className="container">
+                <section className="py-16 sm:py-24">
+                    <div className="container px-4">
                         <div className="text-center max-w-2xl mx-auto mb-12">
-                            <h2 className="text-3xl font-bold tracking-tight text-white">Who Can Use Nexmov.AI?</h2>
+                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Who Can Use Nexmov.AI?</h2>
                         </div>
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                             {userTypes.map((user) => (
@@ -201,7 +203,7 @@ export default function LandingPage() {
                 
                 {/* CTA Section */}
                 <section className="py-16 bg-primary text-primary-foreground">
-                    <div className="container text-center">
+                    <div className="container text-center px-4">
                         <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to shape your future with AI?</h2>
                         <Link href="/dashboard">
                             <Button variant="secondary" size="lg">
@@ -214,12 +216,12 @@ export default function LandingPage() {
             </main>
 
             <footer className="bg-secondary text-secondary-foreground py-8">
-                <div className="container flex flex-col md:flex-row justify-between items-center">
+                <div className="container flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 mb-4 md:mb-0">
                          <Logo />
                          <span className="font-semibold">Nexmov.AI</span>
                     </div>
-                    <div className="flex gap-4 mb-4 md:mb-0">
+                    <div className="flex flex-wrap justify-center gap-4 mb-4 md:mb-0">
                         <Link href="/docs" className="text-sm hover:underline">Documentation</Link>
                         <Link href="/privacy" className="text-sm hover:underline">Privacy Policy</Link>
                         <Link href="/terms" className="text-sm hover:underline">Terms of Use</Link>
@@ -231,7 +233,7 @@ export default function LandingPage() {
                         <a href="https://github.com/nexmov-ai" target="_blank" rel="noopener noreferrer"><Github className="w-5 h-5"/></a>
                     </div>
                 </div>
-                 <div className="container text-center mt-6 text-xs text-muted-foreground">
+                 <div className="container text-center mt-6 text-xs text-muted-foreground px-4">
                     © 2025 Nexmov.AI. All rights reserved.
                 </div>
             </footer>
