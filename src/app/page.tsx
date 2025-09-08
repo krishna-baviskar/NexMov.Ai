@@ -70,7 +70,7 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground">
             <Image
-                src="https://picsum.photos/1920/1080"
+                src="https://picsum.photos/1920/1082"
                 alt="Abstract background"
                 fill
                 className="object-cover"
