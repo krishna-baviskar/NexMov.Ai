@@ -69,7 +69,7 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
             <Image
-                src="https://picsum.photos/1920/1280"
+                src="https://picsum.photos/1920/1281"
                 alt="Abstract AI background"
                 fill
                 className="object-cover"
@@ -123,7 +123,7 @@ export default function LandingPage() {
                             </Button>
                         </Link>
                     </div>
-                    <div className="w-full max-w-sm lg:max-w-none h-64 lg:h-96">
+                    <div className="w-full max-w-md h-72 sm:h-80 md:h-96 lg:h-[32rem]">
                         <ThreeDLoader/>
                     </div>
                 </section>
@@ -145,7 +145,7 @@ export default function LandingPage() {
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Everything You Need to Succeed</h2>
                         <p className="text-gray-300 mt-2 text-lg">Our powerful, AI-driven features are designed to guide your career at every stage.</p>
                     </div>
-                    <div className="grid gap-8 md:grid-cols-2">
+                    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
                         {features.map((feature) => (
                             <Card key={feature.id} className="flex flex-col bg-secondary/50 backdrop-blur-sm border-primary/20 hover:border-primary/50 transition-all hover:scale-105 duration-300">
                                 <CardHeader className="flex flex-row items-center gap-4">
@@ -165,7 +165,7 @@ export default function LandingPage() {
                     <div className="container grid gap-12 px-4 md:grid-cols-2 items-center">
                         <div className="relative w-full h-80 rounded-lg overflow-hidden">
                            <Image 
-                                src="https://picsum.photos/600/400" 
+                                src="https://picsum.photos/601/400" 
                                 alt="Professional working on a laptop"
                                 fill
                                 className="object-cover"

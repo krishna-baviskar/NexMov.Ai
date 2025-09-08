@@ -2,18 +2,16 @@ import { cn } from "@/lib/utils";
 
 export function ThreeDLoader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("w-full h-full", className)} {...props}>
-      <div className="cube-wrapper">
-        <div className="cube">
-          <div className="cube-faces">
-            <div className="cube-face shadow"></div>
-            <div className="cube-face bottom"></div>
-            <div className="cube-face top"></div>
-            <div className="cube-face left"></div>
-            <div className="cube-face right"></div>
-            <div className="cube-face back"></div>
-            <div className="cube-face front"></div>
-          </div>
+    <div className={cn("cube-wrapper", className)} {...props}>
+      <div className="cube" style={{ '--cube-size': 'min(10rem, 40vw)' } as React.CSSProperties}>
+        <div className="cube-faces">
+          <div className="cube-face shadow"></div>
+          <div className="cube-face bottom"></div>
+          <div className="cube-face top"></div>
+          <div className="cube-face left"></div>
+          <div className="cube-face right"></div>
+          <div className="cube-face back"></div>
+          <div className="cube-face front"></div>
         </div>
       </div>
     </div>
