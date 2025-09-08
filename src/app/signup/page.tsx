@@ -187,6 +187,31 @@ export default function SignupPage() {
     const accentColor = computedStyle.getPropertyValue('--accent').trim();
     const whiteColor = '#ffffff';
 
+    const hslToRgb = (h: number, s: number, l: number): [number, number, number] => {
+      s /= 100;
+      l /= 100;
+      const k = (n: number) => (n + h / 30) % 12;
+      const a = s * Math.min(l, 1 - l);
+      const f = (n: number) =>
+        l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
+      return [255 * f(0), 255 * f(8), 255 * f(4)];
+    };
+    
+    const parseHsl = (hslStr: string): string => {
+        if (hslStr.startsWith('#')) return hslStr;
+        const [h, s, l] = hslStr.split(' ').map(parseFloat);
+        const [r, g, b] = hslToRgb(h, s, l);
+        return `rgb(${r}, ${g}, ${b})`;
+    };
+
+    const colors = [
+        parseHsl(primaryColor), 
+        parseHsl(secondaryColor),
+        parseHsl(accentColor),
+        whiteColor
+    ].filter(c => c);
+
+
     const particles: Array<{
       x: number;
       y: number;
@@ -198,8 +223,6 @@ export default function SignupPage() {
       size: number;
       pulse: number;
     }> = [];
-
-    const colors = [`hsl(${primaryColor})`, `hsl(${secondaryColor})`, `hsl(${accentColor})`, whiteColor];
 
     for (let i = 0; i < 150; i++) {
       particles.push({
@@ -214,6 +237,13 @@ export default function SignupPage() {
         pulse: Math.random() * Math.PI * 2
       });
     }
+
+    const colorWithOpacity = (color: string, alpha: number) => {
+        if (color.startsWith('rgb')) {
+            return color.replace(')', `, ${alpha})`).replace('rgb', 'rgba');
+        }
+        return color;
+    };
 
     const animate = () => {
       if(!ctx) return;
@@ -240,24 +270,6 @@ export default function SignupPage() {
         const y2d = particle.y * scale + (canvas.height / 2) * (1 - scale);
         const size = particle.size * scale * (1 + Math.sin(particle.pulse) * 0.3);
         const opacity = Math.min(scale * 2, 1) * (0.6 + Math.sin(particle.pulse) * 0.4);
-
-        const colorWithOpacity = (color: string, alpha: number) => {
-          if (color.startsWith('hsl')) {
-              return color.replace(')', `, ${alpha})`).replace('hsl', 'hsla');
-          }
-          // Fallback for hex
-          let r, g, b;
-          if (color.length === 4) { // #rgb
-              r = parseInt(color[1] + color[1], 16);
-              g = parseInt(color[2] + color[2], 16);
-              b = parseInt(color[3] + color[3], 16);
-          } else { // #rrggbb
-              r = parseInt(color.substring(1,3), 16);
-              g = parseInt(color.substring(3,5), 16);
-              b = parseInt(color.substring(5,7), 16);
-          }
-          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-        };
 
         const gradient = ctx.createRadialGradient(x2d, y2d, 0, x2d, y2d, size * 2);
         gradient.addColorStop(0, colorWithOpacity(particle.color, opacity));
@@ -286,10 +298,10 @@ export default function SignupPage() {
             
             const connectionOpacity = (1 - distance / 120) * 0.4 * Math.min(scale, otherScale);
             
-            let connectionColor = `hsl(${secondaryColor})`;
-            if (currentStep === 1) connectionColor = `hsl(${primaryColor})`;
-            else if (currentStep === 2) connectionColor = `hsl(${secondaryColor})`;
-            else if (currentStep === 3) connectionColor = `hsl(${accentColor})`;
+            let connectionColor = parseHsl(secondaryColor);
+            if (currentStep === 1) connectionColor = parseHsl(primaryColor);
+            else if (currentStep === 2) connectionColor = parseHsl(secondaryColor);
+            else if (currentStep === 3) connectionColor = parseHsl(accentColor);
             
             const connectionGradient = ctx.createLinearGradient(x2d, y2d, otherX2d, otherY2d);
             connectionGradient.addColorStop(0, colorWithOpacity(connectionColor, connectionOpacity));
