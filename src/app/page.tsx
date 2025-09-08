@@ -11,25 +11,25 @@ const features = [
     {
         id: 'career_growth_planner',
         title: 'AI Career Planner',
-        description: 'Visualize a 5-year roadmap with AI-driven advice on skill gaps, salary projections, and key milestones.',
+        description: 'Generate a dynamic 5-year career roadmap. Our AI analyzes your profile to suggest key milestones, identify skill gaps, project salary growth, and recommend strategic moves to keep you on track.',
         icon: <GraduationCap className="w-8 h-8 text-primary" />,
     },
     {
         id: 'job_trends',
         title: 'Real-Time Job Insights',
-        description: 'Stay ahead with live data on job demand, salaries, and emerging roles, tailored to your interests.',
+        description: 'Get a live pulse on the job market. Analyze demand for specific roles, see up-to-date salary ranges in your location, and discover the emerging technologies top companies are hiring for.',
         icon: <TrendingUp className="w-8 h-8 text-primary" />,
     },
     {
         id: 'course_advisor',
         title: 'Personalized Learning Paths',
-        description: 'Receive curated courses, certifications, and projects to bridge your skill gaps effectively.',
+        description: 'Turn skill gaps into strengths. Receive AI-curated recommendations for online courses, industry certifications, and hands-on projects to build the exact competencies you need.',
         icon: <Wand2 className="w-8 h-8 text-primary" />,
     },
     {
         id: 'chatbot',
         title: '24/7 AI Career Advisor',
-        description: 'Your on-demand AI assistant for instant, structured answers to all your career questions.',
+        description: 'Ask anything, anytime. Our conversational AI assistant provides instant, well-structured answers to complex career questions, helping you make informed decisions on the spot.',
         icon: <Bot className="w-8 h-8 text-primary" />,
     },
 ];
@@ -45,22 +45,22 @@ const whyChooseUsPoints = [
 const userTypes = [
     {
         type: 'Students (10th/12th)',
-        value: 'Guidance on higher education, entrance exams, and future-proof career paths.',
+        value: 'Explore future-proof career paths with AI-driven guidance on higher education choices, crucial entrance exams, and foundational skills.',
         icon: <GraduationCap className="w-6 h-6 text-accent" />
     },
     {
         type: 'Undergraduates',
-        value: 'Roadmaps for internships, skill-building, and creating a strong project portfolio.',
+        value: 'Build a powerful profile with a clear roadmap for internships, essential skill development, and creating a standout project portfolio.',
         icon: <Briefcase className="w-6 h-6 text-accent" />
     },
     {
         type: 'Job Switchers',
-        value: 'In-depth skill gap analysis, salary projections, and new role recommendations.',
+        value: 'Transition confidently with in-depth skill gap analysis, realistic salary projections, and tailored recommendations for your new role.',
         icon: <Users className="w-6 h-6 text-accent" />
     },
     {
         type: 'Exam Aspirants',
-        value: 'Personalized study paths, AI-curated resources, and timely exam updates.',
+        value: 'Conquer your exams with personalized study plans, AI-curated learning resources, and timely updates to stay ahead of the curve.',
         icon: <Rocket className="w-6 h-6 text-accent" />
     },
 ];
@@ -69,7 +69,7 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
             <Image
-                src="https://picsum.photos/1920/1281"
+                src="https://picsum.photos/1920/1280"
                 alt="Abstract AI background"
                 fill
                 className="object-cover"
@@ -112,10 +112,10 @@ export default function LandingPage() {
                 <section className="container grid lg:grid-cols-2 place-items-center gap-12 px-4 py-20 text-center lg:text-left sm:py-32">
                     <div className="flex flex-col items-center lg:items-start gap-4">
                         <h1 className="text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                           Navigate Your Future with <span className='text-primary'>AI-Powered</span> Career Guidance
+                           Your AI Co-Pilot for <span className='text-primary'>Smarter</span> Career Decisions
                         </h1>
                         <p className="max-w-2xl text-lg text-gray-300 sm:text-xl">
-                            From high school students to seasoned professionals, Nexmov.AI helps you plan, learn, and grow with real-time, personalized AI insights.
+                            Stop guessing. Start growing. Nexmov.AI combines real-time data with powerful AI to give you a personalized, actionable roadmap for your entire career journey.
                         </p>
                         <Link href="/dashboard">
                             <Button size="lg" className="mt-4">
@@ -134,7 +134,7 @@ export default function LandingPage() {
                     <div className="container max-w-4xl mx-auto px-4 text-center">
                         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">What is Nexmov.AI?</h2>
                         <p className="mt-4 text-muted-foreground text-lg">
-                            Nexmov.AI is a next-generation, AI-powered career guidance platform. It personalizes career planning, learning paths, and industry insights using Google Gemini. Whether you’re a student exploring higher studies, a graduate aiming for internships, or a professional planning your growth, Nexmov.AI adapts to your needs and provides a clear, visual roadmap to success.
+                            Nexmov.AI is your personal career strategist, powered by Google's advanced Gemini AI. We go beyond generic advice to provide a deeply personalized guidance system. Our platform analyzes millions of data points on job trends, salaries, and required skills, then tailors that information to your unique profile and ambitions. Whether you are a student choosing a major, a graduate hunting for your first job, or a professional aiming for the next big promotion, Nexmov.AI delivers a clear, visual, and data-driven roadmap to help you achieve your goals faster.
                         </p>
                     </div>
                 </section>
@@ -165,7 +165,7 @@ export default function LandingPage() {
                     <div className="container grid gap-12 px-4 md:grid-cols-2 items-center">
                         <div className="relative w-full h-80 rounded-lg overflow-hidden">
                            <Image 
-                                src="https://picsum.photos/601/400" 
+                                src="https://picsum.photos/600/400" 
                                 alt="Professional working on a laptop"
                                 fill
                                 className="object-cover"
