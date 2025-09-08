@@ -240,9 +240,14 @@ export default function LandingPage() {
                                       <BrainCircuit className="w-16 h-16 text-secondary" />
                                     </div>
                                     <div className="text-left">
-                                        <h4 className="text-xl font-bold text-white">Our Core Values</h4>
-                                        <p className="text-lg text-muted-foreground mt-2">
-                                            We believe in innovation, personalization, and empowerment. Our goal is to provide tools that adapt to you, not the other way around, ensuring that every piece of advice is relevant and actionable.
+                                         <p className="text-lg text-muted-foreground italic">
+                                            "Our core mission is to democratize career guidance through technology. We believe that everyone deserves access to personalized, intelligent tools that can help them navigate their professional journey with confidence."
+                                        </p>
+                                        <p className="mt-4 font-bold text-white text-lg">
+                                        Co-Founder & CTO
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            Pioneer in AI-driven educational platforms and data science.
                                         </p>
                                     </div>
                                 </div>
@@ -253,9 +258,14 @@ export default function LandingPage() {
                                       <UserCheck className="w-16 h-16 text-accent" />
                                     </div>
                                     <div className="text-left">
-                                        <h4 className="text-xl font-bold text-white">The Expert Team</h4>
-                                        <p className="text-lg text-muted-foreground mt-2">
-                                            Our team is composed of seasoned career counselors, data scientists, and AI engineers dedicated to building the future of career development. We're passionate about helping you succeed.
+                                        <p className="text-lg text-muted-foreground italic">
+                                           "We are a team of passionate educators, engineers, and career counselors. Our diverse expertise allows us to build a product that is not only technologically advanced but also deeply empathetic to user needs."
+                                        </p>
+                                        <p className="mt-4 font-bold text-white text-lg">
+                                        Head of Product
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                           Specialist in user-centric design and career development strategies.
                                         </p>
                                     </div>
                                 </div>
@@ -343,3 +353,5 @@ export default function LandingPage() {
         </div>
     );
 }
+
+    
