@@ -70,11 +70,11 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground">
             <Image
-                src="https://picsum.photos/600/403"
+                src="https://picsum.photos/1920/1080"
                 alt="AI-driven career growth illustration"
                 fill
                 className="object-cover"
-                data-ai-hint="artificial intelligence"
+                data-ai-hint="artificial intelligence abstract"
             />
             <div className="absolute inset-0 bg-black/60" />
 
@@ -96,9 +96,12 @@ export default function LandingPage() {
                         </Link>
                     </nav>
                      <div className="flex items-center gap-2">
-                        <Link href="/dashboard">
+                        <Link href="/login">
+                          <Button variant="ghost">Login</Button>
+                        </Link>
+                        <Link href="/signup">
                             <Button>
-                                Find Your Nex Mov <ChevronRight className="ml-2 h-4 w-4 hidden sm:inline" />
+                                Get Started <ChevronRight className="ml-2 h-4 w-4 hidden sm:inline" />
                             </Button>
                         </Link>
                     </div>
@@ -168,10 +171,10 @@ export default function LandingPage() {
                         </div>
                          <div className="mx-auto max-w-full md:mx-0">
                             <Image 
-                                src="https://picsum.photos/500/501" 
+                                src="https://picsum.photos/500/500" 
                                 alt="Dashboard interface"
                                 width={500}
-                                height={501} 
+                                height={500} 
                                 className="rounded-lg shadow-2xl w-full h-auto"
                                 data-ai-hint="professional development"
                             />
