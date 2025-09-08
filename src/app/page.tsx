@@ -121,10 +121,10 @@ export default function LandingPage() {
                     </div>
                     <div className="mx-auto max-w-full md:mx-0">
                         <Image 
-                            src="https://picsum.photos/600/400" 
+                            src="https://picsum.photos/600/401" 
                             alt="AI-driven career growth illustration"
                             width={600}
-                            height={400} 
+                            height={401} 
                             className="rounded-lg shadow-2xl w-full h-auto"
                             data-ai-hint="artificial intelligence"
                         />
@@ -178,10 +178,10 @@ export default function LandingPage() {
                         </div>
                          <div className="mx-auto max-w-full md:mx-0">
                             <Image 
-                                src="https://picsum.photos/500/500" 
+                                src="https://picsum.photos/500/501" 
                                 alt="Dashboard interface"
                                 width={500}
-                                height={500} 
+                                height={501} 
                                 className="rounded-lg shadow-2xl w-full h-auto"
                                 data-ai-hint="professional development"
                             />
