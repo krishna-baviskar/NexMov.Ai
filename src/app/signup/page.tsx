@@ -27,6 +27,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from "@/hooks/use-toast";
 import { auth } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Logo } from '@/components/icons';
 
 
 interface PersonalInfo {
@@ -426,9 +427,7 @@ export default function SignupPage() {
       <nav className="relative z-50 p-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-3">
-            <div className={`w-10 h-10 bg-gradient-to-r ${getStepColor(currentStep)} rounded-xl flex items-center justify-center transition-all duration-500`}>
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
+            <Logo/>
             <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-white to-purple-600 bg-clip-text text-transparent">
               Nexmov.AI
             </span>
@@ -963,5 +962,7 @@ export default function SignupPage() {
     </div>
   );
 };
+
+    
 
     
