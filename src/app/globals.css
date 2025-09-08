@@ -84,32 +84,38 @@
 @layer components {
   .cube-wrapper {
     @apply w-full h-full flex justify-center items-center;
+    perspective: 800px;
   }
   .cube {
-    width: 50%;
-    height: 50%;
+    width: 12rem; /* Increased size */
+    height: 12rem; /* Increased size */
+    position: relative;
     transform-style: preserve-3d;
     transform: rotateX(-40deg) rotateY(30deg);
-    animation: cube-rotation 4s infinite linear;
+    animation: cube-rotation 12s infinite linear;
   }
   .cube-faces {
     @apply relative w-full h-full;
     transform-style: preserve-3d;
-    transform: translateZ(-2rem);
+    transform: translateZ(-6rem); /* Half of new width/height */
   }
   .cube-face {
-    @apply absolute w-16 h-16 border-2 border-primary;
-    background-color: hsla(var(--primary), 0.2);
+    @apply absolute w-full h-full border-2 border-primary/50;
+    background-color: hsla(var(--primary), 0.1);
+    box-shadow: 0 0 20px hsla(var(--primary), 0.3);
   }
-  .cube-face.front { transform: translateZ(2rem); }
-  .cube-face.back { transform: rotateY(180deg) translateZ(2rem); }
-  .cube-face.right { transform: rotateY(90deg) translateZ(2rem); }
-  .cube-face.left { transform: rotateY(-90deg) translateZ(2rem); }
-  .cube-face.top { transform: rotateX(90deg) translateZ(2rem); }
-  .cube-face.bottom { transform: rotateX(-90deg) translateZ(2rem); }
+  .cube-face.front { transform: rotateY(0deg) translateZ(6rem); }
+  .cube-face.back { transform: rotateY(180deg) translateZ(6rem); }
+  .cube-face.right { transform: rotateY(90deg) translateZ(6rem); }
+  .cube-face.left { transform: rotateY(-90deg) translateZ(6rem); }
+  .cube-face.top { transform: rotateX(90deg) translateZ(6rem); }
+  .cube-face.bottom { transform: rotateX(-90deg) translateZ(6rem); }
+  
   .cube-face.shadow {
-    @apply absolute w-16 h-16 bg-black/50 blur-lg;
-    transform: rotateX(90deg) translateZ(-4rem) translateY(2rem);
+    @apply absolute w-48 h-48 bg-black/30 rounded-full blur-2xl;
+    transform: rotateX(90deg) translateZ(-10rem) translateY(10rem);
+    box-shadow: none;
+    border: none;
   }
 
   @keyframes cube-rotation {
