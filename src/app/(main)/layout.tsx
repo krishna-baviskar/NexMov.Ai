@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   SidebarProvider,
   Sidebar,
@@ -21,10 +22,10 @@ export default function MainLayout({
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader className="p-4">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Logo />
             <span className="text-xl font-semibold">NexMov.ai</span>
-          </div>
+          </Link>
         </SidebarHeader>
         <SidebarContent className="p-2">
           <MainNav />
