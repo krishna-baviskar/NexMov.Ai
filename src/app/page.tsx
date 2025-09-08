@@ -81,7 +81,7 @@ const whoCanUse = [
 
 export default function LandingPage() {
     return (
-        <div className="relative flex min-h-screen w-full flex-col items-center overflow-x-hidden bg-background text-foreground">
+        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background text-foreground">
             {/* Animated Background */}
             <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
             <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-br from-background via-black/80 to-background opacity-90"></div>
@@ -119,21 +119,21 @@ export default function LandingPage() {
                 </div>
             </header>
 
-            <main className="flex-1 z-10">
+            <main className="flex-1 z-10 w-full flex flex-col items-center">
                 {/* Hero Section */}
                 <section id="hero" className="container relative z-10 flex min-h-[calc(80vh)] flex-col items-center justify-center text-center py-12 md:py-20">
                      <div className="max-w-4xl" style={{ animation: 'hero-float 6s ease-in-out infinite' }}>
                         <div className="mb-4 text-primary font-bold tracking-wider">Your AI-Powered Career Navigator</div>
                         <h1 className="text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl" style={{ animation: 'subtle-glow 4s ease-in-out infinite' }}>
-                           Smart Career Guidance for Every Step of Your Journey
+                           Navigate Your Career with AI-Powered Precision
                         </h1>
                         <p className="mx-auto mt-6 max-w-3xl text-lg text-muted-foreground sm:text-xl">
-                            Nexmov.AI is for students, job seekers, and professionals. Get personalized career paths, recommended skills, real-time job trends, and curated news — all in one dashboard.
+                            From university to the C-suite, get a personalized, data-driven roadmap to achieve your professional goals faster. Nexmov.AI is your dedicated co-pilot for smarter career decisions.
                         </p>
                         <div className="mt-8 flex justify-center gap-4">
                             <Link href="/dashboard">
                                 <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-lg text-white shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/30">
-                                    Find Your Nex Mov
+                                    Start Your Journey
                                 </Button>
                             </Link>
                         </div>
@@ -141,7 +141,7 @@ export default function LandingPage() {
                 </section>
 
                 {/* About Section */}
-                <section id="about" className="py-16 sm:py-24">
+                <section id="about" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-5xl px-4">
                         <div className="text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">What is Nexmov.AI?</h2>
@@ -163,12 +163,12 @@ export default function LandingPage() {
                 </section>
 
                 {/* Features Section */}
-                <section id="features" className="py-16 sm:py-24">
+                <section id="features" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-6xl px-4">
                         <div className="mx-auto mb-16 max-w-3xl text-center">
-                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Core Features</h2>
+                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Everything You Need to Succeed</h2>
                             <p className="mt-4 text-lg text-muted-foreground">
-                                Our powerful, AI-driven tools are designed to guide you at every stage of your career.
+                               Our powerful, AI-driven features are designed to guide your career at every stage.
                             </p>
                         </div>
                         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -186,7 +186,7 @@ export default function LandingPage() {
                 </section>
 
                  {/* Who It's For Section */}
-                <section id="who-is-it-for" className="py-16 sm:py-24">
+                <section id="who-is-it-for" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-6xl px-4">
                          <div className="mx-auto mb-16 max-w-3xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Tailored for Every Ambition</h2>
@@ -207,7 +207,7 @@ export default function LandingPage() {
                 </section>
                 
                  {/* Founder Section */}
-                <section id="founder" className="py-16 sm:py-24">
+                <section id="founder" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-4xl px-4 text-center">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">About Our Founder</h2>
                         <div className="mt-8 card-3d gradient-border-card">
@@ -233,7 +233,7 @@ export default function LandingPage() {
 
 
                 {/* Contact Section */}
-                <section id="contact" className="py-16 sm:py-24">
+                <section id="contact" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-4xl px-4">
                         <div className="mx-auto mb-16 max-w-3xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Get in Touch</h2>
