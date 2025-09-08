@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -88,7 +89,9 @@ const formSchema = z.object({
   experience: z.string().min(1, "Please select your experience level."),
   skills: z.string().min(1, "Please list some of your skills."),
   careerGoals: z.array(z.string()).min(1, "Please select at least one career goal."),
+  customCareerGoal: z.string().optional(),
   interests: z.array(z.string()).min(1, "Please select at least one interest."),
+  customInterest: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -120,15 +123,32 @@ export default function CareerRoadmapPage() {
       experience: "",
       skills: "",
       careerGoals: [],
+      customCareerGoal: "",
       interests: [],
+      customInterest: "",
     },
   });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true);
     setRoadmap(null);
+
+    const combinedGoals = [...data.careerGoals];
+    if (data.customCareerGoal) {
+      combinedGoals.push(data.customCareerGoal);
+    }
+
+    const combinedInterests = [...data.interests];
+    if (data.customInterest) {
+      combinedInterests.push(data.customInterest);
+    }
+
     try {
-      const result = await generateCareerRoadmap(data);
+      const result = await generateCareerRoadmap({
+        ...data,
+        careerGoals: combinedGoals,
+        interests: combinedInterests,
+      });
       setRoadmap(result);
     } catch (error) {
       console.error("Failed to generate career roadmap:", error);
@@ -273,6 +293,17 @@ export default function CareerRoadmapPage() {
                                 </Button>
                             ))}
                           </div>
+                           <FormField
+                            control={form.control}
+                            name="customCareerGoal"
+                            render={({ field }) => (
+                              <FormItem className="mt-2">
+                                <FormControl>
+                                  <Input placeholder="Or type a custom goal..." {...field} />
+                                </FormControl>
+                              </FormItem>
+                            )}
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -295,6 +326,17 @@ export default function CareerRoadmapPage() {
                                 </Button>
                             ))}
                           </div>
+                          <FormField
+                            control={form.control}
+                            name="customInterest"
+                            render={({ field }) => (
+                              <FormItem className="mt-2">
+                                <FormControl>
+                                  <Input placeholder="Or type a custom interest..." {...field} />
+                                </FormControl>
+                              </FormItem>
+                            )}
+                          />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -438,3 +480,4 @@ export default function CareerRoadmapPage() {
     </div>
   );
 }
+
