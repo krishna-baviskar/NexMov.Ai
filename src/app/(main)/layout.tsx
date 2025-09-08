@@ -34,7 +34,7 @@ export default function MainLayout({
           <UserNav />
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="flex flex-col">
+      <SidebarInset className="flex flex-col overflow-hidden">
         <Header />
         <main className="flex-1 overflow-y-auto">{children}</main>
       </SidebarInset>
