@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -81,7 +82,7 @@ const whoCanUse = [
 
 export default function LandingPage() {
     return (
-        <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
+        <div className="relative min-h-screen bg-background text-foreground">
             {/* Animated Background */}
             <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
             <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-br from-background via-black/80 to-background opacity-90"></div>
@@ -119,9 +120,9 @@ export default function LandingPage() {
                 </div>
             </header>
 
-            <main className="flex-1 z-10 w-full flex flex-col">
+            <main className="flex flex-col overflow-x-hidden">
                 {/* Hero Section */}
-                <section id="hero" className="container relative z-10 flex min-h-[calc(80vh)] flex-col items-center justify-center text-center py-12 md:py-20">
+                <section id="hero" className="container relative z-10 mx-auto flex min-h-[calc(80vh)] w-full flex-col items-center justify-center text-center py-12 md:py-20">
                      <div className="max-w-4xl" style={{ animation: 'hero-float 6s ease-in-out infinite' }}>
                         <div className="mb-4 text-primary font-bold tracking-wider">Your AI-Powered Career Navigator</div>
                         <h1 className="text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl" style={{ animation: 'subtle-glow 4s ease-in-out infinite' }}>
@@ -282,31 +283,31 @@ export default function LandingPage() {
                         </div>
                     </div>
                 </section>
+                
+                {/* Footer */}
+                <footer className="w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
+                    <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
+                        <div className="flex items-center gap-2">
+                             <Logo />
+                             <span className="font-semibold text-white">Nexmov.AI</span>
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+                            <Link href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
+                            <Link href="/careers" className="transition-colors hover:text-white">Careers</Link>
+                            <Link href="#contact" className="transition-colors hover:text-white">Contact</Link>
+                        </div>
+                         <div className="flex gap-4">
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Linkedin className="h-5 w-5"/></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Twitter className="h-5 w-5"/></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Github className="h-5 w-5"/></a>
+                        </div>
+                    </div>
+                     <div className="container mx-auto mt-6 text-center text-xs text-muted-foreground px-4">
+                        © {new Date().getFullYear()} Nexmov.AI. All rights reserved.
+                    </div>
+                </footer>
             </main>
-
-            {/* Footer */}
-            <footer className="w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
-                <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-2">
-                         <Logo />
-                         <span className="font-semibold text-white">Nexmov.AI</span>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                        <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-                        <Link href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
-                        <Link href="/careers" className="transition-colors hover:text-white">Careers</Link>
-                        <Link href="#contact" className="transition-colors hover:text-white">Contact</Link>
-                    </div>
-                     <div className="flex gap-4">
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Linkedin className="h-5 w-5"/></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Twitter className="h-5 w-5"/></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Github className="h-5 w-5"/></a>
-                    </div>
-                </div>
-                 <div className="container mx-auto mt-6 text-center text-xs text-muted-foreground px-4">
-                    © {new Date().getFullYear()} Nexmov.AI. All rights reserved.
-                </div>
-            </footer>
         </div>
     );
 }
