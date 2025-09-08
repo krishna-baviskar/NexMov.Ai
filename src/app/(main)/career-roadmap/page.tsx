@@ -45,6 +45,8 @@ import {
   PieChart as PieChartIcon,
   PartyPopper,
   DollarSign,
+  Briefcase,
+  Quote,
 } from "lucide-react";
 import { ThreeDLoader } from "@/components/ui/3d-loader";
 import {
@@ -394,7 +396,7 @@ export default function CareerRoadmapPage() {
             </Card>
           </div>
 
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-8">
             {isLoading && (
               <div className="flex justify-center items-center h-full min-h-96">
                 <ThreeDLoader />
@@ -402,6 +404,21 @@ export default function CareerRoadmapPage() {
             )}
             {roadmap ? (
               <div className="space-y-8">
+                 <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><Briefcase/> Suggested Career Options</CardTitle>
+                        <CardDescription>Based on your profile, here are some roles you could explore.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        {roadmap.careerOptions.map((option, index) => (
+                            <div key={index} className="p-4 rounded-lg border bg-secondary/10">
+                                <h4 className="font-bold text-lg">{option.role}</h4>
+                                <p className="text-muted-foreground">{option.description}</p>
+                            </div>
+                        ))}
+                    </CardContent>
+                </Card>
+
                  <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2"><BarChart/> Career Timeline</CardTitle>
@@ -503,15 +520,14 @@ export default function CareerRoadmapPage() {
                     ))}
                      <div className="relative">
                         <div className="absolute -left-9 top-0 bg-background border-2 border-primary rounded-full p-1.5">
-                            <PartyPopper className="w-6 h-6 text-primary" />
+                            <Quote className="w-6 h-6 text-primary" />
                         </div>
                         <Card>
                           <CardHeader>
-                            <CardTitle>Roadmap Complete!</CardTitle>
-                            <CardDescription>Congratulations!</CardDescription>
+                            <CardTitle>Final Advice</CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <p className="text-muted-foreground">You've reached the end of your personalized roadmap. Keep learning and growing!</p>
+                            <p className="text-muted-foreground italic">"{roadmap.finalAdvice}"</p>
                           </CardContent>
                         </Card>
                       </div>
@@ -532,4 +548,3 @@ export default function CareerRoadmapPage() {
     </div>
   );
 }
-

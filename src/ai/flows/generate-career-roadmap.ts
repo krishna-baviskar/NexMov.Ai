@@ -36,6 +36,11 @@ const SalaryProgressionSchema = z.object({
     estimatedSalary: z.number().describe('The estimated annual salary in USD for this milestone.'),
 });
 
+const CareerOptionSchema = z.object({
+  role: z.string().describe('The name of the suggested job role.'),
+  description: z.string().describe('A brief description of why this role is a good fit.'),
+});
+
 const GenerateCareerRoadmapOutputSchema = z.object({
   roadmap: z.array(RoadmapStepSchema).describe('A detailed, step-by-step career roadmap.'),
   skillDistribution: z.array(z.object({ 
@@ -47,6 +52,8 @@ const GenerateCareerRoadmapOutputSchema = z.object({
     duration: z.number().describe('The estimated duration in months for the bar chart.') 
   })).describe('An array of roadmap steps and their estimated duration in months for a timeline bar chart.'),
   salaryProgression: z.array(SalaryProgressionSchema).describe('An array of salary progression estimates for a line chart.'),
+  careerOptions: z.array(CareerOptionSchema).describe('A list of suggested job roles and career options based on the user\'s profile.'),
+  finalAdvice: z.string().describe('A concluding paragraph with personalized advice and encouragement for the user.'),
 });
 
 export type GenerateCareerRoadmapOutput = z.infer<
@@ -99,6 +106,10 @@ Your response must be a JSON object that adheres to the GenerateCareerRoadmapOut
 4.  **salaryProgression**: Based on the generated roadmap, create an array of objects for a line chart. Each object should have:
     *   \`milestone\`: The name of the career stage (e.g., "Entry-Level", "Mid-Level", "Senior", "Lead").
     *   \`estimatedSalary\`: A realistic estimated annual salary in USD for that stage. Start with the current role if possible.
+
+5.  **careerOptions**: Based on the user's entire profile, suggest 2-3 specific and relevant job roles or career paths. For each, provide a \`role\` and a short \`description\` of why it's a suitable option.
+
+6.  **finalAdvice**: Write a concluding paragraph of personalized advice. Summarize the key strengths of the user's profile and offer encouragement for their journey ahead, connecting it back to their stated goals.
 
 Provide a comprehensive, actionable, and financially insightful roadmap. The roadmap should be highly tailored to the user's detailed profile.`,
 });
