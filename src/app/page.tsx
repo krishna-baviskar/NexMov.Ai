@@ -285,31 +285,31 @@ export default function LandingPage() {
                         </div>
                     </div>
                 </section>
-                
-                {/* Footer */}
-                <footer className="w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
-                    <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
-                        <div className="flex items-center gap-2">
-                             <Logo />
-                             <span className="font-semibold text-white">Nexmov.AI</span>
-                        </div>
-                        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-                            <Link href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
-                            <Link href="/careers" className="transition-colors hover:text-white">Careers</Link>
-                            <Link href="#contact" className="transition-colors hover:text-white">Contact</Link>
-                        </div>
-                         <div className="flex gap-4">
-                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Linkedin className="h-5 w-5"/></a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Twitter className="h-5 w-5"/></a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Github className="h-5 w-5"/></a>
-                        </div>
-                    </div>
-                     <div className="container mx-auto mt-6 text-center text-xs text-muted-foreground px-4">
-                        © {new Date().getFullYear()} Nexmov.AI. All rights reserved.
-                    </div>
-                </footer>
             </main>
+            
+            {/* Footer */}
+            <footer className="w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
+                <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
+                    <div className="flex items-center gap-2">
+                         <Logo />
+                         <span className="font-semibold text-white">Nexmov.AI</span>
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                        <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+                        <Link href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
+                        <Link href="/careers" className="transition-colors hover:text-white">Careers</Link>
+                        <Link href="#contact" className="transition-colors hover:text-white">Contact</Link>
+                    </div>
+                     <div className="flex gap-4">
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Linkedin className="h-5 w-5"/></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Twitter className="h-5 w-5"/></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-white"><Github className="h-5 w-5"/></a>
+                    </div>
+                </div>
+                 <div className="container mx-auto mt-6 text-center text-xs text-muted-foreground px-4">
+                    © {new Date().getFullYear()} Nexmov.AI. All rights reserved.
+                </div>
+            </footer>
         </div>
     );
 }
