@@ -31,6 +31,11 @@ const RoadmapStepSchema = z.object({
   skills: z.array(z.string()).describe('A list of key skills to acquire during this step.'),
 });
 
+const SalaryProgressionSchema = z.object({
+    milestone: z.string().describe('The career milestone or year (e.g., "Year 1", "Mid-Level").'),
+    estimatedSalary: z.number().describe('The estimated annual salary in USD for this milestone.'),
+});
+
 const GenerateCareerRoadmapOutputSchema = z.object({
   roadmap: z.array(RoadmapStepSchema).describe('A detailed, step-by-step career roadmap.'),
   skillDistribution: z.array(z.object({ 
@@ -41,6 +46,7 @@ const GenerateCareerRoadmapOutputSchema = z.object({
     name: z.string().describe('The name of the roadmap step or milestone.'), 
     duration: z.number().describe('The estimated duration in months for the bar chart.') 
   })).describe('An array of roadmap steps and their estimated duration in months for a timeline bar chart.'),
+  salaryProgression: z.array(SalaryProgressionSchema).describe('An array of salary progression estimates for a line chart.'),
 });
 
 export type GenerateCareerRoadmapOutput = z.infer<
@@ -57,7 +63,7 @@ const prompt = ai.definePrompt({
   name: 'generateCareerRoadmapPrompt',
   input: {schema: GenerateCareerRoadmapInputSchema},
   output: {schema: GenerateCareerRoadmapOutputSchema},
-  prompt: `You are a career advisor expert. Generate a personalized career roadmap for the user based on their current profile, skills, and career interests.
+  prompt: `You are a career and salary expert. Generate a personalized career roadmap and salary progression for the user.
 
 Current Profile: {{{currentProfile}}}
 Skills: {{{skills}}}
@@ -73,13 +79,17 @@ Your response must be a JSON object that adheres to the GenerateCareerRoadmapOut
 
 2.  **skillDistribution**: Based on the entire roadmap, create an array of objects for a pie chart. Each object should have:
     *   \`name\`: The skill category (e.g., "Frontend", "Backend", "Soft Skills").
-    *   \`value\`: A number representing the percentage or importance of this skill category in the overall plan. The values should sum to 100.
+    *   \`value\`: A number representing the percentage or importance of this skill category. The values should sum to 100.
 
 3.  **timeline**: Create an array of objects for a bar chart. For each step in the roadmap, create an object with:
     *   \`name\`: The title of the roadmap step.
     *   \`duration\`: The *average* estimated duration in months (e.g., for "3-6 months", use 4.5).
 
-Provide a comprehensive and actionable roadmap.`,
+4.  **salaryProgression**: Based on the generated roadmap, create an array of objects for a line chart. Each object should have:
+    *   \`milestone\`: The name of the career stage (e.g., "Entry-Level", "Mid-Level", "Senior", "Lead").
+    *   \`estimatedSalary\`: A realistic estimated annual salary in USD for that stage. Start with the current role if possible.
+
+Provide a comprehensive, actionable, and financially insightful roadmap.`,
 });
 
 const generateCareerRoadmapFlow = ai.defineFlow(

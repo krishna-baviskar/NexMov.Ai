@@ -37,6 +37,8 @@ import {
   BarChart,
   PieChart as PieChartIcon,
   PartyPopper,
+  LineChart,
+  DollarSign,
 } from "lucide-react";
 import { ThreeDLoader } from "@/components/ui/3d-loader";
 import {
@@ -51,6 +53,8 @@ import {
   YAxis,
   CartesianGrid,
   BarChart as RechartsBarChart,
+  LineChart as RechartsLineChart,
+  Line,
 } from "recharts";
 
 const formSchema = z.object({
@@ -113,7 +117,7 @@ export default function CareerRoadmapPage() {
                 Create Your Career Roadmap
             </h1>
             <p className="text-muted-foreground mt-2">
-                Fill in your details and let our AI chart a path for your professional growth.
+                Fill in your details and let our AI chart a path for your professional growth and salary potential.
             </p>
         </div>
 
@@ -209,6 +213,29 @@ export default function CareerRoadmapPage() {
                                     <RechartsTooltip />
                                     <Bar dataKey="duration" fill="hsl(var(--primary))" />
                                 </RechartsBarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Progression</CardTitle>
+                        <CardDescription>Estimated annual salary based on your roadmap milestones.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="w-full h-80">
+                            <ResponsiveContainer>
+                                <RechartsLineChart data={roadmap.salaryProgression} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="milestone" />
+                                    <YAxis 
+                                      label={{ value: 'Salary (USD)', angle: -90, position: 'insideLeft' }}
+                                      tickFormatter={(value) => `$${(value as number / 1000)}k`} 
+                                    />
+                                    <RechartsTooltip formatter={(value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(value)} />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="estimatedSalary" stroke="hsl(var(--accent))" strokeWidth={2} activeDot={{ r: 8 }} />
+                                </RechartsLineChart>
                             </ResponsiveContainer>
                         </div>
                     </CardContent>

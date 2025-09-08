@@ -7,12 +7,12 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GitCommit, Compass, BarChart3, ArrowRight, DollarSign } from "lucide-react";
+import { GitCommit, Compass, BarChart3, ArrowRight } from "lucide-react";
 
 const features = [
   {
     title: "Career Roadmap",
-    description: "Generate a personalized career roadmap with AI-driven insights.",
+    description: "Generate a personalized career roadmap with AI-driven insights and salary projections.",
     href: "/career-roadmap",
     icon: <GitCommit className="w-8 h-8 text-primary" />,
   },
@@ -27,12 +27,6 @@ const features = [
     description: "Analyze current job market trends, salaries, and in-demand skills.",
     href: "/job-market-trends",
     icon: <BarChart3 className="w-8 h-8 text-primary" />,
-  },
-   {
-    title: "Salary Progression",
-    description: "Get salary estimates for your career path based on experience and location.",
-    href: "/salary-progression",
-    icon: <DollarSign className="w-8 h-8 text-primary" />,
   },
 ];
 

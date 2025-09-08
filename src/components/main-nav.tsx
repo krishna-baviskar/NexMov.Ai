@@ -27,11 +27,6 @@ const links = [
     label: "Job Market Trends",
     icon: BarChart3,
   },
-  {
-    href: "/salary-progression",
-    label: "Salary Progression",
-    icon: DollarSign,
-  }
 ];
 
 export function MainNav() {
