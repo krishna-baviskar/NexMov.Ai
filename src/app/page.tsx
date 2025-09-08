@@ -68,7 +68,16 @@ const userTypes = [
 
 export default function LandingPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-background text-foreground" style={{backgroundImage: "url('/background.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed'}}>
+        <div className="relative flex flex-col min-h-screen bg-background text-foreground">
+            <Image
+                src="https://picsum.photos/1920/1080"
+                alt="Abstract background"
+                fill
+                className="object-cover"
+                data-ai-hint="abstract background"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+
             <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
                     <Link href="/" className="flex items-center gap-2">
@@ -96,7 +105,7 @@ export default function LandingPage() {
                 </div>
             </header>
 
-            <main className="flex-1 bg-black/50">
+            <main className="flex-1 z-10">
                 {/* Hero Section */}
                 <section className="container grid items-center gap-6 px-4 pt-12 pb-12 text-center md:grid-cols-2 md:py-24 md:text-left lg:gap-12">
                     <div className="flex flex-col items-center gap-4 md:items-start">
@@ -215,7 +224,7 @@ export default function LandingPage() {
 
             </main>
 
-            <footer className="bg-secondary text-secondary-foreground py-8">
+            <footer className="z-10 bg-secondary text-secondary-foreground py-8">
                 <div className="container flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 mb-4 md:mb-0">
                          <Logo />
