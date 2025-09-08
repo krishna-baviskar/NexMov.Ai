@@ -69,7 +69,7 @@ export default function LandingPage() {
     return (
         <div className="relative flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
             <Image
-                src="https://picsum.photos/1920/1281"
+                src="https://picsum.photos/1920/1281?random=3"
                 alt="Abstract AI background"
                 fill
                 className="object-cover"
@@ -109,7 +109,7 @@ export default function LandingPage() {
 
             <main className="flex-1 z-10">
                 {/* Hero Section */}
-                <section className="container grid lg:grid-cols-2 place-items-center gap-12 px-4 py-20 text-center lg:text-left sm:py-32">
+                <section className="container grid lg:grid-cols-2 place-items-center gap-10 px-4 py-16 text-center lg:text-left sm:py-24">
                     <div className="lg:col-span-2 text-center flex flex-col items-center gap-4">
                         <h1 className="text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
                            Navigate Your Career with <span className='text-primary'>AI-Powered</span> Precision
@@ -123,14 +123,14 @@ export default function LandingPage() {
                             </Button>
                         </Link>
                     </div>
-                    <div className="w-full max-w-md h-72 sm:h-80 md:h-96 lg:h-[32rem] lg:col-span-2 lg:mt-8">
+                    <div className="w-full max-w-md h-64 sm:h-72 md:h-80 lg:h-96 lg:col-span-2 lg:mt-4">
                         <ThreeDLoader/>
                     </div>
                 </section>
                 
 
                 {/* About Section */}
-                <section id="about" className="py-20 sm:py-28 bg-secondary/80 backdrop-blur-md">
+                <section id="about" className="py-16 sm:py-20 bg-secondary/80 backdrop-blur-md">
                     <div className="container max-w-4xl mx-auto px-4 text-center">
                         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">What is Nexmov.AI?</h2>
                         <p className="mt-4 text-muted-foreground text-lg">
@@ -140,7 +140,7 @@ export default function LandingPage() {
                 </section>
 
                 {/* Features Section */}
-                <section id="features" className="container py-20 sm:py-28 px-4">
+                <section id="features" className="container py-16 sm:py-20 px-4">
                     <div className="text-center max-w-3xl mx-auto mb-12">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Everything You Need to Succeed</h2>
                         <p className="text-gray-300 mt-2 text-lg">Our powerful, AI-driven features are designed to guide your career at every stage.</p>
@@ -161,9 +161,9 @@ export default function LandingPage() {
                 </section>
 
                 {/* Why Choose Us Section */}
-                <section className="py-20 bg-secondary/80 backdrop-blur-md sm:py-28">
+                <section className="py-16 bg-secondary/80 backdrop-blur-md sm:py-20">
                     <div className="container grid gap-12 px-4 md:grid-cols-2 items-center">
-                        <div className="relative w-full h-80 rounded-lg overflow-hidden">
+                        <div className="relative w-full h-72 rounded-lg overflow-hidden">
                            <Image 
                                 src="https://picsum.photos/600/400" 
                                 alt="Professional working on a laptop"
@@ -187,7 +187,7 @@ export default function LandingPage() {
                 </section>
 
                 {/* Who It's For Section */}
-                <section id="who" className="py-20 sm:py-28">
+                <section id="who" className="py-16 sm:py-20">
                     <div className="container px-4">
                         <div className="text-center max-w-3xl mx-auto mb-12">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Tailored for Every Ambition</h2>
