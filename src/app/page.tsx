@@ -135,7 +135,7 @@ export default function LandingPage() {
                         </Link>
                         <Link href="/signup">
                             <Button className="bg-primary/80 text-primary-foreground hover:bg-primary">
-                                Get Started <ChevronRight className="ml-1 h-4 w-4" />
+                                Get Started
                             </Button>
                         </Link>
                     </div>
@@ -375,3 +375,4 @@ export default function LandingPage() {
     
 
     
+
