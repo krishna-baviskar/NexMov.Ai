@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   Card,
@@ -81,6 +82,14 @@ export default function DashboardPage() {
             <div className="p-4 rounded-lg bg-background">
               <h4 className="font-semibold mb-1">React Developers Community</h4>
               <p className="text-sm text-muted-foreground">An online community to share, learn, and network with React experts.</p>
+            </div>
+             <div className="p-4 rounded-lg bg-background">
+              <h4 className="font-semibold mb-1">AI-Curated Career News</h4>
+              <p className="text-sm text-muted-foreground">Latest news and trends in career skills and job markets.</p>
+            </div>
+             <div className="p-4 rounded-lg bg-background">
+              <h4 className="font-semibold mb-1">Career Growth Planner</h4>
+              <p className="text-sm text-muted-foreground">Get a 1, 3, and 5-year growth strategy with an AI career advisor tip.</p>
             </div>
           </CardContent>
         </Card>
