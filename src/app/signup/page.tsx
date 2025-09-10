@@ -21,7 +21,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useToast } from "@/hooks/use-toast";
 import { auth } from '@/lib/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Logo } from '@/components/icons';
 
 
@@ -279,7 +279,12 @@ export default function SignupPage() {
     if (!validateStep(2)) return;
     setIsLoading(true);
     try {
-      await createUserWithEmailAndPassword(auth, formData.personal.email, formData.account.password);
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.personal.email, formData.account.password);
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, {
+          displayName: `${formData.personal.firstName} ${formData.personal.lastName}`,
+        });
+      }
       toast({
         title: "Account Created!",
         description: "You have successfully signed up. Welcome to Nexmov.AI!",
