@@ -386,11 +386,7 @@ export default function CareerRoadmapPage() {
                     />
 
                     <Button type="submit" disabled={isLoading} className="w-full">
-                      {isLoading ? (
-                        <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
-                      ) : (
-                        <Wand2 className="mr-2 h-4 w-4" />
-                      )}
+                      <Wand2 className="mr-2 h-4 w-4" />
                       Generate Roadmap
                     </Button>
                   </form>
