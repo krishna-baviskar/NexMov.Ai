@@ -361,7 +361,7 @@ export default function SignupPage() {
             </span>
           </Link>
           <div className="text-sm text-gray-400">
-            Already have an account? 
+            <span className="hidden sm:inline">Already have an account?</span>
             <Link href="/login" className="text-primary hover:text-primary/80 transition-colors ml-2">
               Sign In
             </Link>
@@ -725,5 +725,3 @@ export default function SignupPage() {
     </div>
   );
 };
-
-    
