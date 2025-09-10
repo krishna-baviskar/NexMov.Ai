@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -29,6 +30,8 @@ import { Badge } from "@/components/ui/badge";
 import { BarChart3, TrendingUp, Cpu, MapPin, DollarSign, BrainCircuit, Building } from "lucide-react";
 import { ThreeDLoader } from "@/components/ui/3d-loader";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip as RechartsTooltip, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase";
 
 const formSchema = z.object({
   domain: z.string().min(1, "Please enter a job domain."),
@@ -40,6 +43,7 @@ type FormValues = z.infer<typeof formSchema>;
 const COLORS = ["hsl(var(--chart-1))", "hsl(var(--muted))"];
 
 export default function JobMarketTrendsPage() {
+  const [user] = useAuthState(auth);
   const [trends, setTrends] = useState<AnalyzeJobMarketTrendsOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -76,7 +80,7 @@ export default function JobMarketTrendsPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight">
-                Job Market Trends
+              {user ? `Hello ${user.displayName}, Welcome to Job Market Trends` : "Job Market Trends"}
             </h1>
             <p className="text-muted-foreground mt-2">
                 Get AI-powered insights into the job market for any domain and location.
@@ -140,7 +144,7 @@ export default function JobMarketTrendsPage() {
              <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><TrendingUp/> Domain Demand</CardTitle>
-              </CardHeader>
+              </Header>
               <CardContent>
                 <div className="w-full h-48">
                   <ResponsiveContainer>

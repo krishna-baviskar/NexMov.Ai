@@ -64,6 +64,8 @@ import {
   LineChart,
   Line,
 } from "recharts";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase";
 
 const careerStatuses = [
     'High School Student (10th/12th)', 'Undergraduate Student', 'Graduate Student', 'Recent Graduate', 'Working Professional', 'Career Switcher', 'Competitive Exam Aspirant', 'Freelancer', 'Entrepreneur'
@@ -127,6 +129,7 @@ const CURRENCY_SYMBOLS = {
 type Currency = keyof typeof CURRENCY_RATES;
 
 export default function CareerRoadmapPage() {
+  const [user] = useAuthState(auth);
   const [roadmap, setRoadmap] = useState<GenerateCareerRoadmapOutput | null>(
     null
   );
@@ -210,7 +213,7 @@ export default function CareerRoadmapPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight">
-                Create Your Career Roadmap
+                {user ? `Hello ${user.displayName}, Welcome to Your Career Roadmap` : "Create Your Career Roadmap"}
             </h1>
             <p className="text-muted-foreground mt-2">
                 Fill in your details and let our AI chart a path for your professional growth and salary potential.

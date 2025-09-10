@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -54,6 +55,8 @@ import {
   CartesianGrid,
   Bar as RechartsBar,
 } from "recharts";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase";
 
 const formSchema = z.object({
   currentSkills: z.string().min(1, "Please list your current skills."),
@@ -72,6 +75,7 @@ const RESOURCE_ICONS = {
 };
 
 export default function SkillGapAnalysisPage() {
+  const [user] = useAuthState(auth);
   const [analysis, setAnalysis] =
     useState<PerformSkillGapAnalysisOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,7 +116,7 @@ export default function SkillGapAnalysisPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight">
-                Skill Gap Analysis
+                {user ? `Hello ${user.displayName}, Welcome to Your Skill Gap Analysis` : "Skill Gap Analysis"}
             </h1>
             <p className="text-muted-foreground mt-2">
                 Discover the skills you need to achieve your career goals with AI-driven insights.
