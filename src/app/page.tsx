@@ -27,6 +27,7 @@ import { Logo } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useState, type FormEvent } from 'react';
 
 const features = [
     {
@@ -85,6 +86,27 @@ const whoCanUse = [
 ]
 
 export default function LandingPage() {
+    const [contactForm, setContactForm] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
+
+    const handleContactChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setContactForm({
+            ...contactForm,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleContactSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        const { name, email, subject, message } = contactForm;
+        const mailtoLink = `mailto:ideans.team@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        window.location.href = mailtoLink;
+    };
+
     return (
         <div className="flex min-h-screen flex-col bg-background text-foreground">
             {/* Background Image */}
@@ -223,10 +245,10 @@ export default function LandingPage() {
                                             "Nexmov.AI was created because we saw students and professionals struggle with uncertainty in their next step. With AI, we wanted to create clarity, confidence, and a visual roadmap for everyone."
                                         </p>
                                         <p className="mt-4 font-bold text-white text-lg">
-                                        Founder & CEO
+                                        Krishna Somnath Baviskar
                                         </p>
                                         <p className="text-muted-foreground">
-                                            Experts in AI, EdTech, and Career Guidance solutions.
+                                            Founder and lead Developer @nexmov.ai
                                         </p>
                                     </div>
                                 </div>
@@ -241,10 +263,10 @@ export default function LandingPage() {
                                             "Our core mission is to democratize career guidance through technology. We believe that everyone deserves access to personalized, intelligent tools that can help them navigate their professional journey with confidence."
                                         </p>
                                         <p className="mt-4 font-bold text-white text-lg">
-                                        Co-Founder & CTO
+                                        Sanket Mohan Kotkar
                                         </p>
                                         <p className="text-muted-foreground">
-                                            Pioneer in AI-driven educational platforms and data science.
+                                           Co-Founder and Developer @nexmov.ai
                                         </p>
                                     </div>
                                 </div>
@@ -259,10 +281,10 @@ export default function LandingPage() {
                                            "We are a team of passionate educators, engineers, and career counselors. Our diverse expertise allows us to build a product that is not only technologically advanced but also deeply empathetic to user needs."
                                         </p>
                                         <p className="mt-4 font-bold text-white text-lg">
-                                        Head of Product
+                                        Parth Nikhil Shah
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Specialist in user-centric design and career development strategies.
+                                           Co-Founder and Developer @nexmov.ai
                                         </p>
                                     </div>
                                 </div>
@@ -311,11 +333,11 @@ export default function LandingPage() {
                                     </div>
                                 </div>
                             </div>
-                            <form className="space-y-4">
-                                 <Input type="text" placeholder="Full Name" required className="bg-background/50" />
-                                 <Input type="email" placeholder="Email Address" required className="bg-background/50" />
-                                 <Input type="text" placeholder="Subject" required className="bg-background/50" />
-                                 <Textarea placeholder="Your Message" required className="bg-background/50 min-h-32" />
+                            <form className="space-y-4" onSubmit={handleContactSubmit}>
+                                 <Input type="text" name="name" placeholder="Full Name" value={contactForm.name} onChange={handleContactChange} required className="bg-background/50" />
+                                 <Input type="email" name="email" placeholder="Email Address" value={contactForm.email} onChange={handleContactChange} required className="bg-background/50" />
+                                 <Input type="text" name="subject" placeholder="Subject" value={contactForm.subject} onChange={handleContactChange} required className="bg-background/50" />
+                                 <Textarea name="message" placeholder="Your Message" value={contactForm.message} onChange={handleContactChange} required className="bg-background/50 min-h-32" />
                                  <Button type="submit" className="w-full bg-primary/80 text-primary-foreground hover:bg-primary">Send Message</Button>
                             </form>
                         </div>
@@ -349,5 +371,7 @@ export default function LandingPage() {
         </div>
     );
 }
+
+    
 
     
