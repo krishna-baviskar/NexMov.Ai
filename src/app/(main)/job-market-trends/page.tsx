@@ -144,7 +144,7 @@ export default function JobMarketTrendsPage() {
              <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><TrendingUp/> Domain Demand</CardTitle>
-              </Header>
+              </CardHeader>
               <CardContent>
                 <div className="w-full h-48">
                   <ResponsiveContainer>
@@ -196,7 +196,7 @@ export default function JobMarketTrendsPage() {
             <Card className="lg:col-span-3">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Ranges</CardTitle>
-              </Header>
+              </CardHeader>
               <CardContent>
                   <p className="text-muted-foreground whitespace-pre-wrap">{trends.salaryRanges}</p>
               </CardContent>
