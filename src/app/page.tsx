@@ -86,18 +86,14 @@ const whoCanUse = [
 
 export default function LandingPage() {
     return (
-        <div className="relative min-h-screen bg-background text-foreground">
-            {/* Animated Background */}
-            <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-            <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-br from-background via-black/80 to-background opacity-90"></div>
-            <div 
-              className="absolute -z-10 -top-1/4 left-0 h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle_farthest-side,hsl(var(--primary)/0.15),transparent)] blur-3xl md:h-[500px] md:w-[500px]"
-              style={{ animation: 'hero-float 8s ease-in-out infinite' }}
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
+            {/* Background Image */}
+            <div
+              className="absolute inset-0 -z-20 bg-cover bg-center"
+              style={{ backgroundImage: "url('https://plus.unsplash.com/premium_photo-1756165389301-037ffbdd64ed?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}
             ></div>
-            <div 
-              className="absolute -z-10 -bottom-1/4 right-0 h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle_farthest-side,hsl(var(--secondary)/0.15),transparent)] blur-3xl md:h-[500px] md:w-[500px]"
-              style={{ animation: 'hero-float 10s ease-in-out infinite 2s' }}
-            ></div>
+            <div className="absolute inset-0 -z-10 bg-black/60"></div>
+
 
             {/* Header */}
             <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-md">
@@ -124,7 +120,8 @@ export default function LandingPage() {
                 </div>
             </header>
 
-            <main className="flex flex-col overflow-x-hidden">
+            {/* Main Content */}
+            <main className="flex flex-1 flex-col">
                 {/* Hero Section */}
                 <section id="hero" className="container relative z-10 mx-auto flex min-h-[calc(80vh)] w-full flex-col items-center justify-center text-center py-12 md:py-20">
                      <div className="max-w-4xl" style={{ animation: 'hero-float 6s ease-in-out infinite' }}>
@@ -274,7 +271,6 @@ export default function LandingPage() {
                     </div>
                 </section>
 
-
                 {/* Contact Section */}
                 <section id="contact" className="py-16 sm:py-24 w-full">
                     <div className="container mx-auto max-w-4xl px-4">
@@ -311,7 +307,7 @@ export default function LandingPage() {
                                     <MapPin className="w-6 h-6 text-primary" />
                                     <div>
                                         <h4 className="font-bold text-white">Office Address</h4>
-                                        <p className="text-muted-foreground">Pune,Maharashtra,India</p>
+                                        <p className="text-muted-foreground">Pune, Maharashtra, India</p>
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +324,7 @@ export default function LandingPage() {
             </main>
             
             {/* Footer */}
-            <footer className="w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
+            <footer className="mt-auto w-full border-t border-white/10 bg-black/30 py-8 backdrop-blur-lg">
                 <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2">
                          <Logo />
@@ -353,7 +349,5 @@ export default function LandingPage() {
         </div>
     );
 }
-
-    
 
     

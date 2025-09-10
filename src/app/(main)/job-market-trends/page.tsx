@@ -232,7 +232,7 @@ export default function JobMarketTrendsPage() {
             <Card className="md:col-span-2 lg:col-span-3">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><Building/> Top Companies Hiring</CardTitle>
-              </Header>
+              </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
                 {trends.topCompanies.map((company, i) => <Badge key={i}>{company}</Badge>)}
               </CardContent>
