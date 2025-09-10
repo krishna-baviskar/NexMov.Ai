@@ -1,5 +1,5 @@
 
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -240,7 +240,7 @@ export default function JobMarketTrendsPage() {
 
           </div>
         ) : (
-          !isLoading && <div className="text-center text-muted-foreground py-16"><p>Your trend analysis will appear here.</p></div>
+          !isLoading && <div className="text-center text-muted-foreground py-16 flex items-center justify-center h-full min-h-96 rounded-lg border border-dashed"><p>Your trend analysis will appear here.</p></div>
         )}
       </div>
     </div>
