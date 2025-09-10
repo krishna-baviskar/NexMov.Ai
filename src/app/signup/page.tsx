@@ -12,16 +12,11 @@ import {
   UserPlus, 
   ArrowRight, 
   ArrowLeft,
-  Sparkles, 
-  GraduationCap,
-  Briefcase,
-  Target,
   Calendar,
   MapPin,
   Phone,
   Check,
-  AlertCircle,
-  Zap
+  AlertCircle
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useToast } from "@/hooks/use-toast";
@@ -39,15 +34,6 @@ interface PersonalInfo {
   location: string;
 }
 
-interface CareerInfo {
-  currentStatus: string;
-  educationLevel: string;
-  fieldOfStudy: string;
-  experience: string;
-  careerGoals: string[];
-  interests: string[];
-}
-
 interface AccountInfo {
   password: string;
   confirmPassword: string;
@@ -57,7 +43,6 @@ interface AccountInfo {
 
 interface FormData {
   personal: PersonalInfo;
-  career: CareerInfo;
   account: AccountInfo;
 }
 
@@ -81,14 +66,6 @@ export default function SignupPage() {
       dateOfBirth: '',
       location: ''
     },
-    career: {
-      currentStatus: '',
-      educationLevel: '',
-      fieldOfStudy: '',
-      experience: '',
-      careerGoals: [],
-      interests: []
-    },
     account: {
       password: '',
       confirmPassword: '',
@@ -96,79 +73,6 @@ export default function SignupPage() {
       subscribeNewsletter: true
     }
   });
-
-  const careerStatuses = [
-    'High School Student (10th/12th)',
-    'Undergraduate Student',
-    'Graduate Student',
-    'Recent Graduate',
-    'Working Professional',
-    'Career Switcher',
-    'Competitive Exam Aspirant',
-    'Freelancer',
-    'Entrepreneur'
-  ];
-
-  const educationLevels = [
-    '10th Grade',
-    '12th Grade/High School',
-    'Diploma',
-    'Bachelor\'s Degree',
-    'Master\'s Degree',
-    'PhD/Doctorate',
-    'Professional Certification'
-  ];
-
-  const fieldsOfStudy = [
-    'Computer Science & IT',
-    'Engineering',
-    'Business & Management',
-    'Healthcare & Medicine',
-    'Finance & Economics',
-    'Marketing & Communications',
-    'Design & Creative Arts',
-    'Education',
-    'Law',
-    'Science & Research',
-    'Other'
-  ];
-
-  const experienceLevels = [
-    'No Experience',
-    'Less than 1 year',
-    '1-3 years',
-    '3-5 years',
-    '5-10 years',
-    '10+ years'
-  ];
-
-  const careerGoalOptions = [
-    'Get my first job',
-    'Switch career paths',
-    'Get promoted',
-    'Start my own business',
-    'Learn new skills',
-    'Higher education',
-    'Competitive exams',
-    'Salary increase',
-    'Work-life balance',
-    'Remote work opportunities'
-  ];
-
-  const interestOptions = [
-    'Artificial Intelligence',
-    'Data Science',
-    'Web Development',
-    'Mobile Development',
-    'Cybersecurity',
-    'Digital Marketing',
-    'Finance',
-    'Healthcare',
-    'Education',
-    'Entrepreneurship',
-    'Design',
-    'Research'
-  ];
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -300,8 +204,7 @@ export default function SignupPage() {
             
             let connectionColor = parseHsl(secondaryColor);
             if (currentStep === 1) connectionColor = parseHsl(primaryColor);
-            else if (currentStep === 2) connectionColor = parseHsl(secondaryColor);
-            else if (currentStep === 3) connectionColor = parseHsl(accentColor);
+            else if (currentStep === 2) connectionColor = parseHsl(accentColor);
             
             const connectionGradient = ctx.createLinearGradient(x2d, y2d, otherX2d, otherY2d);
             connectionGradient.addColorStop(0, colorWithOpacity(connectionColor, connectionOpacity));
@@ -351,13 +254,6 @@ export default function SignupPage() {
       if (!formData.personal.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
       if (!formData.personal.location.trim()) newErrors.location = 'Location is required';
     } else if (step === 2) {
-      if (!formData.career.currentStatus) newErrors.currentStatus = 'Current status is required';
-      if (!formData.career.educationLevel) newErrors.educationLevel = 'Education level is required';
-      if (!formData.career.fieldOfStudy) newErrors.fieldOfStudy = 'Field of study is required';
-      if (!formData.career.experience) newErrors.experience = 'Experience level is required';
-      if (formData.career.careerGoals.length === 0) newErrors.careerGoals = 'Select at least one career goal';
-      if (formData.career.interests.length === 0) newErrors.interests = 'Select at least one interest';
-    } else if (step === 3) {
       if (!formData.account.password) newErrors.password = 'Password is required';
       else if (formData.account.password.length < 8) newErrors.password = 'Password must be at least 8 characters';
       if (!formData.account.confirmPassword) newErrors.confirmPassword = 'Please confirm your password';
@@ -371,7 +267,7 @@ export default function SignupPage() {
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, 3));
+      setCurrentStep(prev => Math.min(prev + 1, 2));
     }
   };
 
@@ -380,7 +276,7 @@ export default function SignupPage() {
   };
 
   const handleSubmit = async () => {
-    if (!validateStep(3)) return;
+    if (!validateStep(2)) return;
     setIsLoading(true);
     try {
       await createUserWithEmailAndPassword(auth, formData.personal.email, formData.account.password);
@@ -410,16 +306,6 @@ export default function SignupPage() {
     }
   };
 
-  const updateCareerData = (field: keyof CareerInfo, value: string | string[]) => {
-    setFormData(prev => ({
-      ...prev,
-      career: { ...prev.career, [field]: value }
-    }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
-    }
-  };
-
   const updateAccountData = (field: keyof AccountInfo, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
@@ -430,27 +316,18 @@ export default function SignupPage() {
     }
   };
 
-  const toggleArrayItem = (array: string[], item: string): string[] => {
-    return array.includes(item) 
-      ? array.filter(i => i !== item)
-      : [...array, item];
-  };
-
   const getStepColor = (step: number) => {
     if (step === 1) return 'from-primary to-secondary';
-    if (step === 2) return 'from-secondary to-accent';
     return 'from-accent to-pink-500';
   };
 
   const getFocusRingColor = (step: number) => {
     if (step === 1) return 'focus:ring-primary';
-    if (step === 2) return 'focus:ring-secondary';
     return 'focus:ring-accent';
   };
 
   const getStepIcon = (step: number) => {
     if (step === 1) return <User className="w-6 h-6" />;
-    if (step === 2) return <Target className="w-6 h-6" />;
     return <Lock className="w-6 h-6" />;
   };
 
@@ -463,7 +340,6 @@ export default function SignupPage() {
 
       <div className={`absolute inset-0 bg-gradient-radial ${
         currentStep === 1 ? 'from-primary/10 via-secondary/5' :
-        currentStep === 2 ? 'from-secondary/10 via-accent/5' :
         'from-accent/10 via-pink-500/5'
       } to-transparent transition-all duration-1000 -z-5`} />
 
@@ -484,10 +360,10 @@ export default function SignupPage() {
         </div>
       </nav>
 
-      <div className="relative z-40 max-w-2xl mx-auto px-6 mb-8">
+      <div className="relative z-40 max-w-lg mx-auto px-6 mb-8">
         <div className="flex items-center justify-between">
-          {[1, 2, 3].map(step => (
-            <div key={step} className="flex items-center">
+          {[1, 2].map(step => (
+            <React.Fragment key={step}>
               <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${
                 currentStep >= step 
                   ? `bg-gradient-to-r ${getStepColor(step)} border-transparent text-white scale-110` 
@@ -495,18 +371,17 @@ export default function SignupPage() {
               }`}>
                 {currentStep > step ? <Check className="w-6 h-6" /> : getStepIcon(step)}
               </div>
-              {step < 3 && (
-                <div className={`w-24 sm:w-32 h-1 mx-4 rounded-full transition-all duration-500 ${
+              {step < 2 && (
+                <div className={`w-full h-1 mx-4 rounded-full transition-all duration-500 ${
                   currentStep > step ? `bg-gradient-to-r ${getStepColor(step)}` : 'bg-gray-700'
                 }`} />
               )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
         <div className="flex justify-between mt-4 text-sm">
           <span className={currentStep >= 1 ? 'text-primary' : 'text-gray-400'}>Personal Info</span>
-          <span className={currentStep >= 2 ? 'text-secondary' : 'text-gray-400'}>Career Goals</span>
-          <span className={currentStep >= 3 ? 'text-accent' : 'text-gray-400'}>Account Setup</span>
+          <span className={currentStep >= 2 ? 'text-accent' : 'text-gray-400'}>Account Setup</span>
         </div>
       </div>
 
@@ -660,175 +535,11 @@ export default function SignupPage() {
                 </div>
               </div>
             )}
-
+            
             {currentStep === 2 && (
               <div className="space-y-6 animate-fade-in">
                 <div className="text-center mb-8">
                   <div className={`w-16 h-16 bg-gradient-to-r ${getStepColor(2)} rounded-2xl mx-auto mb-4 flex items-center justify-center transform hover:scale-110 transition-transform duration-500`}>
-                    <Target className="w-8 h-8 text-white" />
-                  </div>
-                  <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-                    Career Goals & Interests
-                  </h2>
-                  <p className="text-gray-400">Help us personalize your AI career guidance</p>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Current Status</label>
-                  <div className="relative">
-                    <select
-                      value={formData.career.currentStatus}
-                      onChange={(e) => updateCareerData('currentStatus', e.target.value)}
-                      className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
-                        errors.currentStatus ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
-                    >
-                      <option value="" className="bg-gray-800">Select your current status</option>
-                      {careerStatuses.map(status => (
-                        <option key={status} value={status} className="bg-gray-800">{status}</option>
-                      ))}
-                    </select>
-                    {errors.currentStatus && (
-                      <div className="absolute -bottom-6 left-0 flex items-center space-x-1 text-red-400 text-xs">
-                        <AlertCircle className="w-3 h-3" />
-                        <span>{errors.currentStatus}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Education Level</label>
-                    <div className="relative">
-                      <select
-                        value={formData.career.educationLevel}
-                        onChange={(e) => updateCareerData('educationLevel', e.target.value)}
-                        className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
-                          errors.educationLevel ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
-                      >
-                        <option value="" className="bg-gray-800">Select education level</option>
-                        {educationLevels.map(level => (
-                          <option key={level} value={level} className="bg-gray-800">{level}</option>
-                        ))}
-                      </select>
-                      {errors.educationLevel && (
-                        <div className="absolute -bottom-6 left-0 flex items-center space-x-1 text-red-400 text-xs">
-                          <AlertCircle className="w-3 h-3" />
-                          <span>{errors.educationLevel}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Experience Level</label>
-                    <div className="relative">
-                      <select
-                        value={formData.career.experience}
-                        onChange={(e) => updateCareerData('experience', e.target.value)}
-                        className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
-                          errors.experience ? 'border-red-400' : 'border-white/10'
-                        } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
-                      >
-                        <option value="" className="bg-gray-800">Select experience level</option>
-                        {experienceLevels.map(level => (
-                          <option key={level} value={level} className="bg-gray-800">{level}</option>
-                        ))}
-                      </select>
-                       {errors.experience && (
-                        <div className="absolute -bottom-6 left-0 flex items-center space-x-1 text-red-400 text-xs">
-                          <AlertCircle className="w-3 h-3" />
-                          <span>{errors.experience}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Field of Study/Interest</label>
-                  <div className="relative">
-                    <select
-                      value={formData.career.fieldOfStudy}
-                      onChange={(e) => updateCareerData('fieldOfStudy', e.target.value)}
-                      className={`w-full px-4 py-3 bg-white/5 border appearance-none ${
-                        errors.fieldOfStudy ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white`}
-                    >
-                      <option value="" className="bg-gray-800">Select your field of study</option>
-                      {fieldsOfStudy.map(field => (
-                        <option key={field} value={field} className="bg-gray-800">{field}</option>
-                      ))}
-                    </select>
-                     {errors.fieldOfStudy && (
-                        <div className="absolute -bottom-6 left-0 flex items-center space-x-1 text-red-400 text-xs">
-                          <AlertCircle className="w-3 h-3" />
-                          <span>{errors.fieldOfStudy}</span>
-                        </div>
-                      )}
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-300">Career Goals (Select all that apply)</label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {careerGoalOptions.map(goal => (
-                      <button
-                        key={goal}
-                        type="button"
-                        onClick={() => updateCareerData('careerGoals', toggleArrayItem(formData.career.careerGoals, goal))}
-                        className={`p-3 rounded-xl border transition-all duration-300 text-sm ${
-                          formData.career.careerGoals.includes(goal)
-                            ? 'bg-secondary/20 border-secondary text-secondary'
-                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-secondary/50 hover:bg-secondary/10'
-                        }`}
-                      >
-                        {goal}
-                      </button>
-                    ))}
-                  </div>
-                  {errors.careerGoals && (
-                    <div className="flex items-center space-x-1 text-red-400 text-xs">
-                      <AlertCircle className="w-3 h-3" />
-                      <span>{errors.careerGoals}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-300">Areas of Interest (Select all that apply)</label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {interestOptions.map(interest => (
-                      <button
-                        key={interest}
-                        type="button"
-                        onClick={() => updateCareerData('interests', toggleArrayItem(formData.career.interests, interest))}
-                        className={`p-3 rounded-xl border transition-all duration-300 text-sm ${
-                          formData.career.interests.includes(interest)
-                            ? 'bg-secondary/20 border-secondary text-secondary'
-                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-secondary/50 hover:bg-secondary/10'
-                        }`}
-                      >
-                        {interest}
-                      </button>
-                    ))}
-                  </div>
-                  {errors.interests && (
-                    <div className="flex items-center space-x-1 text-red-400 text-xs">
-                      <AlertCircle className="w-3 h-3" />
-                      <span>{errors.interests}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-            
-            {currentStep === 3 && (
-              <div className="space-y-6 animate-fade-in">
-                <div className="text-center mb-8">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${getStepColor(3)} rounded-2xl mx-auto mb-4 flex items-center justify-center transform hover:scale-110 transition-transform duration-500`}>
                     <Lock className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-accent to-pink-500 bg-clip-text text-transparent">
@@ -847,7 +558,7 @@ export default function SignupPage() {
                       onChange={(e) => updateAccountData('password', e.target.value)}
                       className={`w-full pl-12 pr-12 py-3 bg-white/5 border ${
                         errors.password ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 ${getFocusRingColor(3)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                       placeholder="Create a strong password"
                     />
                     <button
@@ -890,7 +601,7 @@ export default function SignupPage() {
                       onChange={(e) => updateAccountData('confirmPassword', e.target.value)}
                       className={`w-full pl-12 pr-12 py-3 bg-white/5 border ${
                         errors.confirmPassword ? 'border-red-400' : 'border-white/10'
-                      } rounded-xl focus:ring-2 ${getFocusRingColor(3)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
+                      } rounded-xl focus:ring-2 ${getFocusRingColor(2)} focus:border-transparent outline-none transition-all duration-300 text-white placeholder-gray-400`}
                       placeholder="Confirm your password"
                     />
                     <button
@@ -916,7 +627,7 @@ export default function SignupPage() {
                       id="agreeToTerms"
                       checked={formData.account.agreeToTerms}
                       onChange={(e) => updateAccountData('agreeToTerms', e.target.checked)}
-                      className={`w-5 h-5 mt-0.5 bg-white/5 border ${errors.agreeToTerms ? 'border-red-400' : 'border-white/10'} rounded focus:ring-2 ${getFocusRingColor(3)}`}
+                      className={`w-5 h-5 mt-0.5 bg-white/5 border ${errors.agreeToTerms ? 'border-red-400' : 'border-white/10'} rounded focus:ring-2 ${getFocusRingColor(2)}`}
                     />
                     <label htmlFor="agreeToTerms" className="text-sm text-gray-400">
                       I agree to the{' '}
@@ -942,7 +653,7 @@ export default function SignupPage() {
                       id="subscribeNewsletter"
                       checked={formData.account.subscribeNewsletter}
                       onChange={(e) => updateAccountData('subscribeNewsletter', e.target.checked)}
-                      className={`w-5 h-5 mt-0.5 bg-white/5 border border-white/10 rounded focus:ring-2 ${getFocusRingColor(3)}`}
+                      className={`w-5 h-5 mt-0.5 bg-white/5 border border-white/10 rounded focus:ring-2 ${getFocusRingColor(2)}`}
                     />
                     <label htmlFor="subscribeNewsletter" className="text-sm text-gray-400">
                       Subscribe to our newsletter for career tips, job alerts, and AI insights
@@ -966,7 +677,7 @@ export default function SignupPage() {
                 <span>Previous</span>
               </button>
 
-              {currentStep < 3 ? (
+              {currentStep < 2 ? (
                 <button
                   onClick={handleNext}
                   className={`flex items-center space-x-2 px-8 py-3 bg-gradient-to-r ${getStepColor(currentStep)} hover:scale-105 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300`}
