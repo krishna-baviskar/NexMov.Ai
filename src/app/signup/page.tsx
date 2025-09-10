@@ -280,10 +280,14 @@ export default function SignupPage() {
     setIsLoading(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, formData.personal.email, formData.account.password);
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: `${formData.personal.firstName} ${formData.personal.lastName}`,
+      const user = userCredential.user;
+      if (user) {
+        await updateProfile(user, {
+          displayName: `${formData.personal.firstName} ${formData.personal.lastName}`.trim(),
         });
+        
+        // Reload user to get updated profile information
+        await user.reload();
       }
       toast({
         title: "Account Created!",
@@ -721,3 +725,5 @@ export default function SignupPage() {
     </div>
   );
 };
+
+    
