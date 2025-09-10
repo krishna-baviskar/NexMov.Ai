@@ -173,7 +173,7 @@ export default function LandingPage() {
                                 Nexmov.AI is a next-generation AI-powered career navigation platform that adapts to your education level, interests, and goals. It generates personalized roadmaps, skill-building advice, market insights, and curated news in real time.
                             </p>
                         </div>
-                        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+                        <div className="mt-16 grid gap-8 md:grid-cols-2">
                              <div className="card-3d gradient-border-card">
                                 <h3 className="gradient-text text-2xl font-bold">Our Mission</h3>
                                 <p className="mt-2 text-muted-foreground">To make career guidance personalized, data-driven, and accessible to all, regardless of background.</p>

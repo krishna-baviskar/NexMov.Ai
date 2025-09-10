@@ -122,8 +122,8 @@ export default function SkillGapAnalysisPage() {
                 Discover the skills you need to achieve your career goals with AI-driven insights.
             </p>
         </div>
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-1 space-y-4">
+        <div className="grid gap-8 md:grid-cols-3">
+          <div className="md:col-span-1 space-y-4">
             <Card>
               <CardHeader>
                 <CardTitle>Analysis Input</CardTitle>
@@ -197,7 +197,7 @@ export default function SkillGapAnalysisPage() {
             </Card>
           </div>
 
-          <div className="lg:col-span-2 space-y-8">
+          <div className="md:col-span-2 space-y-8">
             {isLoading && (
               <div className="flex justify-center items-center h-full min-h-96">
                 <ThreeDLoader />
@@ -219,7 +219,7 @@ export default function SkillGapAnalysisPage() {
                       <ResponsiveContainer>
                         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
                           <PolarGrid />
-                          <PolarAngleAxis dataKey="skill" />
+                          <PolarAngleAxis dataKey="skill" tick={{fontSize: 12}} />
                           <PolarRadiusAxis angle={30} domain={[0, 100]} />
                           <RechartsRadar name="Required" dataKey="required" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.6} />
                           <RechartsRadar name="Current" dataKey="current" stroke="hsl(var(--chart-2))" fill="hsl(var(--chart-2))" fillOpacity={0.6} />
@@ -243,10 +243,10 @@ export default function SkillGapAnalysisPage() {
                   <CardContent>
                     <div className="w-full h-80">
                         <ResponsiveContainer>
-                            <RechartsBarChart data={analysis.skillGaps} layout="vertical" margin={{ top: 5, right: 20, left: 30, bottom: 5 }}>
+                            <RechartsBarChart data={analysis.skillGaps} layout="vertical" margin={{ top: 5, right: 20, left: 100, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis type="number" domain={[0,5]} ticks={[1,2,3,4,5]}/>
-                                <YAxis dataKey="name" type="category" width={100} />
+                                <YAxis dataKey="name" type="category" width={100} interval={0} tick={{fontSize: 12}}/>
                                 <RechartsTooltip />
                                 <RechartsBar dataKey="importance" fill="hsl(var(--accent))" />
                             </RechartsBarChart>

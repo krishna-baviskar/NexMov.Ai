@@ -50,7 +50,7 @@ export default function DashboardPage() {
               key={feature.href}
               className="hover:border-primary/50 hover:shadow-lg transition-all"
             >
-              <CardHeader className="flex flex-row items-center gap-4">
+              <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div className="bg-primary/10 p-3 rounded-lg">{feature.icon}</div>
                 <div>
                   <CardTitle>{feature.title}</CardTitle>

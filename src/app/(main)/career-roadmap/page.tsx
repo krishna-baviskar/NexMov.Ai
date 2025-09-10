@@ -220,8 +220,8 @@ export default function CareerRoadmapPage() {
             </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-1 space-y-4">
+        <div className="grid gap-8 md:grid-cols-3">
+          <div className="md:col-span-1 space-y-4">
             <Card>
               <CardHeader>
                 <CardTitle>Your Profile</CardTitle>
@@ -399,7 +399,7 @@ export default function CareerRoadmapPage() {
             </Card>
           </div>
 
-          <div className="lg:col-span-2 space-y-8">
+          <div className="md:col-span-2 space-y-8">
             {isLoading && (
               <div className="flex justify-center items-center h-full min-h-96">
                 <ThreeDLoader />
@@ -443,13 +443,13 @@ export default function CareerRoadmapPage() {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <div className="flex justify-between items-center">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                             <div>
                                 <CardTitle className="flex items-center gap-2"><DollarSign/> Salary Progression</CardTitle>
                                 <CardDescription>Estimated annual salary based on your roadmap milestones.</CardDescription>
                             </div>
                             <Select onValueChange={(value) => setSelectedCurrency(value as Currency)} defaultValue={selectedCurrency}>
-                                <SelectTrigger className="w-[100px]">
+                                <SelectTrigger className="w-full sm:w-[100px]">
                                     <SelectValue placeholder="Currency" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -501,7 +501,7 @@ export default function CareerRoadmapPage() {
                 </Card>
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight mb-4">Your AI-Generated Roadmap</h2>
-                  <div className="space-y-6 border-l-2 border-border pl-6">
+                  <div className="space-y-6 border-l-2 border-border pl-6 md:pl-8">
                     {roadmap.roadmap.map((step, index) => (
                       <div key={index} className="relative">
                         <div className="absolute -left-9 top-0 bg-background border-2 border-primary rounded-full p-1.5">
