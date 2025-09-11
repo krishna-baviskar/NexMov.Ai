@@ -1,4 +1,4 @@
-import { ThreeDLoader } from '@/components/ui/3d-loader';
+import { ThreeDLoader } from '@/components/ui/3d-loader'; 
 
 export default function Loading() {
   return (
