@@ -213,7 +213,7 @@ export default function CareerRoadmapPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight">
-                {user ? `Hello ${user.displayName}, Welcome to Your Career Roadmap` : "Create Your Career Roadmap"}
+                {user ? `Hello!! ${user.displayName}, Welcome to Your Career Roadmap` : "Create Your Career Roadmap"}
             </h1>
             <p className="text-muted-foreground mt-2">
                 Fill in your details and let our AI chart a path for your professional growth and salary potential.

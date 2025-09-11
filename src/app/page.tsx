@@ -249,7 +249,7 @@ export default function LandingPage() {
                                         Krishna Somnath Baviskar
                                         </p>
                                         <p className="text-muted-foreground">
-                                            Founder and lead Developer @nexmov.ai
+                                            Founder and Lead Developer 
                                         </p>
                                     </div>
                                 </div>
@@ -267,7 +267,7 @@ export default function LandingPage() {
                                         Sanket Mohan Kotkar
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Developer @nexmov.ai
+                                           Co-Founder and Tech Developer
                                         </p>
                                     </div>
                                 </div>
@@ -285,7 +285,7 @@ export default function LandingPage() {
                                         Parth Nikhil Shah
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Developer @nexmov.ai
+                                           Co-Founder and Core Developer 
                                         </p>
                                     </div>
                                 </div>
@@ -309,14 +309,14 @@ export default function LandingPage() {
                                     <Mail className="w-6 h-6 text-primary" />
                                     <div>
                                         <h4 className="font-bold text-white">General Inquiries</h4>
-                                        <a href="mailto:support@nexmov.ai" className="text-muted-foreground hover:text-primary">support@nexmov.ai</a>
+                                        <a href="mailto:ideans.team@gmail.com" className="text-muted-foreground hover:text-primary">ideans.team@gmail.com</a>
                                     </div>
                                 </div>
                                  <div className="flex items-center gap-4">
                                     <Wand2 className="w-6 h-6 text-primary" />
                                     <div>
                                         <h4 className="font-bold text-white">Partnerships & Business</h4>
-                                        <a href="mailto:partners@nexmov.ai" className="text-muted-foreground hover:text-primary">partners@nexmov.ai</a>
+                                        <a href="mailto:ideans.team@gmail.com" className="text-muted-foreground hover:text-primary">ideans.team@gmail.com</a>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">

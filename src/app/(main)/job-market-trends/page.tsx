@@ -80,7 +80,7 @@ export default function JobMarketTrendsPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight">
-              {user ? `Hello ${user.displayName}, Welcome to Job Market Trends` : "Job Market Trends"}
+              {user ? `Hello!! ${user.displayName}, Welcome to Job Market Trends` : "Job Market Trends"}
             </h1>
             <p className="text-muted-foreground mt-2">
                 Get AI-powered insights into the job market for any domain and location.

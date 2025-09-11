@@ -116,7 +116,7 @@ export default function SkillGapAnalysisPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center">
             <h1 className="text-3xl font-bold tracking-tight">
-                {user ? `Hello ${user.displayName}, Welcome to Your Skill Gap Analysis` : "Skill Gap Analysis"}
+                {user ? `Hello!! ${user.displayName}, Welcome to Your Skill Gap Analysis` : "Skill Gap Analysis"}
             </h1>
             <p className="text-muted-foreground mt-2">
                 Discover the skills you need to achieve your career goals with AI-driven insights.

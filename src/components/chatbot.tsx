@@ -77,9 +77,9 @@ export default function Chatbot() {
         >
           <div className="flex flex-col h-full">
             <div className="bg-muted p-4 rounded-t-xl">
-              <h3 className="font-semibold text-foreground">NexAI</h3>
+              <h3 className="font-semibold text-foreground"> NexAI   </h3>
               <p className="text-sm text-muted-foreground">
-                Ask me anything!
+              Smart answers for your next move-Ask me anything!
               </p>
             </div>
             <ScrollArea className="flex-1 p-4">
@@ -142,7 +142,7 @@ export default function Chatbot() {
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
+                  placeholder="Ask. Learn. Grow."
                   className="flex-1"
                   autoComplete="off"
                 />
