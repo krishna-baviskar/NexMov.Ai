@@ -267,7 +267,7 @@ export default function LandingPage() {
                                         Sanket Mohan Kotkar
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Tech Developer
+                                           Co-Founder and Core Developer
                                         </p>
                                     </div>
                                 </div>
@@ -285,7 +285,7 @@ export default function LandingPage() {
                                         Parth Nikhil Shah
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Core Developer 
+                                           Co-Founder and Tech Developer 
                                         </p>
                                     </div>
                                 </div>
