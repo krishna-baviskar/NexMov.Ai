@@ -46,7 +46,7 @@ The application is built with a modern, robust, and scalable tech stack:
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [ShadCN UI](https://ui.shadcn.com/)
 - **Generative AI:** [Google AI & Genkit](https://firebase.google.com/docs/genkit)
-- **Authentication:** [Firebase Authentication]
+- **Authentication:** Firebase Authentication
 - **Data Visualization:** [Recharts](https://recharts.org/)
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Form Management:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
