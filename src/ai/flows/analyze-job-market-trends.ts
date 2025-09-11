@@ -1,4 +1,4 @@
-'use server';
+'use server'; 
 /**
  * @fileOverview An AI agent for analyzing job market trends.
  *
