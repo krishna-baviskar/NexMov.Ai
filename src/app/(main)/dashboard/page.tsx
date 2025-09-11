@@ -32,7 +32,7 @@ const features = [
   {
     title: "Coming Soon",
     description: "More Features and tools coming soon. Stay tuned!",
-    href: "/dashboard",
+    href: "/",
     icon: <Sparkles className="w-8 h-8 text-primary" />,
   },
 ];
