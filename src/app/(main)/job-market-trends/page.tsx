@@ -121,11 +121,7 @@ export default function JobMarketTrendsPage() {
                   )}
                 />
                 <Button type="submit" disabled={isLoading} className="w-full sm:col-span-2 lg:col-span-1">
-                  {isLoading ? (
-                    <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
-                  ) : (
-                    <BarChart3 className="mr-2 h-4 w-4" />
-                  )}
+                  <BarChart3 className="mr-2 h-4 w-4" />
                   Analyze Trends
                 </Button>
               </form>
