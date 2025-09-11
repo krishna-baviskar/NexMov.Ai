@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
@@ -237,8 +238,8 @@ export default function LandingPage() {
                         <div className="mt-8 grid gap-8 md:grid-cols-1">
                             <div className="card-3d gradient-border-card">
                                 <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
-                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-primary">
-                                    <Heart className="w-16 h-16 text-primary" />
+                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-primary overflow-hidden">
+                                    <Image src="/krishna.png" alt="Krishna Somnath Baviskar" width={128} height={128} className="object-cover" />
                                     </div>
                                     <div className="text-left">
                                         <p className="text-lg text-muted-foreground italic">
@@ -376,3 +377,6 @@ export default function LandingPage() {
 
     
 
+
+
+    
