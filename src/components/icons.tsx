@@ -1,4 +1,4 @@
-export function Logo(
+export function Logo( 
   props: Omit<React.ComponentProps<'img'>, 'src' | 'alt'>
 ) {
   return (
