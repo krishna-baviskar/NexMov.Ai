@@ -428,7 +428,7 @@ export default function CareerRoadmapPage() {
                             <ResponsiveContainer>
                                 <RechartsBarChart data={roadmap.timeline} margin={{ top: 5, right: 20, left: -10, bottom: 60 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} height={100} tick={{ fontSize: 12 }} />
+                                    <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} height={100} tick={{ fontSize: 10 }} />
                                     <YAxis label={{ value: 'Months', angle: -90, position: 'insideLeft' }} />
                                     <RechartsTooltip />
                                     <Bar dataKey="duration" fill="hsl(var(--primary))" />
@@ -459,7 +459,7 @@ export default function CareerRoadmapPage() {
                     <CardContent>
                         <div className="w-full h-80">
                             <ResponsiveContainer>
-                                <LineChart data={convertedSalaryProgression} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                                <LineChart data={convertedSalaryProgression} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="milestone" />
                                     <YAxis 
@@ -547,3 +547,5 @@ export default function CareerRoadmapPage() {
     </div>
   );
 }
+
+    

@@ -177,10 +177,10 @@ export default function JobMarketTrendsPage() {
                 <CardContent>
                     <div className="w-full h-[350px]">
                         <ResponsiveContainer>
-                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 150, bottom: 5 }}>
+                            <RechartsBarChart data={trends.trendingRoles} layout="vertical" margin={{ top: 5, right: 20, left: 120, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis type="number" domain={[0,100]} />
-                                <YAxis dataKey="name" type="category" width={150} interval={0} tick={{fontSize: 12}} />
+                                <YAxis dataKey="name" type="category" width={120} interval={0} tick={{fontSize: 12}} />
                                 <RechartsTooltip />
                                 <Bar dataKey="demand" fill="hsl(var(--primary))" />
                             </RechartsBarChart>
@@ -242,3 +242,5 @@ export default function JobMarketTrendsPage() {
     </div>
   );
 }
+
+    

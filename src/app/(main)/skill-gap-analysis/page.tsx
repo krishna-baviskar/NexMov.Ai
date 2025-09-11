@@ -215,7 +215,7 @@ export default function SkillGapAnalysisPage() {
                       <ResponsiveContainer>
                         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
                           <PolarGrid />
-                          <PolarAngleAxis dataKey="skill" tick={{fontSize: 12}} />
+                          <PolarAngleAxis dataKey="skill" tick={{fontSize: 10}} />
                           <PolarRadiusAxis angle={30} domain={[0, 100]} />
                           <RechartsRadar name="Required" dataKey="required" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.6} />
                           <RechartsRadar name="Current" dataKey="current" stroke="hsl(var(--chart-2))" fill="hsl(var(--chart-2))" fillOpacity={0.6} />
@@ -242,7 +242,7 @@ export default function SkillGapAnalysisPage() {
                             <RechartsBarChart data={analysis.skillGaps} layout="vertical" margin={{ top: 5, right: 20, left: 100, bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis type="number" domain={[0,5]} ticks={[1,2,3,4,5]}/>
-                                <YAxis dataKey="name" type="category" width={100} interval={0} tick={{fontSize: 12}}/>
+                                <YAxis dataKey="name" type="category" width={120} interval={0} tick={{fontSize: 12}}/>
                                 <RechartsTooltip />
                                 <RechartsBar dataKey="importance" fill="hsl(var(--accent))" />
                             </RechartsBarChart>
@@ -291,3 +291,5 @@ export default function SkillGapAnalysisPage() {
     </div>
   );
 }
+
+    
