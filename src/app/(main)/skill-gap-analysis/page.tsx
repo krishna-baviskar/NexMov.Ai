@@ -184,11 +184,7 @@ export default function SkillGapAnalysisPage() {
                       )}
                     />
                     <Button type="submit" disabled={isLoading} className="w-full">
-                      {isLoading ? (
-                        <ThreeDLoader className="w-6 h-6 -ml-2 mr-2" />
-                      ) : (
-                        <Compass className="mr-2 h-4 w-4" />
-                      )}
+                      <Compass className="mr-2 h-4 w-4" />
                       Analyze Skills
                     </Button>
                   </form>
