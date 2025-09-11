@@ -65,7 +65,7 @@ export default function DashboardPage() {
               <CardContent>
                 <CardDescription className="mb-4">{feature.description}</CardDescription>
                 <Link href={feature.href}>
-                  <Button variant="outline" className="w-full" disabled={feature.title === 'Coming Soon'}>
+                  <Button variant="outline" className="w-full">
                     Explore
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
