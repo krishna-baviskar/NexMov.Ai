@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-config();
+config(); 
 
 import '@/ai/flows/answer-user-queries-with-chatbot.ts';
 import '@/ai/flows/generate-career-roadmap.ts';
