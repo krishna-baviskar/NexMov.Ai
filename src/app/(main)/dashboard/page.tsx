@@ -8,7 +8,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GitCommit, Compass, BarChart3, ArrowRight } from "lucide-react";
+import { GitCommit, Compass, BarChart3, ArrowRight, Sparkles } from "lucide-react";
 
 const features = [
   {
@@ -28,6 +28,12 @@ const features = [
     description: "Analyze current job market trends, salaries, and in-demand skills.",
     href: "/job-market-trends",
     icon: <BarChart3 className="w-8 h-8 text-primary" />,
+  },
+  {
+    title: "Coming Soon",
+    description: "More Features and tools coming soon. Stay tuned!",
+    href: "/dashboard",
+    icon: <Sparkles className="w-8 h-8 text-primary" />,
   },
 ];
 
@@ -59,7 +65,7 @@ export default function DashboardPage() {
               <CardContent>
                 <CardDescription className="mb-4">{feature.description}</CardDescription>
                 <Link href={feature.href}>
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full" disabled={feature.title === 'Coming Soon'}>
                     Explore
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
