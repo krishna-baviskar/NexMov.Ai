@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"; 
 import "./3d-loader.css";
 
 export function ThreeDLoader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
