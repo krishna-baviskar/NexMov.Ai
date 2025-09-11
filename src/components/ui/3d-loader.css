@@ -1,4 +1,4 @@
-:root {
+:root { 
   --cube-bg: hsl(var(--primary) / 0.2);
   --cube-face-bg: hsl(var(--primary));
   --cube-face-shadow-color: hsl(var(--background) / 0.5);
