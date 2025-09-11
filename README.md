@@ -61,11 +61,6 @@ The project follows a standard Next.js App Router structure, organized for clari
 
 ```
 .
-├── public/                  # Static assets (images, fonts, etc.)
-│   ├── krishna.png
-│   ├── nexmov.png
-│   ├── parth.png
-│   └── sanket.png
 ├── src/
 │   ├── ai/                  # AI-related logic
 │   │   ├── flows/           # Genkit flows for AI features
