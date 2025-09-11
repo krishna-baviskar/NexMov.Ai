@@ -256,8 +256,8 @@ export default function LandingPage() {
                             </div>
                             <div className="card-3d gradient-border-card">
                                 <div className="flex flex-col items-center md:flex-row md:items-start gap-8">
-                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-secondary">
-                                      <BrainCircuit className="w-16 h-16 text-secondary" />
+                                    <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center flex-shrink-0 border-2 border-secondary overflow-hidden">
+                                      <Image src="/sanket.png" alt="Sanket Mohan Kotkar" width={128} height={128} className="object-cover" />
                                     </div>
                                     <div className="text-left">
                                          <p className="text-lg text-muted-foreground italic">
@@ -378,5 +378,7 @@ export default function LandingPage() {
     
 
 
+
+    
 
     
