@@ -1,4 +1,4 @@
-'use server';
+'use server'; 
 /**
  * @fileOverview Skill gap analysis AI agent.
  *
