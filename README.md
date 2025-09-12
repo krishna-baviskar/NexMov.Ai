@@ -7,15 +7,13 @@ Welcome to the official repository for **Nexmov.AI**, a next-generation, AI-powe
 
 - [Project Overview](#project-overview)
 - [Key Features](#key-features)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation & Setup](#installation--setup)
 - [Application Workflow](#application-workflow)
   - [Authentication Flow](#authentication-flow)
   - [AI Features Flow](#ai-features-flow)
-- [Key Components & Libraries](#key-components--libraries)
+
 
 ---
 
@@ -34,73 +32,6 @@ Nexmov.AI is a comprehensive web application built to address the uncertainties 
 - **User Authentication:** Secure signup and login functionality using Firebase Authentication, providing a personalized experience for each user.
 - **Fully Responsive UI:** A modern, visually appealing, and intuitive user interface built with ShadCN UI and Tailwind CSS that works seamlessly across all devices.
 - **Interactive Data Visualizations:** Utilizes Recharts to present complex data through dynamic and easy-to-understand charts and graphs.
-
----
-
-## Technology Stack
-
-The application is built with a modern, robust, and scalable tech stack:
-
-- **Framework:** Next.js[>](https://nextjs.org/) (with App Router)
-- **Language:** TypeScript[>](https://www.typescriptlang.org/)
-- **Styling:** Tailwind CSS[>](https://tailwindcss.com/)
-- **UI Components:** ShadCN UI[>](https://ui.shadcn.com/)
-- **Generative AI:** Google AIs & Genkit [>](https://firebase.google.com/docs/genkit)
-- **Authentication:** Firebase Authentication [>
-- **Data Visualization:** Recharts [>](https://recharts.org/)
-- **Icons:** Lucide React [>](https://lucide.dev/)
-- **Form Management:** React Hook Form [>](https://react-hook-form.com/) & Zod [>](https://zod.dev/)
-
----
-
-## Project Structure
-
-The project follows a standard Next.js App Router structure, organized for clarity and scalability.
-
-```
-.
-├── src/
-│   ├── ai/                  # AI-related logic
-│   │   ├── flows/           # Genkit flows for AI features
-│   │   │   ├── analyze-job-market-trends.ts
-│   │   │   ├── answer-user-queries-with-chatbot.ts
-│   │   │   ├── generate-career-roadmap.ts
-│   │   │   └── perform-skill-gap-analysis.ts
-│   │   ├── dev.ts           # Genkit development server entry point
-│   │   └── genkit.ts        # Genkit initialization and configuration
-│   ├── app/                 # Next.js App Router directory
-│   │   ├── (main)/          # Main application layout with authentication
-│   │   │   ├── career-roadmap/page.tsx
-│   │   │   ├── dashboard/page.tsx
-│   │   │   ├── job-market-trends/page.tsx
-│   │   │   ├── skill-gap-analysis/page.tsx
-│   │   │   ├── layout.tsx     # Main authenticated layout
-│   │   │   └── loading.tsx    # Loading UI for main routes
-│   │   ├── globals.css      # Global styles and Tailwind directives
-│   │   ├── layout.tsx       # Root layout
-│   │   ├── loading.tsx      # Root loading UI
-│   │   ├── login/page.tsx   # Login page
-│   │   ├── page.tsx         # Landing page
-│   │   └── signup/page.tsx  # Signup page
-│   ├── components/
-│   │   ├── ui/              # ShadCN UI components
-│   │   ├── chatbot.tsx      # AI Chatbot component
-│   │   ├── header.tsx       # Main app header
-│   │   ├── icons.tsx        # Custom icon components
-│   │   ├── main-nav.tsx     # Main sidebar navigation
-│   │   └── user-nav.tsx     # User dropdown menu
-│   ├── hooks/
-│   │   ├── use-mobile.tsx   # Hook to detect mobile devices
-│   │   └── use-toast.ts     # Hook for showing toast notifications
-│   └── lib/
-│       ├── firebase.ts      # Firebase initialization and config
-│       └── utils.ts         # Utility functions (e.g., cn for classnames)
-├── .env                     # Environment variables
-├── next.config.ts           # Next.js configuration
-├── package.json             # Project dependencies and scripts
-├── tailwind.config.ts       # Tailwind CSS configuration
-└── tsconfig.json            # TypeScript configuration
-```
 
 ---
 
@@ -130,13 +61,13 @@ Follow these instructions to get the project up and running on your local machin
     Create a `.env` file in the root of the project and add your Firebase configuration details. You can get these from your Firebase project settings.
 
     ```env
-    # Firebase configuration from your project settings
+    
     NEXT_PUBLIC_FIREBASE_API_KEY="AIza..."
     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-project-id.firebaseapp.com"
     NEXT_PUBLIC_FIREBASE_PROJECT_ID="your-project-id"
-    # ... and other Firebase config variables
+ 
     
-    # Gemini API Key for Genkit
+  
     GEMINI_API_KEY="AIza..."
     ```
 
@@ -167,18 +98,9 @@ Follow these instructions to get the project up and running on your local machin
 3.  **Genkit Processing:**
     - The flow receives the user's input.
     - A structured prompt is constructed using the input data.
-    - Genkit sends the prompt to the Google Gemini LLM.
+    - Genkit sends the prompt to the Google Gemini LLM and any other LLM.
     - The model processes the prompt and returns a structured JSON object as defined by the Zod output schema.
 4.  **Response to Frontend:** The structured JSON data is sent back to the client.
 5.  **Data Visualization:** The frontend uses the received data to dynamically render charts, graphs, and other UI elements, presenting the insights to the user in a clear and interactive way.
 
----
 
-## Key Components & Libraries
-
-- **`src/app/(main)/layout.tsx`:** This file defines the main layout for the authenticated part of the app, including the persistent sidebar and header.
-- **`src/ai/genkit.ts`:** Initializes the `ai` object and configures the Genkit plugins, setting the default LLM for the application.
-- **`src/ai/flows/*.ts`:** Each file in this directory represents a self-contained AI agent. It defines the input/output schemas (using Zod), the prompt template, and the server-side logic for a specific AI feature.
-- **`src/components/ui/`:** This directory contains all the reusable UI components from ShadCN, which form the building blocks of the application's design system.
-- **`src/lib/firebase.ts`:** This is where the Firebase app is initialized. It's crucial for connecting the application to Firebase services like Authentication.
-- **`recharts`:** This library is used across the feature pages to render the responsive and interactive charts that visualize AI-generated data.
