@@ -1,4 +1,3 @@
- 
 "use client";
 
 import { useState } from "react";
@@ -63,9 +62,13 @@ import {
   BarChart as RechartsBarChart,
   LineChart,
   Line,
+  TooltipProps,
+  LabelList,
 } from "recharts";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 
 const careerStatuses = [
     'High School Student (10th/12th)', 'Undergraduate Student', 'Graduate Student', 'Recent Graduate', 'Working Professional', 'Career Switcher', 'Competitive Exam Aspirant', 'Freelancer', 'Entrepreneur'
@@ -114,7 +117,7 @@ const PIE_COLORS = [
 
 const CURRENCY_RATES = {
   USD: 1,
-  INR: 83.5, 
+  INR: 83.5,
   EUR: 0.92,
   GBP: 0.78,
 };
@@ -128,6 +131,53 @@ const CURRENCY_SYMBOLS = {
 
 type Currency = keyof typeof CURRENCY_RATES;
 
+const CustomTooltip = ({ active, payload, label, currency }: TooltipProps<ValueType, NameType> & { currency: Currency }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="rounded-lg border bg-background p-2 shadow-sm">
+        <div className="grid grid-cols-1 gap-2">
+          <div className="flex flex-col space-y-1">
+            <span className="text-muted-foreground text-sm">{data.milestone}</span>
+            <span className="font-bold text-lg">
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              }).format(data.estimatedSalary)}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+// Custom Tooltip for Career Timeline
+const CareerTimelineTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="rounded-lg border bg-background p-3 shadow-sm max-w-[200px] sm:max-w-[250px]">
+        <div className="flex flex-col space-y-1">
+          {/* First line: Step name */}
+          <span className="font-medium text-sm leading-tight break-words">
+            {data.name}
+          </span>
+          {/* Second line: Duration */}
+          <span className="text-muted-foreground text-xs">
+            Duration: {payload[0].value} Months
+          </span>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function CareerRoadmapPage() {
   const [user] = useAuthState(auth);
   const [roadmap, setRoadmap] = useState<GenerateCareerRoadmapOutput | null>(
@@ -135,6 +185,7 @@ export default function CareerRoadmapPage() {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState<Currency>("INR");
+  const isMobile = useIsMobile();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -197,16 +248,17 @@ export default function CareerRoadmapPage() {
       style: 'currency',
       currency: selectedCurrency,
       minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(value);
   };
-  
-  const formatAxis = (value: number) => {
-    if (value >= 10000000) return `${CURRENCY_SYMBOLS[selectedCurrency]}${(value / 10000000).toFixed(1)}Cr`;
-    if (value >= 100000) return `${CURRENCY_SYMBOLS[selectedCurrency]}${(value / 100000).toFixed(1)}L`;
-    if (value >= 1000) return `${CURRENCY_SYMBOLS[selectedCurrency]}${(value / 1000).toFixed(1)}k`;
-    return `${CURRENCY_SYMBOLS[selectedCurrency]}${value}`;
-  }
 
+  const formatAxis = (value: number) => {
+    const symbol = CURRENCY_SYMBOLS[selectedCurrency];
+    if (value >= 10000000) return `${symbol}${(value / 10000000).toFixed(1)}Cr`;
+    if (value >= 100000) return `${symbol}${(value / 100000).toFixed(0)}L`;
+    if (value >= 1000) return `${symbol}${(value / 1000).toFixed(0)}k`;
+    return `${symbol}${value}`;
+  }
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
@@ -331,6 +383,8 @@ export default function CareerRoadmapPage() {
                                 type="button"
                                 variant={form.getValues("careerGoals").includes(goal) ? "default" : "outline"}
                                 onClick={() => toggleArrayItem("careerGoals", goal)}
+                                size="sm"
+                                className="text-xs"
                                 >
                                 {goal}
                                 </Button>
@@ -364,6 +418,8 @@ export default function CareerRoadmapPage() {
                                 type="button"
                                 variant={form.getValues("interests").includes(interest) ? "default" : "outline"}
                                 onClick={() => toggleArrayItem("interests", interest)}
+                                size="sm"
+                                className="text-xs"
                                 >
                                 {interest}
                                 </Button>
@@ -418,25 +474,47 @@ export default function CareerRoadmapPage() {
                     </CardContent>
                 </Card>
 
-                 <Card>
+                {/* UPDATED CAREER TIMELINE CHART */}
+                <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2"><BarChart/> Career Timeline</CardTitle>
                         <CardDescription>Estimated duration for each step in your roadmap.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="w-full h-80">
-                            <ResponsiveContainer>
-                                <RechartsBarChart data={roadmap.timeline} margin={{ top: 5, right: 20, left: -10, bottom: 60 }}>
+                        <div className="w-full h-[350px] sm:h-[450px] md:h-[550px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <RechartsBarChart data={roadmap.timeline} margin={{ top: 30, right: 20, left: 20, bottom: 5 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} height={100} tick={{ fontSize: 10 }} />
-                                    <YAxis label={{ value: 'Months', angle: -90, position: 'insideLeft' }} />
-                                    <RechartsTooltip />
-                                    <Bar dataKey="duration" fill="hsl(var(--primary))" />
+
+                                    {/* UPDATED TOOLTIP - Mobile Responsive with Custom Content */}
+                                    <RechartsTooltip content={<CareerTimelineTooltip />} />
+
+                                    {/* Bar component */}
+                                    <Bar dataKey="duration" fill="hsl(var(--accent))">
+                                        <LabelList
+                                            dataKey="duration"
+                                            position="top"
+                                            formatter={(value: number, props: any) => {
+                                                if (props && props.payload) {
+                                                    const stepName = props.payload.name;
+                                                    // For mobile, show shorter labels on bars
+                                                    return isMobile ? `${value}M` : `${stepName}: ${value} Months`;
+                                                }
+                                                return `${value} Months`;
+                                            }}
+                                            style={{ 
+                                                fontSize: isMobile ? 8 : 10, 
+                                                fill: 'hsl(var(--foreground))' 
+                                            }}
+                                        />
+                                    </Bar>
                                 </RechartsBarChart>
                             </ResponsiveContainer>
                         </div>
                     </CardContent>
                 </Card>
+                {/* END UPDATED CAREER TIMELINE CHART */}
+
                 <Card>
                     <CardHeader>
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -457,21 +535,33 @@ export default function CareerRoadmapPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="w-full h-80">
+                        <div className="w-full h-[450px]">
                             <ResponsiveContainer>
-                                <LineChart data={convertedSalaryProgression} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                <LineChart data={convertedSalaryProgression} margin={{ top: 5, right: 30, left: 20, bottom: 110 }}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="milestone" />
-                                    <YAxis 
-                                      label={{ value: `Salary (${selectedCurrency})`, angle: -90, position: 'insideLeft' }}
-                                      tickFormatter={formatAxis} 
+                                    <XAxis
+                                      dataKey="milestone"
+                                      interval={0}
+                                      angle={-45}
+                                      textAnchor="end"
+                                      height={120}
+                                      tick={{ fontSize: 12 }}
                                     />
-                                    <RechartsTooltip formatter={(value: number) => formatCurrency(value)} />
-                                    <Legend />
+                                    <YAxis
+                                      label={{ value: `Salary (${selectedCurrency})`, angle: -90, position: 'insideLeft', offset: -15 }}
+                                      tickFormatter={formatAxis}
+                                      tick={{ fontSize: 12 }}
+                                      width={80}
+                                    />
+                                    <RechartsTooltip content={<CustomTooltip currency={selectedCurrency} />} />
+                                    <Legend verticalAlign="top" wrapperStyle={{paddingBottom: '1rem'}} />
                                     <Line type="monotone" dataKey="estimatedSalary" name="Estimated Salary" stroke="hsl(var(--accent))" strokeWidth={2} activeDot={{ r: 8 }} />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
+                        <p className="text-xs text-muted-foreground text-center italic mt-2">
+                            Note: Salary projections are estimates and may vary based on company, location, and individual skills.
+                        </p>
                     </CardContent>
                 </Card>
                 <Card>
@@ -480,16 +570,33 @@ export default function CareerRoadmapPage() {
                         <CardDescription>Recommended focus areas for skill development.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                       <div className="w-full h-64">
+                       <div className="w-full h-[350px] sm:h-96">
                          <ResponsiveContainer>
                             <PieChart>
-                                <Pie data={roadmap.skillDistribution} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                                <Pie
+                                    data={roadmap.skillDistribution}
+                                    dataKey="value"
+                                    nameKey="name"
+                                    cx="50%"
+                                    cy="50%"
+                                    outerRadius={isMobile ? 80 : 100}
+                                    label
+                                >
                                 {roadmap.skillDistribution.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                                 ))}
                                 </Pie>
                                 <RechartsTooltip />
-                                <Legend />
+                                <Legend
+                                    layout={isMobile ? 'horizontal' : 'vertical'}
+                                    verticalAlign={isMobile ? 'bottom' : 'middle'}
+                                    align={isMobile ? 'center' : 'right'}
+                                    wrapperStyle={
+                                        isMobile
+                                        ? { paddingTop: '20px', fontSize: '12px' }
+                                        : { paddingLeft: '1rem', flexWrap: 'wrap', maxWidth: 150 }
+                                    }
+                                />
                             </PieChart>
                          </ResponsiveContainer>
                        </div>
@@ -547,5 +654,3 @@ export default function CareerRoadmapPage() {
     </div>
   );
 }
-
-    
