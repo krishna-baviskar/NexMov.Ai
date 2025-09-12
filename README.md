@@ -41,15 +41,15 @@ Nexmov.AI is a comprehensive web application built to address the uncertainties 
 
 The application is built with a modern, robust, and scalable tech stack:
 
-- **Framework:** [Next.js](https://nextjs.org/) (with App Router)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components:** [ShadCN UI](https://ui.shadcn.com/)
-- **Generative AI:** [Google AI & Genkit](https://firebase.google.com/docs/genkit)
-- **Authentication:** Firebase Authentication
-- **Data Visualization:** [Recharts](https://recharts.org/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Form Management:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+- **Framework:** [Next.js][>](https://nextjs.org/) (with App Router)
+- **Language:** [TypeScript][>](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS][>](https://tailwindcss.com/)
+- **UI Components:** [ShadCN UI][>](https://ui.shadcn.com/)
+- **Generative AI:** [Google AI & Genkit] [>](https://firebase.google.com/docs/genkit)
+- **Authentication:** Firebase Authentication [>]
+- **Data Visualization:** [Recharts] [>](https://recharts.org/)
+- **Icons:** [Lucide React] [>](https://lucide.dev/)
+- **Form Management:** [React Hook Form] [>](https://react-hook-form.com/) & [Zod] [>](https://zod.dev/)
 
 ---
 
