@@ -1,4 +1,4 @@
- 
+
 'use client';
 
 import Link from 'next/link';
@@ -22,13 +22,16 @@ import {
     ChevronRight,
     Target,
     BrainCircuit,
-    UserCheck
+    UserCheck,
+    Menu,
+    X
 } from 'lucide-react';
 import { Logo } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useState, type FormEvent } from 'react';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
 const features = [
     {
@@ -130,7 +133,7 @@ export default function LandingPage() {
                         <Link href="#features"><Button variant="ghost">Features</Button></Link>
                         <Link href="#contact"><Button variant="ghost">Contact</Button></Link>
                     </nav>
-                     <div className="flex items-center gap-2">
+                     <div className="hidden items-center gap-2 md:flex">
                         <Link href="/login">
                           <Button variant="outline" className="border-primary/50 bg-primary/10 hover:bg-primary/20">Login</Button>
                         </Link>
@@ -139,6 +142,47 @@ export default function LandingPage() {
                                 Get Started
                             </Button>
                         </Link>
+                    </div>
+                    <div className="md:hidden">
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                    <Menu className="h-6 w-6" />
+                                </Button>
+                            </SheetTrigger>
+                            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                                <SheetHeader className="p-4 border-b border-border">
+                                    <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                                    <Link href="/" className="flex items-center gap-2">
+                                        <Logo />
+                                        <span className="text-2xl font-bold gradient-text">Nexmov.AI</span>
+                                    </Link>
+                                </SheetHeader>
+                                <nav className="flex flex-col gap-4 mt-4 p-4">
+                                    <SheetClose asChild>
+                                        <Link href="#about"><Button variant="ghost" className="w-full justify-start">About</Button></Link>
+                                    </SheetClose>
+                                    <SheetClose asChild>
+                                        <Link href="#features"><Button variant="ghost" className="w-full justify-start">Features</Button></Link>
+                                    </SheetClose>
+                                    <SheetClose asChild>
+                                        <Link href="#contact"><Button variant="ghost" className="w-full justify-start">Contact</Button></Link>
+                                    </SheetClose>
+                                    <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-border">
+                                        <SheetClose asChild>
+                                            <Link href="/login">
+                                                <Button variant="outline" className="w-full">Login</Button>
+                                            </Link>
+                                        </SheetClose>
+                                        <SheetClose asChild>
+                                            <Link href="/signup">
+                                                <Button className="w-full">Get Started</Button>
+                                            </Link>
+                                        </SheetClose>
+                                    </div>
+                                </nav>
+                            </SheetContent>
+                        </Sheet>
                     </div>
                 </div>
             </header>
@@ -267,7 +311,7 @@ export default function LandingPage() {
                                         Sanket Mohan Kotkar
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Core Developer
+                                           Co-Founder and Tech Developer
                                         </p>
                                     </div>
                                 </div>
@@ -285,7 +329,7 @@ export default function LandingPage() {
                                         Parth Nikhil Shah
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Tech Developer 
+                                           Co-Founder and Core Developer 
                                         </p>
                                     </div>
                                 </div>
@@ -378,6 +422,12 @@ export default function LandingPage() {
     
 
 
+
+    
+
+    
+
+    
 
     
 
