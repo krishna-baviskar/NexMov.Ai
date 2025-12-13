@@ -293,7 +293,7 @@ export default function LandingPage() {
                                         Krishna Somnath Baviskar
                                         </p>
                                         <p className="text-muted-foreground">
-                                            Founder and Lead Developer 
+                                            Lead Developer 
                                         </p>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@ export default function LandingPage() {
                                         Sanket Mohan Kotkar
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Core Developer
+                                           Core Developer
                                         </p>
                                     </div>
                                 </div>
@@ -329,7 +329,7 @@ export default function LandingPage() {
                                         Parth Nikhil Shah
                                         </p>
                                         <p className="text-muted-foreground">
-                                           Co-Founder and Tech Developer 
+                                         Tech Developer 
                                         </p>
                                     </div>
                                 </div>
