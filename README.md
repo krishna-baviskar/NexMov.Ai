@@ -2,7 +2,7 @@
 # NexMov.AI - Your AI-Powered Career Co-Pilot
 
 Welcome to the official repository for **Nexmov.AI**, a next-generation, AI-powered career navigation platform designed to guide users from their educational journey to the C-suite. This application provides personalized, data-driven roadmaps, skill-building advice, real-time market insights, and curated career news to help users make smarter career decisions.
-
+ 
 ## Table of Contents
 
 - [Project Overview](#project-overview)
